@@ -1,7 +1,16 @@
-import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { lightTheme } from './utils/theme';
+import { BasicStyle, GlobalStyle } from './utils/globalStyles';
+import { Outlet } from 'react-router-dom';
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <ThemeProvider theme={lightTheme}>
+      <GlobalStyle />
+      <BasicStyle />
+      <Outlet />
+    </ThemeProvider>
+  );
 }
 
 export default App;
