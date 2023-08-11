@@ -4,7 +4,7 @@ import App from './App';
 import BasicLayout from './layouts/BasicLayout';
 import AuthLayout from './layouts/AuthLayout';
 // components
-import Home from './components/Home';
+import Home from './routes/Home';
 
 const router = createHashRouter([
   {

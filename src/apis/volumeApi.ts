@@ -2,12 +2,14 @@ const ROOT = process.env.REACT_APP_API_ROOT;
 const KEY = process.env.REACT_APP_API_KEY;
 
 const request = async (url: string) => {
-  const response = await fetch(url);
-  if (response.ok) {
+  try {
+    const response = await fetch(url);
     const data = await response.json();
     return data;
+  } catch (error) {
+    console.log('❌ Failed to Fetch 😇', error);
+    return;
   }
-  throw new Error('❌ Failed to Fetch 😇');
 };
 
 interface IAccessInfo {
@@ -16,25 +18,25 @@ interface IAccessInfo {
   };
   webReaderLink: string;
 }
-interface IVolumeInfo {
+export interface IVolumeInfo {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   authors: string[];
-  publisher: string;
+  publisher?: string;
   publishedDate: string;
-  description: string;
+  description?: string;
   pageCount: number;
   printType: string;
-  categories: string[];
-  averageRating: number;
-  imageLinks: {
+  categories?: string[];
+  averageRating?: number;
+  imageLinks?: {
     smallThumbnail: string;
     thumbnail: string;
   };
   language: string;
   previewLink: string;
 }
-interface IVolume {
+export interface IVolume {
   kind: string;
   id: string;
   etag: string;
@@ -42,6 +44,7 @@ interface IVolume {
   accessInfo: IAccessInfo;
 }
 export interface ISearchResult {
+  kind: string;
   totalItems: number;
   items: IVolume[];
 }
@@ -51,7 +54,10 @@ export interface ISearchResult {
  * @param isPartial // 미리보기 가능 도서만 가져오기
  * @returns
  */
-export const fetchVolumeListByQuery = (query: string, isPartial: boolean) =>
-  request(
+export const fetchVolumeListByQuery = async (
+  query: string,
+  isPartial: boolean
+) =>
+  await request(
     `${ROOT}volumes?q=${query}${isPartial && '&filter=partial'}&key=${KEY}`
   );

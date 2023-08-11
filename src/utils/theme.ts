@@ -2,14 +2,14 @@ import { DefaultTheme } from 'styled-components';
 
 export const lightTheme: DefaultTheme = {
   main: {
-    1: '#ffe8b2',
-    2: '#fff2d6',
-    3: '#fff',
+    i: '#ffe8b2',
+    j: '#fff2d6',
+    k: '#fff',
   },
   sub: {
-    1: '#1c8dd8',
-    2: '#5bb9f7',
-    3: '#b2e0ff',
+    i: '#1c8dd8',
+    j: '#5bb9f7',
+    k: '#b2e0ff',
   },
   title: 'Titan One',
   padding: {
@@ -26,14 +26,14 @@ export const lightTheme: DefaultTheme = {
 
 export const darkTheme: DefaultTheme = {
   main: {
-    1: '',
-    2: '',
-    3: '',
+    i: '',
+    j: '',
+    k: '',
   },
   sub: {
-    1: '',
-    2: '',
-    3: '',
+    i: '',
+    j: '',
+    k: '',
   },
   title: 'Titan One',
   padding: {

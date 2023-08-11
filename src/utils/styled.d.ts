@@ -5,14 +5,14 @@ import 'styled-components';
 declare module 'styled-components' {
   export interface DefaultTheme {
     main: {
-      1: string;
-      2: string;
-      3: string;
+      i: string;
+      j: string;
+      k: string;
     };
     sub: {
-      1: string;
-      2: string;
-      3: string;
+      i: string;
+      j: string;
+      k: string;
     };
     title: string;
     padding: {
