@@ -1,18 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ISearchResult, fetchVolumeListByQuery } from '../apis/volumeApi';
-import { fetchBestSellerList } from '../apis/nytApi';
-import { ISortBestSeller, getBestSellerList } from '../services/nytService';
+import BestSeller from '../components/BestSellerList';
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoading2, setIsLoading2] = useState(true);
   const [searchResult, setSearchResult] = useState<ISearchResult>();
-  const [bestSeller, setBestSeller] = useState<ISortBestSeller[]>();
   const [searchValue, setSearchValue] = useState('');
-
-  useEffect(() => {
-    getBestSeller();
-  }, []);
 
   const handleSearchValue = (e: any) => setSearchValue(e.target.value);
   const handleSubmit = async (e: any) => {
@@ -25,12 +18,7 @@ function Home() {
     setSearchResult(data);
     setIsLoading(false);
   };
-  const getBestSeller = async () => {
-    const data = await fetchBestSellerList();
-    const newData = (await getBestSellerList(data)) as ISortBestSeller[];
-    setBestSeller(newData);
-    setIsLoading2(false);
-  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -56,18 +44,7 @@ function Home() {
       )}
       <div>
         <h3>Best Seller</h3>
-        <div>
-          {!isLoading2 &&
-            bestSeller?.map((book, i) => {
-              return (
-                <div key={i}>
-                  <div>{book?.rank}</div>
-                  <div>{book?.img}</div>
-                  <div>{book?.title}</div>
-                </div>
-              );
-            })}
-        </div>
+        <BestSeller />
       </div>
     </div>
   );

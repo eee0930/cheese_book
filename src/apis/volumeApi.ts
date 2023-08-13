@@ -49,7 +49,7 @@ export interface ISearchResult {
   items: IVolume[];
 }
 /**
- * 도서 검색 결과 가져오기 (GET)
+ * 도서 검색 결과 가져오기
  * @param query
  * @param isPartial // 미리보기 가능 도서만 가져오기
  * @returns
@@ -63,7 +63,15 @@ export const fetchVolumeListByQuery = async (
   );
 
 /**
- * 도서 커버 가져오기 (GET)
+ * 도서 상세보기
+ * @param id
+ * @returns
+ */
+export const fetchVolumeById = async (id: string) =>
+  await request(`${ROOT}volumes/${id}?key=${KEY}`);
+
+/**
+ * 도서 표지 이미지 가져오기
  * @param isbn
  * @returns
  */
