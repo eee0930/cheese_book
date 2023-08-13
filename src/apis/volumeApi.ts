@@ -61,3 +61,11 @@ export const fetchVolumeListByQuery = async (
   await request(
     `${ROOT}volumes?q=${query}${isPartial && '&filter=partial'}&key=${KEY}`
   );
+
+/**
+ * 도서 커버 가져오기 (GET)
+ * @param isbn
+ * @returns
+ */
+export const fetchVolumeByIstn = async (isbn: string) =>
+  await request(`${ROOT}volumes?q=isbn:${isbn}&key=${KEY}`);

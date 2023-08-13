@@ -2,12 +2,13 @@ const ROOT = process.env.REACT_APP_NYT_ROOT;
 const KEY = process.env.REACT_APP_NYT_KEY;
 
 const request = async (url: string) => {
-  const response = await fetch(url);
-  if (response.ok) {
+  try {
+    const response = await fetch(url);
     const data = await response.json();
     return data;
+  } catch (error) {
+    console.log('❌ Failed to Fetch 😇', error);
   }
-  throw new Error('❌ Failed to Fetch 😇');
 };
 
 export interface IBookDetails {
@@ -28,7 +29,7 @@ export interface IBestSeller {
       isbn13: string;
     }
   ];
-  book_details: IBookDetails;
+  book_details: IBookDetails[];
 }
 
 export interface IBestSellerList {
