@@ -29,8 +29,7 @@ export interface IVolumeInfo {
   printType: string;
   categories?: string[];
   averageRating?: number;
-  imageLinks?: {
-    smallThumbnail: string;
+  imageLinks: {
     thumbnail: string;
   };
   language: string;
@@ -41,7 +40,7 @@ export interface IVolume {
   id: string;
   etag: string;
   volumeInfo: IVolumeInfo;
-  accessInfo: IAccessInfo;
+  accessInfo?: IAccessInfo;
 }
 export interface ISearchResult {
   kind: string;
@@ -59,7 +58,9 @@ export const fetchVolumeListByQuery = async (
   isPartial: boolean
 ) =>
   await request(
-    `${ROOT}volumes?q=${query}${isPartial && '&filter=partial'}&key=${KEY}`
+    `${ROOT}volumes?q=${query}&maxResults=50${
+      isPartial && '&filter=partial'
+    }&key=${KEY}`
   );
 
 /**

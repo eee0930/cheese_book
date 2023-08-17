@@ -1,20 +1,14 @@
 import { useEffect, useState } from 'react';
 import { ISortBestSeller, getBestSeller } from '../services/nytService';
 import { fetchBestSellerList } from '../apis/nytApi';
-import { useRecoilState } from 'recoil';
-import { bestSellerFetchedState } from '../atom';
 
 function BestSellerList() {
-  const [isBestSellerFetched, setIsBestSellerFetched] = useRecoilState(
-    bestSellerFetchedState
-  );
   const [isLoading, setIsLoading] = useState(true);
   const [bestSeller, setBestSeller] = useState<ISortBestSeller[]>([]);
 
   useEffect(() => {
-    if (!isBestSellerFetched) {
+    if (!bestSeller.length) {
       getBestSellerList();
-      setIsBestSellerFetched(true);
       setIsLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,8 +33,7 @@ function BestSellerList() {
                 <img src={book.img} alt={book.title} />
               </div>
               <div>
-                {book.rank}
-                {book.title}
+                {book.rank} {book.title}
               </div>
             </li>
           ))}

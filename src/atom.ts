@@ -1,4 +1,12 @@
 import { atom } from 'recoil';
+import { IVolumeInfo } from './apis/volumeApi';
+
+interface IIsbnVolumInfo {
+  [key: string]: {
+    page: number;
+    info: IVolumeInfo;
+  };
+}
 
 /**
  * 라이트 모드 여부
@@ -17,9 +25,22 @@ export const loginState = atom({
 });
 
 /**
- * bestSeller api 호출 여부 (중복 호출을 막기 위해)
+ * 미리보기한 책 리스트 책 정보와 마지막 읽은 페이지 {isbn: {page, info}}
  */
-export const bestSellerFetchedState = atom({
-  key: 'bestSellerFetched',
-  default: false,
+export const volumeInfoListOfPageState = atom<IIsbnVolumInfo[]>({
+  key: 'volumeInfoList',
+  default: [],
+});
+
+/**
+ * 최근 본 책 목록 (10개)
+ */
+export const latestVolumeListState = atom<IVolumeInfo[]>({
+  key: 'latestVolumeList',
+  default: [],
+});
+
+export const likedVolumeListState = atom({
+  key: 'likedVolumeList',
+  default: [],
 });
