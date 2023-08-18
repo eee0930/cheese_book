@@ -1,28 +1,28 @@
 import { useEffect, useState } from 'react';
-import { IBookItem, fetchBestSellerBookList } from '../apis/aladinApi';
+import { IBookItem, fetchNewestBookList } from '../apis/aladinApi';
 
-function BestSellerList() {
+function NewestSellerList() {
   const [isLoading, setIsLoading] = useState(true);
-  const [bestSellerList, setBestSellerList] = useState<IBookItem[]>([]);
+  const [newestSellerList, setNewestSellerList] = useState<IBookItem[]>([]);
 
   useEffect(() => {
-    if (!bestSellerList.length) {
-      getBestSellerList();
+    if (!newestSellerList.length) {
+      getNewestSellerList();
       setIsLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getBestSellerList = async () => {
-    const fetchedbestSellerList = await fetchBestSellerBookList(true);
-    setBestSellerList(fetchedbestSellerList?.item);
+  const getNewestSellerList = async () => {
+    const fetchedNewestSellerList = await fetchNewestBookList(true);
+    setNewestSellerList(fetchedNewestSellerList?.item);
   };
 
   return (
     <>
       {!isLoading && (
         <ul>
-          {bestSellerList?.map((book, i) => (
+          {newestSellerList?.map((book, i) => (
             <li key={i}>
               <div>
                 <img src={book.cover} alt={book.title} />
@@ -38,4 +38,4 @@ function BestSellerList() {
   );
 }
 
-export default BestSellerList;
+export default NewestSellerList;

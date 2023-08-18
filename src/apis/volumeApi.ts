@@ -58,7 +58,7 @@ export const fetchVolumeListByQuery = async (
   isPartial: boolean
 ) =>
   await request(
-    `${ROOT}volumes?q=${query}&maxResults=50${
+    `${ROOT}volumes?q=${query}&maxResults=40${
       isPartial && '&filter=partial'
     }&key=${KEY}`
   );

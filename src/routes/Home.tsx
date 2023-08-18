@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ISearchResult,
   IVolume,
   fetchVolumeListByQuery,
 } from '../apis/volumeApi';
 import BestSeller from '../components/BestSellerList';
+import BookViewer from '../components/BookViewer';
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -56,6 +57,7 @@ function Home() {
   };
   return (
     <div>
+      <BookViewer isbn={'0738531367'} />
       <form onSubmit={handleSubmit}>
         <div>
           <input type="search" value={searchField} onChange={handleSearch} />
