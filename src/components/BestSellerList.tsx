@@ -14,7 +14,7 @@ function BestSellerList() {
   }, []);
 
   const getBestSellerList = async () => {
-    const fetchedbestSellerList = await fetchBestSellerBookList(true);
+    const fetchedbestSellerList = await fetchBestSellerBookList(true, 0);
     setBestSellerList(fetchedbestSellerList?.item);
   };
 

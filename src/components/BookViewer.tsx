@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useBookViewer } from '../hooks/useBookViewer';
+import { useAppendScript } from '../hooks/useAppendScript';
 
 declare global {
   interface Window {
@@ -11,12 +11,14 @@ interface IIsbn {
   isbn: string;
 }
 
+const VIEWER_SRC = process.env.REACT_APP_BOOK_VIEWER as string;
+
 function BookViewer({ isbn }: IIsbn) {
   const viewerCanvas = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
   const [googleBooks, setGoogleBooks] = useState<any>();
   const [bookViewer, setBookViewer] = useState<any>();
-  const { $script } = useBookViewer();
+  const $script = useAppendScript(VIEWER_SRC);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => initialLoad(), [$script]);
@@ -48,6 +50,7 @@ function BookViewer({ isbn }: IIsbn) {
             setBookViewer(viewer);
             initialize(viewer);
           });
+          viewerCanvas.current.id = 'googleBooksViewer';
         }
       }
     } else {
@@ -60,10 +63,19 @@ function BookViewer({ isbn }: IIsbn) {
   const initialize = (viewer: any) =>
     viewer.load(`ISBN:${isbn}`, handleNotFound);
 
+  const handleNextPage = () => bookViewer.nextPage();
+
+  const handlePrevPage = () => bookViewer.previousPage();
+
+  const goToPage = (page: number) => bookViewer.goToPage(page);
+
   return (
     <>
       {loaded && (
-        <div ref={viewerCanvas} style={{ width: '300px', height: '200px' }} />
+        <>
+          <div ref={viewerCanvas} style={{ width: '300px', height: '200px' }} />
+          <button onClick={handleNextPage}>다음페이지</button>
+        </>
       )}
     </>
   );

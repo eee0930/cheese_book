@@ -2,9 +2,10 @@ import { createHashRouter } from 'react-router-dom';
 import App from './App';
 // layouts
 import BasicLayout from './layouts/BasicLayout';
-import AuthLayout from './layouts/AuthLayout';
 // components
 import Home from './routes/Home';
+import AuthLayout from './layouts/AuthLayout';
+import ListBestSeller from './routes/ListBestSeller';
 
 const router = createHashRouter([
   {
@@ -12,13 +13,9 @@ const router = createHashRouter([
     element: <App />,
     children: [
       {
-        path: 'auth',
+        path: '/auth',
         element: <AuthLayout />,
-        children: [
-          {
-            path: 'login',
-          },
-        ],
+        children: [],
       },
       {
         path: '',
@@ -27,6 +24,10 @@ const router = createHashRouter([
           {
             path: '',
             element: <Home />,
+          },
+          {
+            path: '/best',
+            element: <ListBestSeller />,
           },
         ],
       },

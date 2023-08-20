@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
@@ -46,8 +46,8 @@ export const GlobalStyle = createGlobalStyle`
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    background-color: ${(props) => props.theme.main.k};
-    color: #333;
+    background-color: ${(props) => props.theme.background};
+    color: $black;
     overflow: hidden;
     width: 100vw;
     height: 100vh;
@@ -575,5 +575,202 @@ export const BasicStyle = createGlobalStyle`
   .mobile-hidden {display: none;}
   @media (min-width: 768px) {
     .mobile-hidden {display: inline-block;}
+  }
+`;
+
+export const CheeseStyle = createGlobalStyle`
+  .title {
+    font-family: ${(props) => props.theme.title}, cursive;
+    letter-spacing: -0.04em;
+    word-spacing: 0.03em;
+    font-stretch: 0.05em;
+    line-height: 0.83;
+    font-size: 5rem;
+  }
+  .likeBtn.liked .fa-solid.fa-heart {
+    color: ${(props) => props.theme.main1.main1};
+  }
+  .likeBtn.active i {
+    color: ${(props) => props.theme.main1.main1};
+    animation: bigToSmall 0.5s ease;
+  }
+ 
+  input.cheese-form {
+    width: 100%;
+    max-width: 250px;
+    height: 40px;
+    border: solid 2px ${(props) => props.theme.black.lighter};
+    border-radius: 8px;
+    padding: 2px 7px;
+  }
+  input[type="checkbox"], input[type="radio"] {
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    -o-appearance:none;
+    outline: none;
+    content: none;	
+    position: relative;
+    cursor: pointer;
+  }
+  input[type=checkbox]:before {
+    content: '';
+    background: ${(props) => props.theme.main3.main2};
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    @media(min-width: 768px) {
+      width: 18px;
+      height: 18px;
+      border-radius: 3px;
+    }
+  }
+  input[type=checkbox]:after {
+    content: '\2713';
+    font-size: 13px;
+    color: transparent !important;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    @media(min-width: 768px) {
+      top: 3px;
+      left: 3px;
+    }
+  }
+  input[type=checkbox]:checked:before {
+    background-color: ${(props) => props.theme.main2.main2};
+    @media(min-width: 992px) {
+      -webkit-animation: jelly 0.3s ease;
+      animation: jelly 0.3s ease;
+    }
+  }
+  input[type=checkbox]:checked:after {
+    color: ${(props) => props.theme.main2.side} !important;
+  }
+
+  .cheese-glass {
+    background: rgba(175, 148, 160, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    -webkit-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(175, 148, 160, 0.18);
+  }
+  .jelly:hover, .jelly:active {
+    -webkit-animation: jelly 0.3s ease;
+    animation: jelly 0.3s ease;
+  }
+  @-webkit-keyframes jelly {
+    0%, 100% {-webkit-transform: scale(1, 1)}
+    30% {-webkit-transform: scale(1.25, 0.75)}
+    40% {-webkit-transform: scale(0.75, 1.25)}
+    50% {-webkit-transform: scale(1.15, 0.85)}
+    65% {-webkit-transform: scale(.95, 1.05)}
+    75% {-webkit-transform: scale(1.05, .95)}
+  }
+  @keyframes jelly {
+    0%, 100% {transform: scale(1, 1)}
+    30% {transform: scale(1.25, 0.75)}
+    40% {transform: scale(0.75, 1.25)}
+    50% {transform: scale(1.15, 0.85)}
+    65% {transform: scale(.95, 1.05)}
+    75% {transform: scale(1.05, .95)}
+  }
+  // /* box dots animation */
+  @-webkit-keyframes bURGXq {
+    0% {-webkit-transform: translate(0px, 0px);}
+    100% {-webkit-transform: translate(20px, 20px);}
+  }
+  @keyframes bURGXq {
+    0% {transform: translate(0px, 0px);}
+    100% {transform: translate(20px, 20px);}
+  }
+
+  // /* big-> small (하투 애니메이션) */
+  @-webkit-keyframes bigToSmall {
+    0%, 100% {-webkit-transform: scale(1);}
+    40% {-webkit-transform: scale(0.1);}
+    70%, 75% {-webkit-transform: scale(3);}
+    90% {-webkit-transform: scale(0.5);}
+  }
+  @keyframes bigToSmall {
+    0%, 100% {transform: scale(1);}
+    40% {transform: scale(0.1);}
+    70%, 75% {transform: scale(3);}
+    90% {transform: scale(0.5);}
+  }
+`;
+
+export const Loader = styled.div`
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: 100%;
+  div {
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    div {
+      position: absolute;
+      border: 2px solid ${(props) => props.theme.main3.side};
+      opacity: 1;
+      border-radius: 50%;
+      animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+    div:nth-child(2) {
+      animation-delay: -0.5s;
+    }
+  }
+  @keyframes lds-ripple {
+    0% {
+      top: 18px;
+      left: 18px;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+    4.9% {
+      top: 18px;
+      left: 18px;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+    5% {
+      top: 18px;
+      left: 18px;
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      top: 0px;
+      left: 0px;
+      width: 36px;
+      height: 36px;
+      opacity: 0;
+    }
+  }
+`;
+export const TitleSection = styled.div`
+  margin: 2rem 0;
+  h1 {
+    font-size: 2rem;
+    color: ${(props) => props.theme.main1.main2};
+    text-transform: uppercase;
+    i {
+      width: 1.5em;
+      font-size: 0.6em;
+      position: relative;
+      top: -5px;
+      right: 0;
+    }
+  }
+  @media (min-width: 768px) {
+    margin: 3rem 1rem;
   }
 `;

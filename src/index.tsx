@@ -8,9 +8,9 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <div>
+  <React.StrictMode>
     <RecoilRoot>
       <RouterProvider router={router} />
     </RecoilRoot>
-  </div>
+  </React.StrictMode>
 );

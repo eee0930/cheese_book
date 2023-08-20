@@ -12,12 +12,6 @@ const request = async (url: string) => {
   }
 };
 
-interface IAccessInfo {
-  pdf: {
-    isAvailable: boolean;
-  };
-  webReaderLink: string;
-}
 export interface IVolumeInfo {
   title: string;
   subtitle?: string;
@@ -40,7 +34,7 @@ export interface IVolume {
   id: string;
   etag: string;
   volumeInfo: IVolumeInfo;
-  accessInfo?: IAccessInfo;
+  accessInfo?: { embeddable: boolean };
 }
 export interface ISearchResult {
   kind: string;

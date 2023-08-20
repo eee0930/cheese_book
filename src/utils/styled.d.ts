@@ -4,15 +4,34 @@ import 'styled-components';
 // and extend them!
 declare module 'styled-components' {
   export interface DefaultTheme {
-    main: {
-      i: string;
-      j: string;
-      k: string;
+    main1: {
+      main1: string;
+      main2: string;
+      side: string;
     };
-    sub: {
-      i: string;
-      j: string;
-      k: string;
+    main2: {
+      main1: string;
+      main2: string;
+      side: string;
+    };
+    main3: {
+      main1: string;
+      main2: string;
+      side: string;
+    };
+    main4: {
+      main1: string;
+      side: string;
+    };
+    black: {
+      veryDark: string;
+      darker: string;
+      lighter: string;
+    };
+    white: {
+      veryDark: string;
+      lighter: string;
+      darker: string;
     };
     title: string;
     padding: {
@@ -25,5 +44,11 @@ declare module 'styled-components' {
       md: string;
       sm: string;
     };
+    boxLine: {
+      lg: string;
+      md: string;
+      sm: string;
+    };
+    background: string;
   }
 }

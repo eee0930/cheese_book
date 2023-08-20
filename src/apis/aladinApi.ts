@@ -47,13 +47,22 @@ export const fetchNewestBookList = async (isHome: boolean) =>
   );
 
 /**
- * 베스트셀러 목록
+ * 이주의 베스트 셀러
+ * @returns
+ */
+export const fetchTotalBestSellerList = async () =>
+  await request(`${ROOT}ItemList.aspx?QueryType=Bestseller&SearchTarget=All`);
+/**
+ * 베스트셀러 목록 (국내/ 해외)
  * @param isHome
  * @returns
  */
-export const fetchBestSellerBookList = async (isHome: boolean) =>
+export const fetchBestSellerBookList = async (
+  isHome: boolean,
+  categoryId: number
+) =>
   await request(
-    `${ROOT}ItemList.aspx?QueryType=Bestseller&SearchTarget=${
+    `${ROOT}ItemList.aspx?QueryType=Bestseller&categoryId=${categoryId}&SearchTarget=${
       isHome ? 'book' : 'Foreign'
     }`
   );

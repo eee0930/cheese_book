@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import {
-  ISearchResult,
-  IVolume,
-  fetchVolumeListByQuery,
-} from '../apis/volumeApi';
+import { useState } from 'react';
 import BestSeller from '../components/BestSellerList';
 import BookViewer from '../components/BookViewer';
+import {
+  IBookItem,
+  IRequestList,
+  fetchBookListByQuery,
+} from '../apis/aladinApi';
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [searchResult, setSearchResult] = useState<IVolume[]>();
+  const [searchResult, setSearchResult] = useState<IBookItem[]>();
   const [searchField, setSearchField] = useState('');
   const [sortResult, setSortResult] = useState('');
 
@@ -17,38 +17,36 @@ function Home() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setIsLoading(true);
-    const data = (await fetchVolumeListByQuery(
+    const data = (await fetchBookListByQuery(
       searchField,
       true
-    )) as ISearchResult;
-    setSearchResult(data?.items);
+    )) as IRequestList;
+    setSearchResult(data?.item);
     setIsLoading(false);
   };
   const handleSort = (e: any) => {
     const sort = e.target.value;
     setSortResult(sort);
   };
-  const cleanData = (data: IVolume[]) => {
+  const cleanData = (data: IBookItem[]) => {
     const cleanedData = data.map((book) => {
-      if (book.volumeInfo.hasOwnProperty('publishedDate') === false) {
-        book.volumeInfo['publishedDate'] = '0000';
-      } else if (book.volumeInfo.hasOwnProperty('imageLinks') === false) {
-        book.volumeInfo['imageLinks'] = {
-          thumbnail: process.env.PUBLIC_URL + '/img/default_profile.jpg',
-        };
+      if (book.hasOwnProperty('pubDate') === false) {
+        book['pubDate'] = '0000';
+      } else if (book.hasOwnProperty('cover') === false) {
+        book['cover'] = process.env.PUBLIC_URL + '/img/default_profile.jpg';
       }
       return book;
     });
     return cleanedData;
   };
-  const sortBooks = (data: IVolume[]) => {
+  const sortBooks = (data: IBookItem[]) => {
     const sortedBooks = data.sort((a, b) => {
       if (sortResult === 'Newest') {
-        return (parseInt(b.volumeInfo.publishedDate.substring(0, 4)) -
-          parseInt(a.volumeInfo.publishedDate.substring(0, 4))) as number;
+        return (parseInt(b.pubDate.substring(0, 4)) -
+          parseInt(a.pubDate.substring(0, 4))) as number;
       } else if (sortResult === 'Oldest') {
-        return (parseInt(a.volumeInfo.publishedDate.substring(0, 4)) -
-          parseInt(b.volumeInfo.publishedDate.substring(0, 4))) as number;
+        return (parseInt(a.pubDate.substring(0, 4)) -
+          parseInt(b.pubDate.substring(0, 4))) as number;
       } else {
         return 0;
       }
@@ -57,7 +55,7 @@ function Home() {
   };
   return (
     <div>
-      <BookViewer isbn={'0738531367'} />
+      <BookViewer isbn={'1982182199'} />
       <form onSubmit={handleSubmit}>
         <div>
           <input type="search" value={searchField} onChange={handleSearch} />
@@ -69,8 +67,8 @@ function Home() {
       {!isLoading && (
         <div>
           <ul>
-            {searchResult?.map((volume) => (
-              <li key={volume.id}>{volume?.volumeInfo?.title}</li>
+            {searchResult?.map((book) => (
+              <li key={book.isbn}>{book?.title}</li>
             ))}
           </ul>
         </div>

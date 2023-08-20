@@ -9,11 +9,18 @@ interface IIsbnVolumInfo {
 }
 
 /**
- * 라이트 모드 여부
+ * 페이지 너비
  */
-export const themeState = atom({
-  key: 'isLightTheme',
-  default: true,
+interface IOffset {
+  [key: string]: number;
+}
+export const offsetState = atom<IOffset>({
+  key: 'offset',
+  default: {
+    pc: 1200,
+    tablet: 768,
+    mobile: 320,
+  },
 });
 
 /**
