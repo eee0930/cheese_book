@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const SideMenuContainer = styled.div`
-  padding: 1.2rem 1.2rem 0.3rem 0.8rem;
+  padding: 1.8rem 1.2rem 1.2rem 1rem;
   width: 100%;
   height: 100vh;
   @media (min-width: 1200px) {

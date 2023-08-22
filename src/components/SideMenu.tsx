@@ -37,6 +37,7 @@ function SideMenu() {
         setOffset('mobile');
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -72,7 +73,7 @@ function SideMenu() {
                       <i className="fa-solid fa-rocket" />
                     </span>
                     <span>
-                      <Link to="/chart">Newest</Link>
+                      <Link to="/chart">New Books</Link>
                     </span>
                   </li>
                   <li className={`${bestSellerMatch && 'active'}`}>

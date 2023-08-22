@@ -44,18 +44,12 @@ export interface ISearchResult {
 /**
  * 도서 검색 결과 가져오기
  * @param query
- * @param isPartial // 미리보기 가능 도서만 가져오기
  * @returns
  */
-export const fetchVolumeListByQuery = async (
-  query: string,
-  isPartial: boolean
-) =>
-  await request(
-    `${ROOT}volumes?q=${query}&maxResults=40${
-      isPartial && '&filter=partial'
-    }&key=${KEY}`
-  );
+export const fetchVolumeListByQuery = async (query: string) =>
+  (await request(
+    `${ROOT}volumes?q=${query}&maxResults=40&key=${KEY}`
+  )) as ISearchResult;
 
 /**
  * 도서 상세보기
@@ -63,7 +57,7 @@ export const fetchVolumeListByQuery = async (
  * @returns
  */
 export const fetchVolumeById = async (id: string) =>
-  await request(`${ROOT}volumes/${id}?key=${KEY}`);
+  (await request(`${ROOT}volumes/${id}?key=${KEY}`)) as IVolume;
 
 /**
  * 도서 표지 이미지 가져오기
@@ -71,4 +65,4 @@ export const fetchVolumeById = async (id: string) =>
  * @returns
  */
 export const fetchVolumeByIstn = async (isbn: string) =>
-  await request(`${ROOT}volumes?q=isbn:${isbn}&key=${KEY}`);
+  (await request(`${ROOT}volumes?q=isbn:${isbn}&key=${KEY}`)) as ISearchResult;

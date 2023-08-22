@@ -1,0 +1,25 @@
+{
+  "Korea": {
+    "987": "Science",
+    "2551": "Comic",
+    "50926": "Detective",
+    "50933": "Action",
+    "50953": "Theme",
+    "50928": "Fantasy",
+    "50930": "SF",
+    "55889": "Essay",
+    "1196": "Travel",
+    "74": "History",
+    "336": "Self-improvement",
+    "351": "Computer"
+  },
+  "Overseas": {
+    "90840": "Comic",
+    "97456": "Novel",
+    "90845": "Essay",
+    "90846": "Travel",
+    "90847": "History",
+    "90854": "Self-improvement",
+    "90859": "Computer"
+  }
+}
