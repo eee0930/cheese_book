@@ -2,33 +2,10 @@ const KEY = process.env.REACT_APP_ALADIN_KEY;
 const ROOT = process.env.REACT_APP_ALADIN_ROOT;
 
 const VERSION = '20131101';
-const MAX_RESULTS = 20;
-const START = 1;
-
-export interface IBookItem {
-  title: string;
-  author: string;
-  pubDate: string;
-  isbn: string;
-  itemId: string;
-  priceStandard: number;
-  cover: string;
-  categoryName: string;
-  publisher: string;
-  adult: boolean;
-  customerReviewRank: number;
-}
-
-export interface IRequestList {
-  pubDate: string;
-  totalResults: number;
-  startIndex: number;
-  itemsPerPage: number;
-  item: IBookItem[];
-}
+const COVER_SIZE = 'MidBig';
 
 const request = async (url: string) => {
-  const options = `&TTBKey=${KEY}&Cover=MidBig&Output=js&MaxResults=${MAX_RESULTS}&start=${START}&Version=${VERSION}`;
+  const options = `&TTBKey=${KEY}&Cover=${COVER_SIZE}&Output=js&Version=${VERSION}`;
   try {
     const response = await fetch(`${url}${options}`);
     const data = await response.json();
@@ -38,40 +15,72 @@ const request = async (url: string) => {
   }
 };
 
+interface ISubInfo {
+  itemPage?: number;
+  originalTitle?: string;
+  previewImgList?: string[];
+  cardReviewImgList?: string[];
+  ratingInfo?: {
+    ratingScore: number;
+  };
+}
+
+export interface IAladinBookItem {
+  title: string;
+  author: string;
+  pubDate: string;
+  description: string;
+  isbn: string;
+  isbn13: string;
+  itemId: number;
+  priceStandard: number;
+  cover: string;
+  categoryId?: number;
+  categoryName?: string;
+  publisher: string;
+  adult?: boolean;
+  customerReviewRank: number;
+  bestDuration?: string;
+  bestRank?: number;
+  subInfo?: ISubInfo;
+}
+
+export interface IAladinRequestList {
+  pubDate: string;
+  totalResults: number;
+  startIndex: number;
+  itemsPerPage: number;
+  item: IAladinBookItem[];
+}
+
 /**
  * 신간 목록
  * @param isHome
  * @returns
  */
-export const fetchNewestBookList = async (isHome: boolean) =>
+export const fetchNewestBookList = async (isHome: boolean, maxResult: number) =>
   (await request(
     `${ROOT}ItemList.aspx?QueryType=ItemNewSpecial&SearchTarget=${
       isHome ? 'book' : 'Foreign'
-    }`
-  )) as IRequestList;
+    }&MaxResults=${maxResult}`
+  )) as IAladinRequestList;
 
 /**
- * 이주의 베스트 셀러
- * @returns
- */
-export const fetchTotalBestSellerList = async () =>
-  (await request(
-    `${ROOT}ItemList.aspx?QueryType=Bestseller&SearchTarget=All`
-  )) as IRequestList;
-/**
- * 베스트셀러 목록 (국내/ 해외)
+ * 이주의 베스트 셀러 (국내/ 해외)
  * @param isHome
+ * @param categoryId
  * @returns
  */
 export const fetchBestSellerBookList = async (
   isHome: boolean,
-  categoryId: number
+  categoryId: number,
+  maxResult: number
 ) =>
   (await request(
     `${ROOT}ItemList.aspx?QueryType=Bestseller&categoryId=${categoryId}&SearchTarget=${
-      isHome ? 'book' : 'Foreign'
-    }`
-  )) as IRequestList;
+      isHome ? 'Book' : 'Foreign'
+    }&MaxResults=${maxResult}`
+  )) as IAladinRequestList;
 
 /**
  * 도서 검색 결과 목록
@@ -79,9 +88,30 @@ export const fetchBestSellerBookList = async (
  * @param isHome
  * @returns
  */
-export const fetchBookListByQuery = async (query: string, isHome: boolean) =>
+export const fetchBookListByQuery = async (
+  query: string,
+  isHome: boolean,
+  maxResult: number
+) =>
   (await request(
     `${ROOT}ItemSearch.aspx?Query=${query}&SearchTarget=${
       isHome ? 'book' : 'Foreign'
-    }`
-  )) as IRequestList;
+    }&MaxResults=${maxResult}`
+  )) as IAladinRequestList;
+
+/**
+ * 도서상세정보
+ * @param isbn13
+ * @returns
+ */
+export const fetchBookDetailByIsbn = async (isbn: string, isbn13: string) => {
+  let type = 'ISBN13';
+  let itemId = isbn13;
+  if (!isbn13) {
+    type = 'ISBN';
+    itemId = isbn;
+  }
+  return (await request(
+    `${ROOT}ItemLookUp.aspx?ItemIdType=${type}&ItemId=${itemId}&OptResult=cardReviewImgList,ratingInfo,bestSellerRank`
+  )) as IAladinRequestList;
+};

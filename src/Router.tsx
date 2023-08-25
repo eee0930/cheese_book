@@ -8,15 +8,15 @@ import Home from './routes/Home';
 import ListBestSeller from './routes/ListBestSeller';
 import Login from './routes/Login';
 import ListNewBooks from './routes/ListNewBooks';
-import Recommend from './routes/Recommend';
-import ViewerModal from './routes/ViewerModal';
+import Taste from './routes/Taste';
 import ViewDetail from './routes/ViewDetail';
 import Bookshelves from './routes/Bookshelves';
 import SearchResults from './routes/SearchResults';
-import RecommendResults from './routes/RecommendResults';
+import TasteResults from './routes/TasteResults';
 import NotFound from './routes/NotFound';
 // components
 import ErrorComponent from './components/ErrorComponet';
+import BookViewer from './routes/BookViewer';
 
 const router = createHashRouter([
   {
@@ -41,103 +41,40 @@ const router = createHashRouter([
           {
             path: '',
             element: <Home />,
-            children: [
-              {
-                path: 'book/:id',
-                element: <ViewDetail />,
-                children: [
-                  {
-                    path: 'book/viewer/:id',
-                    element: <ViewerModal />,
-                  },
-                ],
-              },
-            ],
           },
           {
             path: 'best',
             element: <ListBestSeller />,
-            children: [
-              {
-                path: ':id',
-                element: <ViewDetail />,
-                children: [
-                  {
-                    path: 'viewer',
-                    element: <ViewerModal />,
-                  },
-                ],
-              },
-            ],
           },
           {
             path: 'new',
             element: <ListNewBooks />,
-            children: [
-              {
-                path: ':id',
-                element: <ViewDetail />,
-                children: [
-                  {
-                    path: 'viewer',
-                    element: <ViewerModal />,
-                  },
-                ],
-              },
-            ],
           },
           {
-            path: 'recommend',
-            element: <Recommend />,
+            path: 'taste',
+            element: <Taste />,
             children: [
               {
                 path: 'result',
-                element: <RecommendResults />,
-                children: [
-                  {
-                    path: ':id',
-                    element: <ViewDetail />,
-                    children: [
-                      {
-                        path: 'viewer',
-                        element: <ViewerModal />,
-                      },
-                    ],
-                  },
-                ],
-                errorElement: <ErrorComponent />,
+                element: <TasteResults />,
               },
             ],
           },
           {
             path: 'my',
             element: <Bookshelves />,
-            children: [
-              {
-                path: ':id',
-                element: <ViewDetail />,
-                children: [
-                  {
-                    path: 'viewer',
-                    element: <ViewerModal />,
-                  },
-                ],
-              },
-            ],
           },
           {
             path: 'search',
             element: <SearchResults />,
+          },
+          {
+            path: 'book/:id',
+            element: <ViewDetail />,
             children: [
               {
-                path: ':id',
-                element: <ViewDetail />,
-                children: [
-                  {
-                    path: 'viewer',
-                    element: <ViewerModal />,
-                  },
-                ],
+                path: 'viewer',
+                element: <BookViewer />,
               },
             ],
           },

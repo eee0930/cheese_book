@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Link, useMatch } from 'react-router-dom';
+import { Link, useMatch, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { offsetState } from '../atom';
+import { loginState, offsetState } from '../atom';
 // styles
 import {
   SideMenuContainer,
@@ -21,12 +21,18 @@ import {
 } from '../utils/components/sideMenuStyles';
 
 function SideMenu() {
+  const loggedIn = useRecoilValue(loginState);
   const offsetInfo = useRecoilValue(offsetState);
+
   const homeMatch = useMatch('/');
-  const newestMatch = useMatch('/newest/*');
+  const newestMatch = useMatch('/new/*');
   const bestSellerMatch = useMatch('/best/*');
-  const recommendMatch = useMatch('/mbti/*');
+  const tasteMatch = useMatch('/taste/*');
+  const myMatch = useMatch('/my/*');
+
+  const [searchField, setSearchField] = useState('');
   const [offset, setOffset] = useState<string>();
+
   const windowWidth = window.innerWidth;
   useEffect(() => {
     if (!offset) {
@@ -38,7 +44,14 @@ function SideMenu() {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [windowWidth]);
+
+  const navigate = useNavigate();
+  const handleSearch = (e: any) => setSearchField(e.target.value);
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    navigate(`/search?q=${searchField}`);
+  };
 
   return (
     <>
@@ -65,7 +78,7 @@ function SideMenu() {
                       <i className="fa-solid fa-house-chimney-window" />
                     </span>
                     <span>
-                      <Link to="/">home</Link>
+                      <Link to="/">Home</Link>
                     </span>
                   </li>
                   <li className={`${newestMatch && 'active'}`}>
@@ -73,7 +86,7 @@ function SideMenu() {
                       <i className="fa-solid fa-rocket" />
                     </span>
                     <span>
-                      <Link to="/chart">New Books</Link>
+                      <Link to="/new">New Books</Link>
                     </span>
                   </li>
                   <li className={`${bestSellerMatch && 'active'}`}>
@@ -81,23 +94,39 @@ function SideMenu() {
                       <i className="fa-solid fa-trophy" />
                     </span>
                     <span>
-                      <Link to="/mixtape">Best Seller</Link>
+                      <Link to="/best">Best Sellers</Link>
                     </span>
                   </li>
-                  <li className={`${recommendMatch && 'active'}`}>
+                  <li className={`${tasteMatch && 'active'}`}>
                     <span className="icon-cover">
                       <i className="fa-solid fa-flask" />
                     </span>
                     <span>
-                      <Link to="/mixtape">recommend</Link>
+                      <Link to="/taste">Your Taste</Link>
                     </span>
                   </li>
+                  {!loggedIn && (
+                    <li className={`${myMatch && 'active'}`}>
+                      <span className="icon-cover">
+                        <i className="fa-solid fa-book" />
+                      </span>
+                      <span>
+                        <Link to="/my">My Books</Link>
+                      </span>
+                    </li>
+                  )}
                 </SideMenus>
                 <SearchSection>
                   <SearchCover>
                     <i className="fa-solid fa-magnifying-glass" />
-                    <form>
-                      <input type="search" name="search" placeholder="search" />
+                    <form method="get" onSubmit={handleSubmit}>
+                      <input
+                        type="search"
+                        name="search"
+                        placeholder="search"
+                        value={searchField}
+                        onChange={handleSearch}
+                      />
                     </form>
                   </SearchCover>
                 </SearchSection>
@@ -116,28 +145,35 @@ function SideMenu() {
                 </Link>
               </div>
               <div className="col">
-                <Link to="/chart">
+                <Link to="/new">
+                  <IconCover>
+                    <i className="fa-solid fa-rocket" />
+                  </IconCover>
+                  <MenuName>new</MenuName>
+                </Link>
+              </div>
+              <div className="col">
+                <Link to="/best">
                   <IconCover>
                     <i className="fa-solid fa-trophy" />
                   </IconCover>
-                  <MenuName>chart</MenuName>
+                  <MenuName>best</MenuName>
                 </Link>
               </div>
               <div className="col">
-                <Link to="/mixtape">
+                <Link to="/taste">
                   <IconCover>
-                    <i className="fa-solid fa-record-vinyl" />
+                    <i className="fa-solid fa-flask" />
                   </IconCover>
-                  <MenuName>mix tape</MenuName>
+                  <MenuName>taste</MenuName>
                 </Link>
               </div>
               <div className="col">
-                <Link to="#">
+                <Link to="/my">
                   <IconCover>
-                    <i className="fa-solid fa-bars" />
-                    <i className="fa-solid fa-music" />
+                    <i className="fa-solid fa-book" />
                   </IconCover>
-                  <MenuName>play list</MenuName>
+                  <MenuName>my</MenuName>
                 </Link>
               </div>
             </MobileMenuCover>

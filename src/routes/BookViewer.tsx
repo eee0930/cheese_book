@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useAppendScript } from '../hooks/useAppendScript';
+import { useAppendScript } from '../hooks/appendScript';
 
 declare global {
   interface Window {
@@ -7,13 +7,10 @@ declare global {
   }
 }
 
-interface IIsbn {
-  isbn: string;
-}
-
 const VIEWER_SRC = process.env.REACT_APP_BOOK_VIEWER as string;
 
-function BookViewer({ isbn }: IIsbn) {
+const isbn = '1982182199';
+function BookViewer() {
   const viewerCanvas = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
   const [googleBooks, setGoogleBooks] = useState<any>();

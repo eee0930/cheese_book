@@ -64,17 +64,17 @@ export const SideMenuIn = styled(BoxStyle)`
   z-index: 4;
 `;
 export const TitleCover = styled.div`
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   padding: 1rem 0;
   .title {
-    font-size: 2rem;
+    font-size: 1.8rem;
     text-align: center;
     text-transform: uppercase;
     color: ${(props) => props.theme.main1.main1};
   }
   @media (min-width: 1200px) {
     .title {
-      font-size: 2.7rem;
+      font-size: 2.2rem;
     }
   }
 `;
@@ -153,7 +153,7 @@ export const LoginCover = styled.div`
   }
 `;
 export const SideMenus = styled.ul`
-  padding: 2rem 1.2rem;
+  padding: 2rem 0.8rem;
   position: relative;
   margin-bottom: 1.5rem;
   &:before,
@@ -175,13 +175,15 @@ export const SideMenus = styled.ul`
     margin-bottom: 1rem;
     font-size: 1.2rem;
     color: ${(props) => props.theme.black.darker};
-    text-transform: uppercase;
+    //text-transform: uppercase;
     i,
     a {
       transition: color 0.3s ease;
     }
     i {
       font-size: 1.2em;
+      position: relative;
+      top: 1.5px;
     }
     span {
       margin-left: 0.5rem;

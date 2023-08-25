@@ -47,7 +47,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     background-color: ${(props) => props.theme.background};
-    color: $black;
+    color: #333;
     overflow: hidden;
     width: 100vw;
     height: 100vh;
@@ -583,9 +583,7 @@ export const CheeseStyle = createGlobalStyle`
     font-family: ${(props) => props.theme.title}, cursive;
     letter-spacing: -0.04em;
     word-spacing: 0.03em;
-    font-stretch: 0.05em;
     line-height: 0.83;
-    font-size: 5rem;
   }
   .likeBtn.liked .fa-solid.fa-heart {
     color: ${(props) => props.theme.main1.main1};

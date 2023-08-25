@@ -22,7 +22,10 @@ export const CheeseContainer = styled.div`
 
 export const CheeseMainContainer = styled.div`
   overflow-y: auto;
-  max-height: 100vh;
+  max-height: calc(100vh - ${(props) => props.theme.sideMenu.sm});
+  @media (min-width: 768px) {
+    max-height: 100vh;
+  }
 `;
 
 export const BaseLayoutMenu = styled.div`

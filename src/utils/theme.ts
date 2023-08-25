@@ -30,7 +30,7 @@ export const lightTheme: DefaultTheme = {
     lighter: '#fff',
     darker: '#fcf8f1',
   },
-  title: 'Titan One',
+  title: 'Titan One, Black Han Sans',
   padding: {
     lg: '1rem 2rem',
     md: '0.8rem 1rem',
