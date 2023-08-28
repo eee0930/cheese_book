@@ -3,16 +3,19 @@
  * @param storage local storage name
  * @param data local storage data
  */
-export const useSaveLocalDatas = (storage: string, data: any) => {
+export const useSaveLocalDatas = (storage: string) => {
   const localData = useLocalDatas(storage, false);
-  let newDataStr;
-  if (localData) {
-    const newData = [...localData, ...data];
-    newDataStr = JSON.stringify(newData);
-  } else {
-    newDataStr = JSON.stringify(data);
-  }
-  localStorage.setItem(storage, newDataStr);
+  const saveFn = (data: any) => {
+    let newDataStr;
+    if (localData) {
+      const newData = [...localData, ...data];
+      newDataStr = JSON.stringify(newData);
+    } else {
+      newDataStr = JSON.stringify(data);
+    }
+    localStorage.setItem(storage, newDataStr);
+  };
+  return saveFn;
 };
 
 /**

@@ -69,7 +69,7 @@ const router = createHashRouter([
             element: <SearchResults />,
           },
           {
-            path: 'book/:id',
+            path: 'book/:isbn',
             element: <ViewDetail />,
             children: [
               {

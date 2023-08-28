@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { IAladinBookItem, fetchBestSellerBookList } from '../apis/aladinApi';
+// components
 import Book from './mixins/Book';
 
 interface IBestSellers {
   isHome: boolean;
   cateNum?: number;
   maxSize?: number;
-  exceptCate?: number;
 }
 
-function BestSellers({ isHome, cateNum, maxSize, exceptCate }: IBestSellers) {
+function BestSellers({ isHome, cateNum, maxSize }: IBestSellers) {
   const [isLoading, setIsLoading] = useState(true);
   const [bestSellerList, setBestSellerList] = useState<IAladinBookItem[]>();
 
@@ -31,14 +31,13 @@ function BestSellers({ isHome, cateNum, maxSize, exceptCate }: IBestSellers) {
 
   const getBestSellerList = async (categoryNum: number, resultSize: number) => {
     const fetchedbestSellerList = await fetchBestSellerBookList(
-      true,
+      isHome,
       categoryNum,
       resultSize
     );
     setBestSellerList(fetchedbestSellerList?.item);
   };
 
-  let except;
   return (
     <>
       {!isLoading && (

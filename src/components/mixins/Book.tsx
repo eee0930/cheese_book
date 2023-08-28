@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuthors } from '../../hooks/redesignData';
+// styles
 import {
   BookContentContainer,
   BookCover,
@@ -13,18 +14,28 @@ interface IBook {
     author: string;
     cover: string;
     publisher: string;
+    isbn: string;
     isbn13: string;
   };
 }
+
 function Book({ book }: IBook) {
-  const author = useAuthors(book.author);
+  const { title, author, cover, publisher, isbn, isbn13 } = book;
+  const oneAuthor = useAuthors(author);
+  const navigate = useNavigate();
+
+  const handleClickBox = () => {
+    navigate(`/book/${isbn13.length ? isbn13 : isbn}`);
+  };
+
   return (
-    <BookContentContainer className="col-6 col-md-3 col-xl">
-      <Link to={`/book/${book.isbn13}`}>
-        <BookCover style={{ backgroundImage: `url(${book.cover})` }} />
-        <BookTitle>{book.title}</BookTitle>
-        <BookInfo>{`${author} · ${book.publisher}`}</BookInfo>
-      </Link>
+    <BookContentContainer
+      onClick={handleClickBox}
+      className="col-6 col-md-3 col-xl"
+    >
+      <BookCover style={{ backgroundImage: `url(${cover})` }} />
+      <BookTitle>{title}</BookTitle>
+      <BookInfo>{`${oneAuthor} · ${publisher}`}</BookInfo>
     </BookContentContainer>
   );
 }

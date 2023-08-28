@@ -5,7 +5,7 @@ const VERSION = '20131101';
 const COVER_SIZE = 'MidBig';
 
 const request = async (url: string) => {
-  const options = `&TTBKey=${KEY}&Cover=${COVER_SIZE}&Output=js&Version=${VERSION}`;
+  const options = `&TTBKey=${KEY}&Output=js&Version=${VERSION}`;
   try {
     const response = await fetch(`${url}${options}`);
     const data = await response.json();
@@ -35,8 +35,8 @@ export interface IAladinBookItem {
   itemId: number;
   priceStandard: number;
   cover: string;
-  categoryId?: number;
-  categoryName?: string;
+  categoryId: number;
+  categoryName: string;
   publisher: string;
   adult?: boolean;
   customerReviewRank: number;
@@ -60,7 +60,7 @@ export interface IAladinRequestList {
  */
 export const fetchNewestBookList = async (isHome: boolean, maxResult: number) =>
   (await request(
-    `${ROOT}ItemList.aspx?QueryType=ItemNewSpecial&SearchTarget=${
+    `${ROOT}ItemList.aspx?QueryType=ItemNewSpecial&Cover=MidBig&SearchTarget=${
       isHome ? 'book' : 'Foreign'
     }&MaxResults=${maxResult}`
   )) as IAladinRequestList;
@@ -77,7 +77,7 @@ export const fetchBestSellerBookList = async (
   maxResult: number
 ) =>
   (await request(
-    `${ROOT}ItemList.aspx?QueryType=Bestseller&categoryId=${categoryId}&SearchTarget=${
+    `${ROOT}ItemList.aspx?QueryType=Bestseller&Cover=MidBig&categoryId=${categoryId}&SearchTarget=${
       isHome ? 'Book' : 'Foreign'
     }&MaxResults=${maxResult}`
   )) as IAladinRequestList;
@@ -94,7 +94,7 @@ export const fetchBookListByQuery = async (
   maxResult: number
 ) =>
   (await request(
-    `${ROOT}ItemSearch.aspx?Query=${query}&SearchTarget=${
+    `${ROOT}ItemSearch.aspx?Query=${query}&Cover=MidBig&SearchTarget=${
       isHome ? 'book' : 'Foreign'
     }&MaxResults=${maxResult}`
   )) as IAladinRequestList;
@@ -104,14 +104,12 @@ export const fetchBookListByQuery = async (
  * @param isbn13
  * @returns
  */
-export const fetchBookDetailByIsbn = async (isbn: string, isbn13: string) => {
+export const fetchBookDetailByIsbn = async (isbn: string) => {
   let type = 'ISBN13';
-  let itemId = isbn13;
-  if (!isbn13) {
+  if (isbn.length < 13) {
     type = 'ISBN';
-    itemId = isbn;
   }
   return (await request(
-    `${ROOT}ItemLookUp.aspx?ItemIdType=${type}&ItemId=${itemId}&OptResult=cardReviewImgList,ratingInfo,bestSellerRank`
+    `${ROOT}ItemLookUp.aspx?ItemIdType=${type}&ItemId=${isbn}&Cover=Big&OptResult=cardReviewImgList,ratingInfo,bestSellerRank`
   )) as IAladinRequestList;
 };

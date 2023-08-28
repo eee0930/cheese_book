@@ -1,3 +1,4 @@
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
@@ -14,12 +15,20 @@ const Image = styled.img`
 
 function NotFound() {
   return (
-    <ErrorContainer>
-      <Link to="/">
-        <Image src={process.env.PUBLIC_URL + '/img/error.png'} />
-      </Link>
-      <h1>404 Not Found.</h1>
-    </ErrorContainer>
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <title>Cheese Book</title>
+        </Helmet>
+      </HelmetProvider>
+
+      <ErrorContainer>
+        <Link to="/">
+          <Image src={process.env.PUBLIC_URL + '/img/error.png'} />
+        </Link>
+        <h1>404 Not Found.</h1>
+      </ErrorContainer>
+    </>
   );
 }
 

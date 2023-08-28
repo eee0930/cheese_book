@@ -1,5 +1,15 @@
+import { Helmet, HelmetProvider } from 'react-helmet-async';
+
 function Bookshelves() {
-  return null;
+  return (
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <title>Bookshelves | Cheese Book</title>
+        </Helmet>
+      </HelmetProvider>
+    </>
+  );
 }
 
 export default Bookshelves;

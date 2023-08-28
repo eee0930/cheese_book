@@ -1,32 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { IAladinBookItem, fetchBookListByQuery } from '../apis/aladinApi';
-import { Loader } from '../utils/globalStyles';
+// components
 import Book from '../components/mixins/Book';
-import { styled } from 'styled-components';
-
-export const ContentTitle = styled.div`
-  margin: 1rem 0;
-  padding: 0 5px;
-  font-size: 1.2rem;
-  span {
-    font-size: 1.1em;
-    color: ${(props) => props.theme.main1.main1};
-  }
-  i {
-    width: 1.5em;
-    position: relative;
-    left: 5px;
-    color: ${(props) => props.theme.main1.main1};
-  }
-  @media (min-width: 768px) {
-    padding: 0 0.7rem;
-  }
-  @media (min-width: 1199.5px) {
-    margin: 1.5rem 0;
-    padding: 0 1rem;
-  }
-`;
+//styles
+import { Loader } from '../utils/globalStyles';
+import { ContentTitle } from '../utils/commonStyles';
 
 function SearchResults() {
   const location = useLocation();
@@ -36,16 +15,14 @@ function SearchResults() {
   const [sortResult, setSortResult] = useState('');
 
   useEffect(() => {
-    window.moveTo(0, 0);
+    setIsLoading(true);
     if (query) {
       getBookListByQuery(query);
-    } else {
-      setIsLoading(true);
     }
   }, [query]);
 
   const getBookListByQuery = async (q: string) => {
-    const data = await fetchBookListByQuery(q, true, 40);
+    const data = await fetchBookListByQuery(q, true, 30);
     setBookList(data?.item);
     setIsLoading(false);
   };

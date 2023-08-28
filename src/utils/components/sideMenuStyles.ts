@@ -175,7 +175,7 @@ export const SideMenus = styled.ul`
     margin-bottom: 1rem;
     font-size: 1.2rem;
     color: ${(props) => props.theme.black.darker};
-    //text-transform: uppercase;
+    text-transform: uppercase;
     i,
     a {
       transition: color 0.3s ease;
