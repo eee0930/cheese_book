@@ -16,7 +16,7 @@ function Home() {
       <Banner />
       <ContentContainer>
         <ContentTitle>Best Sellers This Week</ContentTitle>
-        <BestSellers isHome={true} />
+        <BestSellers isHome={true} maxSize={24} />
       </ContentContainer>
     </>
   );

@@ -20,22 +20,24 @@ interface IBook {
 }
 
 function Book({ book }: IBook) {
-  const { title, author, cover, publisher, isbn, isbn13 } = book;
+  const { title, author, cover, publisher, isbn } = book;
   const oneAuthor = useAuthors(author);
   const navigate = useNavigate();
 
   const handleClickBox = () => {
-    navigate(`/book/${isbn13.length ? isbn13 : isbn}`);
+    navigate(`/book/${isbn}`);
   };
 
   return (
     <BookContentContainer
       onClick={handleClickBox}
-      className="col-6 col-md-3 col-xl"
+      className="col-6 col-md-3 col-xl-2"
     >
-      <BookCover style={{ backgroundImage: `url(${cover})` }} />
-      <BookTitle>{title}</BookTitle>
-      <BookInfo>{`${oneAuthor} · ${publisher}`}</BookInfo>
+      <BookCover title={title} style={{ backgroundImage: `url(${cover})` }} />
+      <BookTitle title={title}>{title}</BookTitle>
+      <BookInfo
+        title={`${oneAuthor} · ${publisher}`}
+      >{`${oneAuthor} · ${publisher}`}</BookInfo>
     </BookContentContainer>
   );
 }

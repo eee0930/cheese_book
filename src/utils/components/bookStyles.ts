@@ -8,8 +8,6 @@ export const BookContentContainer = styled.div`
     margin-bottom: 1rem;
   }
   @media (min-width: 1199.5px) {
-    padding: 1rem !important;
-    width: 20% !important;
     margin-bottom: 1.5rem;
   }
 `;
@@ -20,28 +18,31 @@ export const BookCover = styled.div`
   background-size: contain;
   background-position: top center;
   margin-bottom: 5px;
+  cursor: pointer;
   @media (min-width: 768px) {
     margin-bottom: 0.5rem;
   }
-  @media (min-width: 1200px) {
+  @media (min-width: 1199.5px) {
     margin-bottom: 0.8rem;
   }
 `;
-const oneLineContent = styled.div`
+const OneLineContent = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   line-height: 1.2;
 `;
-export const BookTitle = styled(oneLineContent)`
+export const BookTitle = styled(OneLineContent)`
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 5px;
+  cursor: pointer;
   @media (min-width: 768px) {
     margin-bottom: 10px;
   }
 `;
-export const BookInfo = styled(oneLineContent)`
+export const BookInfo = styled(OneLineContent)`
   font-size: 0.8rem;
   font-weight: 500;
+  cursor: pointer;
 `;

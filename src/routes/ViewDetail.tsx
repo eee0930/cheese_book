@@ -1,10 +1,14 @@
-import { styled } from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
-import { IAladinBookItem, fetchBookDetailByIsbn } from '../apis/aladinApi';
-import { Loader } from '../utils/globalStyles';
+import { Link } from 'react-router-dom';
 import { Outlet, useMatch, useNavigate } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+// apis
+import { IAladinBookItem, fetchBookDetailByIsbn } from '../apis/aladinApi';
+import { fetchVolumeByIsbn } from '../apis/volumeApi';
+// styles
+import { Loader } from '../utils/globalStyles';
+
+import { styled } from 'styled-components';
 
 export const BookContentResultContainer = styled.div`
   margin: 1rem 0;
@@ -138,12 +142,14 @@ function ViewDetail() {
   const useIsbn = useMatch(`/book/:isbn`);
   const isbn = useIsbn?.params.isbn;
   const [isLoading, setIsLoading] = useState(true);
+  const [isCanPreview, setIsCanPrieview] = useState(false);
   const [book, setBook] = useState<IAladinBookItem>();
 
   const box = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsLoading(true);
+    getPreviewInfo();
     getBookDetail();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -156,6 +162,17 @@ function ViewDetail() {
     }
   };
 
+  const getPreviewInfo = async () => {
+    if (isbn) {
+      const data = await fetchVolumeByIsbn(isbn);
+      if (data?.items) {
+        const embeddable = data?.items[0]?.accessInfo?.embeddable;
+        if (embeddable) {
+          setIsCanPrieview(embeddable);
+        }
+      }
+    }
+  };
   const handlePreview = (id: string | undefined) => {
     if (id) {
       if (box.current) {
@@ -167,35 +184,7 @@ function ViewDetail() {
       return;
     }
   };
-  // export interface IAlanBookItem {
-  //   title: string;
-  //   author: string;
-  //   pubDate: string;
-  //   description: string;
-  //   isbn: string;
-  //   isbn13: string;
-  //   itemId: number;
-  //   priceStandard: number;
-  //   cover: string;
-  //   categoryId?: number;
-  //   categoryName?: string;
-  //   publisher: string;
-  //   adult?: boolean;
-  //   customerReviewRank: number;
-  //   bestDuration?: string;
-  //   bestRank?: number;
-  //   subInfo?: ISubInfo;
-  // }
 
-  // interface ISubInfo {
-  //   itemPage?: number;
-  //   originalTitle?: string;
-  //   previewImgList?: string[];
-  //   cardReviewImgList?: string[];
-  //   ratingInfo?: {
-  //     ratingScore: number;
-  //   };
-  // }
   return (
     <>
       {isLoading ? (
@@ -237,11 +226,13 @@ function ViewDetail() {
                     <BookImage src={book?.cover} alt={book?.title} />
                   </BookFront>
                   {/* <BookRight /> */}
-                  <PreviewBtnSection>
-                    <PreviewBtn onClick={() => handlePreview(book?.isbn)}>
-                      미리보기
-                    </PreviewBtn>
-                  </PreviewBtnSection>
+                  {isCanPreview && (
+                    <PreviewBtnSection>
+                      <PreviewBtn onClick={() => handlePreview(book?.isbn)}>
+                        미리보기
+                      </PreviewBtn>
+                    </PreviewBtnSection>
+                  )}
                 </BookImageSection>
               </BookContentSection>
             </BookContentContainer>

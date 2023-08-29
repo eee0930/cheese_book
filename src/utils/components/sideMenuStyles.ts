@@ -70,11 +70,14 @@ export const TitleCover = styled.div`
     font-size: 1.8rem;
     text-align: center;
     text-transform: uppercase;
-    color: ${(props) => props.theme.main1.main1};
+    text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000,
+      0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000,
+      0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000;
+    color: ${(props) => props.theme.main3.main2};
   }
   @media (min-width: 1200px) {
     .title {
-      font-size: 2.2rem;
+      font-size: 2rem;
     }
   }
 `;

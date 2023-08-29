@@ -34,7 +34,7 @@ export interface IVolume {
   id: string;
   etag: string;
   volumeInfo: IVolumeInfo;
-  accessInfo?: { embeddable: boolean };
+  accessInfo: { embeddable: boolean };
 }
 export interface ISearchResult {
   kind: string;
@@ -64,5 +64,5 @@ export const fetchVolumeById = async (id: string) =>
  * @param isbn
  * @returns
  */
-export const fetchVolumeByIstn = async (isbn: string) =>
+export const fetchVolumeByIsbn = async (isbn: string) =>
   (await request(`${ROOT}volumes?q=isbn:${isbn}&key=${KEY}`)) as ISearchResult;

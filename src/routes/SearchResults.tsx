@@ -19,7 +19,7 @@ function SearchResults() {
     if (query) {
       getBookListByQuery(query);
     }
-  }, [query]);
+  }, []);
 
   const getBookListByQuery = async (q: string) => {
     const data = await fetchBookListByQuery(q, true, 30);
@@ -59,11 +59,12 @@ function SearchResults() {
       ) : (
         <>
           <ContentTitle className="title">
-            Search Result <span>{query}</span>
+            <span>Search Result</span> {query}
             <i className="fa fa-caret-down" />
           </ContentTitle>
           <div className="row">
-            {bookList && bookList.map((book) => <Book book={book} />)}
+            {bookList &&
+              bookList.map((book, i) => <Book book={book} key={i} />)}
           </div>
         </>
       )}

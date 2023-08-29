@@ -19,15 +19,15 @@ export const ContentTitle = styled.h1`
   word-spacing: 0.03em;
   line-height: 0.83;
   font-weight: 400;
+  color: ${(props) => props.theme.main1.main1};
   span {
     font-size: 1.1em;
-    color: ${(props) => props.theme.main1.main1};
+    color: ${(props) => props.theme.black.darker};
   }
   i {
     width: 1.5em;
     position: relative;
     left: 5px;
-    color: ${(props) => props.theme.main1.main1};
   }
   &.active {
     color: ${(props) => props.theme.main1.main2};
