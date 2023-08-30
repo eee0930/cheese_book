@@ -1,40 +1,26 @@
-import { useEffect, useState } from 'react';
-import { IAladinBookItem, fetchNewestBookList } from '../apis/aladinApi';
+import { useQuery } from 'react-query';
+import { IAladinRequestList, fetchNewestBookList } from '../apis/aladinApi';
+import Book from './mixins/Book';
 
-function NewBooks() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [newestSellerList, setNewestSellerList] = useState<IAladinBookItem[]>(
-    []
+interface INewBooks {
+  isHome?: boolean;
+  maxSize?: number;
+}
+function NewBooks({ isHome, maxSize }: INewBooks) {
+  const { data, isLoading } = useQuery<IAladinRequestList>(
+    'newBooks',
+    () => fetchNewestBookList(isHome ? isHome : true, maxSize ? maxSize : 20),
+    { retry: 0 }
   );
-
-  useEffect(() => {
-    if (!newestSellerList.length) {
-      getNewestSellerList();
-      setIsLoading(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const getNewestSellerList = async () => {
-    const fetchedNewestSellerList = await fetchNewestBookList(true, 20);
-    setNewestSellerList(fetchedNewestSellerList?.item);
-  };
 
   return (
     <>
       {!isLoading && (
-        <ul>
-          {newestSellerList?.map((book, i) => (
-            <li key={i}>
-              <div>
-                <img src={book.cover} alt={book.title} />
-              </div>
-              <div>
-                {i + 1} {book.title} {book.adult && 'YES'}
-              </div>
-            </li>
+        <div className="row">
+          {data?.item?.map((book) => (
+            <Book key={book.isbn} book={book} />
           ))}
-        </ul>
+        </div>
       )}
     </>
   );

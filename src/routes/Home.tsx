@@ -4,6 +4,7 @@ import Banner from '../components/Banner';
 import BestSellers from '../components/BestSellers';
 // styles
 import { ContentContainer, ContentTitle } from '../utils/commonStyles';
+import NavTaps from '../components/NavTaps';
 
 function Home() {
   return (
@@ -15,7 +16,8 @@ function Home() {
       </HelmetProvider>
       <Banner />
       <ContentContainer>
-        <ContentTitle>Best Sellers This Week</ContentTitle>
+        <ContentTitle>이번주 베스트 셀러</ContentTitle>
+        {/* <NavTaps /> */}
         <BestSellers isHome={true} maxSize={24} />
       </ContentContainer>
     </>

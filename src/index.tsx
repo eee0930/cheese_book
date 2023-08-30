@@ -3,14 +3,18 @@ import ReactDOM from 'react-dom/client';
 import router from './Router';
 import { RecoilRoot } from 'recoil';
 import { RouterProvider } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
+const client = new QueryClient();
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
     <RecoilRoot>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={client}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </RecoilRoot>
   </React.StrictMode>
 );

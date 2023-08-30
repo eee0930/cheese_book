@@ -3,12 +3,17 @@ import { Link } from 'react-router-dom';
 import { Outlet, useMatch, useNavigate } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 // apis
-import { IAladinBookItem, fetchBookDetailByIsbn } from '../apis/aladinApi';
+import {
+  IAladinBookItem,
+  IAladinRequestList,
+  fetchBookDetailByIsbn,
+} from '../apis/aladinApi';
 import { fetchVolumeByIsbn } from '../apis/volumeApi';
 // styles
 import { Loader } from '../utils/globalStyles';
 
 import { styled } from 'styled-components';
+import { useQuery } from 'react-query';
 
 export const BookContentResultContainer = styled.div`
   margin: 1rem 0;
@@ -140,36 +145,32 @@ export const BoxContainer = styled.div`
 function ViewDetail() {
   const navigator = useNavigate();
   const useIsbn = useMatch(`/book/:isbn`);
-  const isbn = useIsbn?.params.isbn;
-  const [isLoading, setIsLoading] = useState(true);
+  const isbn = useIsbn?.params.isbn as string;
   const [isCanPreview, setIsCanPrieview] = useState(false);
-  const [book, setBook] = useState<IAladinBookItem>();
 
   const box = useRef<HTMLDivElement>(null);
 
+  const { data: book, isLoading } = useQuery<IAladinRequestList>(
+    'bookDetail',
+    () => fetchBookDetailByIsbn(isbn),
+    { retry: 0 }
+  );
+
   useEffect(() => {
-    setIsLoading(true);
     getPreviewInfo();
-    getBookDetail();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getBookDetail = async () => {
-    if (isbn) {
-      const data = await fetchBookDetailByIsbn(isbn);
-      setBook(data.item[0]);
-      setIsLoading(false);
-    }
-  };
-
   const getPreviewInfo = async () => {
     if (isbn) {
-      const data = await fetchVolumeByIsbn(isbn);
-      if (data?.items) {
-        const embeddable = data?.items[0]?.accessInfo?.embeddable;
+      const fetchedData = await fetchVolumeByIsbn(isbn);
+      if (fetchedData?.items) {
+        const embeddable = fetchedData?.items[0]?.accessInfo?.embeddable;
         if (embeddable) {
-          setIsCanPrieview(embeddable);
+          setIsCanPrieview(true);
         }
+      } else {
+        setIsCanPrieview(false);
       }
     }
   };
@@ -198,7 +199,7 @@ function ViewDetail() {
         <>
           <HelmetProvider>
             <Helmet>
-              <title>{book?.title + ' | '}Cheese Book</title>
+              <title>{book?.item[0]?.title + ' | '}Cheese Book</title>
             </Helmet>
           </HelmetProvider>
           <BookContentResultContainer>
@@ -206,7 +207,7 @@ function ViewDetail() {
               <Link to="/">
                 <i className="fa fa-home" />
               </Link>
-              {book?.categoryName?.split('>').map((cate, i) => {
+              {book?.item[0]?.categoryName?.split('>').map((cate, i) => {
                 return (
                   <span key={i}>
                     {i !== 0 && '/ '}
@@ -217,18 +218,23 @@ function ViewDetail() {
             </CategoryContainer>
             <BookContentContainer>
               <TitleSection>
-                <h1>{book?.title}</h1>
-                <h3>{book?.author}</h3>
+                <h1>{book?.item[0]?.title}</h1>
+                <h3>{book?.item[0]?.author}</h3>
               </TitleSection>
               <BookContentSection className="row">
                 <BookImageSection className="col-12 col-lg-4">
                   <BookFront>
-                    <BookImage src={book?.cover} alt={book?.title} />
+                    <BookImage
+                      src={book?.item[0]?.cover}
+                      alt={book?.item[0]?.title}
+                    />
                   </BookFront>
                   {/* <BookRight /> */}
                   {isCanPreview && (
                     <PreviewBtnSection>
-                      <PreviewBtn onClick={() => handlePreview(book?.isbn)}>
+                      <PreviewBtn
+                        onClick={() => handlePreview(book?.item[0]?.isbn)}
+                      >
                         미리보기
                       </PreviewBtn>
                     </PreviewBtnSection>

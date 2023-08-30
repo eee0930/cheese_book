@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { IAladinBookItem, fetchBookListByQuery } from '../apis/aladinApi';
+import { useQuery } from 'react-query';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
+// apis
+import {
+  IAladinBookItem,
+  IAladinRequestList,
+  fetchBookListByQuery,
+} from '../apis/aladinApi';
 // components
 import Book from '../components/mixins/Book';
 //styles
@@ -9,24 +16,21 @@ import { ContentTitle } from '../utils/commonStyles';
 
 function SearchResults() {
   const location = useLocation();
-  const query = new URLSearchParams(location.search).get('q');
-  const [isLoading, setIsLoading] = useState(true);
-  const [bookList, setBookList] = useState<IAladinBookItem[]>();
+  const query = new URLSearchParams(location.search).get('q') as string;
+  const [isHome, setIsHome] = useState(true);
   const [sortResult, setSortResult] = useState('');
+  const [bookList, setBookList] = useState<IAladinBookItem[]>();
 
+  const { data: books, isLoading } = useQuery<IAladinRequestList>(
+    'search',
+    () => fetchBookListByQuery(query, isHome, 36),
+    { retry: 0 }
+  );
   useEffect(() => {
-    setIsLoading(true);
-    if (query) {
-      getBookListByQuery(query);
+    if (!isLoading) {
+      setBookList(books?.item);
     }
   }, []);
-
-  const getBookListByQuery = async (q: string) => {
-    const data = await fetchBookListByQuery(q, true, 30);
-    setBookList(data?.item);
-    setIsLoading(false);
-  };
-
   const handleSort = (e: any) => {
     const sort = e.target.value;
     setSortResult(sort);
@@ -58,13 +62,19 @@ function SearchResults() {
         </Loader>
       ) : (
         <>
+          <HelmetProvider>
+            <Helmet>
+              <title>{query} 검색 | Cheese Book</title>
+            </Helmet>
+          </HelmetProvider>
           <ContentTitle className="title">
             <span>Search Result</span> {query}
             <i className="fa fa-caret-down" />
           </ContentTitle>
           <div className="row">
-            {bookList &&
-              bookList.map((book, i) => <Book book={book} key={i} />)}
+            {books?.item?.map((book, i) => (
+              <Book book={book} key={i} />
+            ))}
           </div>
         </>
       )}

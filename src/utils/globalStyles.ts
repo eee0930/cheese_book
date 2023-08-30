@@ -593,6 +593,18 @@ export const CheeseStyle = createGlobalStyle`
     animation: bigToSmall 0.5s ease;
   }
  
+  .bg-primary {
+    background-color: ${(props) => props.theme.main1.main1};
+    color: ${(props) => props.theme.white.lighter};
+  }
+  .bg-secondary {
+    background-color: ${(props) => props.theme.main3.main2};
+    color: ${(props) => props.theme.black.darker};
+  }
+  .bg-third {
+    background-color: ${(props) => props.theme.white.lighter};
+    color: ${(props) => props.theme.black.darker};
+  }
   input.cheese-form {
     width: 100%;
     max-width: 250px;

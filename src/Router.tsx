@@ -1,9 +1,8 @@
 import { createHashRouter } from 'react-router-dom';
 import App from './App';
-// layouts
-import BasicLayout from './layouts/BasicLayout';
-import AuthLayout from './layouts/AuthLayout';
 // routes
+import BasicLayout from './routes/layouts/BasicLayout';
+import AuthLayout from './routes/layouts/AuthLayout';
 import Home from './routes/Home';
 import ListBestSeller from './routes/ListBestSeller';
 import Login from './routes/Login';

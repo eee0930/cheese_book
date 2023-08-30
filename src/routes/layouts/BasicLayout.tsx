@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 // components
-import SideMenu from '../components/SideMenu';
+import SideMenu from '../../components/SideMenu';
 // styles
 import {
   BaseLayoutContainer,
@@ -8,7 +8,7 @@ import {
   CheeseMainContainer,
   BaseLayoutMenu,
   MobileSideMenuContainer,
-} from '../utils/layoutStyles';
+} from '../../utils/layoutStyles';
 import { useEffect, useRef } from 'react';
 
 function BasicLayout() {
