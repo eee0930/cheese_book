@@ -29,6 +29,7 @@ function SideMenu() {
   const bestSellerMatch = useMatch('/best/*');
   const tasteMatch = useMatch('/taste/*');
   const myMatch = useMatch('/my/*');
+  const searchMatch = useMatch('/search/*');
 
   const [searchField, setSearchField] = useState('');
   const [offset, setOffset] = useState<string>();
@@ -117,7 +118,7 @@ function SideMenu() {
                   )}
                 </SideMenus>
                 <SearchSection>
-                  <SearchCover>
+                  <SearchCover className={`${searchMatch && 'active'}`}>
                     <i className="fa-solid fa-magnifying-glass" />
                     <form method="get" onSubmit={handleSubmit}>
                       <input

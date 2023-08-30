@@ -250,6 +250,9 @@ export const SearchCover = styled.div`
     font-size: 1.2rem;
     transform: translateY(-50%);
   }
+  &.active {
+    border: solid 3px ${(props) => props.theme.main1.main2};
+  }
 `;
 
 export const MobileMenuContainer = styled.div`

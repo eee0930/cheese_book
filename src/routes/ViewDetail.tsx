@@ -8,7 +8,7 @@ import {
   IAladinRequestList,
   fetchBookDetailByIsbn,
 } from '../apis/aladinApi';
-import { fetchVolumeByIsbn } from '../apis/volumeApi';
+import { ISearchResult, IVolume, fetchVolumeByIsbn } from '../apis/volumeApi';
 // styles
 import { Loader } from '../utils/globalStyles';
 
@@ -150,10 +150,19 @@ function ViewDetail() {
 
   const box = useRef<HTMLDivElement>(null);
 
-  const { data: book, isLoading } = useQuery<IAladinRequestList>(
-    'bookDetail',
-    () => fetchBookDetailByIsbn(isbn),
-    { retry: 0 }
+  const { data: book, isLoading } = useQuery<
+    IAladinRequestList,
+    any,
+    IAladinBookItem
+  >('bookDetail', () => fetchBookDetailByIsbn(isbn), {
+    retry: 0,
+    select: (bookDetail) => bookDetail.item[0],
+  });
+
+  const previewInfo = useQuery<ISearchResult, any, IVolume[]>(
+    'bookInfo',
+    () => fetchVolumeByIsbn(isbn),
+    { retry: 0, select: (bookInfo) => bookInfo.items }
   );
 
   useEffect(() => {
@@ -162,11 +171,10 @@ function ViewDetail() {
   }, []);
 
   const getPreviewInfo = async () => {
-    if (isbn) {
-      const fetchedData = await fetchVolumeByIsbn(isbn);
-      if (fetchedData?.items) {
-        const embeddable = fetchedData?.items[0]?.accessInfo?.embeddable;
-        if (embeddable) {
+    const { isLoading, data } = previewInfo;
+    if (!isLoading) {
+      if (data) {
+        if (data[0]?.accessInfo?.embeddable) {
           setIsCanPrieview(true);
         }
       } else {
@@ -199,7 +207,7 @@ function ViewDetail() {
         <>
           <HelmetProvider>
             <Helmet>
-              <title>{book?.item[0]?.title + ' | '}Cheese Book</title>
+              <title>{book?.title + ' | '}Cheese Book</title>
             </Helmet>
           </HelmetProvider>
           <BookContentResultContainer>
@@ -207,7 +215,7 @@ function ViewDetail() {
               <Link to="/">
                 <i className="fa fa-home" />
               </Link>
-              {book?.item[0]?.categoryName?.split('>').map((cate, i) => {
+              {book?.categoryName?.split('>').map((cate, i) => {
                 return (
                   <span key={i}>
                     {i !== 0 && '/ '}
@@ -218,23 +226,18 @@ function ViewDetail() {
             </CategoryContainer>
             <BookContentContainer>
               <TitleSection>
-                <h1>{book?.item[0]?.title}</h1>
-                <h3>{book?.item[0]?.author}</h3>
+                <h1>{book?.title}</h1>
+                <h3>{book?.author}</h3>
               </TitleSection>
               <BookContentSection className="row">
                 <BookImageSection className="col-12 col-lg-4">
                   <BookFront>
-                    <BookImage
-                      src={book?.item[0]?.cover}
-                      alt={book?.item[0]?.title}
-                    />
+                    <BookImage src={book?.cover} alt={book?.title} />
                   </BookFront>
                   {/* <BookRight /> */}
                   {isCanPreview && (
                     <PreviewBtnSection>
-                      <PreviewBtn
-                        onClick={() => handlePreview(book?.item[0]?.isbn)}
-                      >
+                      <PreviewBtn onClick={() => handlePreview(book?.isbn)}>
                         미리보기
                       </PreviewBtn>
                     </PreviewBtnSection>
