@@ -2,7 +2,6 @@ const KEY = process.env.REACT_APP_ALADIN_KEY;
 const ROOT = process.env.REACT_APP_ALADIN_ROOT;
 
 const VERSION = '20131101';
-const COVER_SIZE = 'MidBig';
 
 const request = async (url: string) => {
   const options = `&TTBKey=${KEY}&Output=js&Version=${VERSION}`;
