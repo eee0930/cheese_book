@@ -105,7 +105,7 @@ export const fetchBookListByQuery = async (
  */
 export const fetchBookDetailByIsbn = async (isbn: string) => {
   let type = 'ISBN13';
-  if (isbn.length < 13) {
+  if (isbn && isbn.length < 13) {
     type = 'ISBN';
   }
   return (await request(

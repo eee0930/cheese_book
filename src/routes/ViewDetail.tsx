@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Link, Outlet, useMatch, useNavigate } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useQuery } from 'react-query';
@@ -8,8 +8,7 @@ import {
   IAladinRequestList,
   fetchBookDetailByIsbn,
 } from '../apis/aladinApi';
-import { fetchViewerImagesById } from '../apis/fetching';
-import { ISearchResult, IVolume, fetchVolumeByIsbn } from '../apis/volumeApi';
+// import { ISearchResult, IVolume, fetchVolumeByIsbn } from '../apis/volumeApi';
 // styles
 import { Loader } from '../utils/globalStyles';
 import {
@@ -30,7 +29,7 @@ function ViewDetail() {
   const navigator = useNavigate();
   const useIsbn = useMatch(`/book/:isbn`);
   const isbn = useIsbn?.params.isbn as string;
-  const [isEmbeddable, setIsEmbeddable] = useState(false);
+  //const [isEmbeddable, setIsEmbeddable] = useState(false);
 
   const box = useRef<HTMLDivElement>(null);
 
@@ -43,29 +42,29 @@ function ViewDetail() {
     select: (bookDetail) => bookDetail.item[0],
   });
 
-  const previewInfo = useQuery<ISearchResult, any, IVolume[]>(
-    'bookInfo',
-    () => fetchVolumeByIsbn(isbn),
-    { retry: 0, select: (bookInfo) => bookInfo.items }
-  );
+  // const previewInfo = useQuery<ISearchResult, any, IVolume[]>(
+  //   'bookInfo',
+  //   () => fetchVolumeByIsbn(isbn),
+  //   { retry: 0, select: (bookInfo) => bookInfo.items }
+  // );
 
-  useEffect(() => {
-    getPreviewInfo();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   getPreviewInfo();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
-  const getPreviewInfo = async () => {
-    const { isLoading, data } = previewInfo;
-    if (!isLoading) {
-      if (data) {
-        if (data[0]?.accessInfo?.embeddable) {
-          setIsEmbeddable(true);
-        }
-      } else {
-        setIsEmbeddable(false);
-      }
-    }
-  };
+  // const getPreviewInfo = async () => {
+  //   const { isLoading, data } = previewInfo;
+  //   if (!isLoading) {
+  //     if (data) {
+  //       if (data[0]?.accessInfo?.embeddable) {
+  //         setIsEmbeddable(true);
+  //       }
+  //     } else {
+  //       setIsEmbeddable(false);
+  //     }
+  //   }
+  // };
   // const handlePreview = (id: string | undefined) => {
   //   if (id) {
   //     if (box.current) {
@@ -78,11 +77,12 @@ function ViewDetail() {
   //   }
   // };
 
-  const handlePreview = async (id: number | undefined) => {
-    if (id) {
-      const images = await fetchViewerImagesById(id);
-      console.log(images);
+  const handlePreview = () => {
+    if (box.current) {
+      box.current.style.display = 'block';
     }
+
+    navigator(`/book/${isbn}/viewer`);
   };
 
   return (
@@ -126,9 +126,7 @@ function ViewDetail() {
                     <BookImage src={book?.cover} alt={book?.title} />
                   </BookFront>
                   <PreviewBtnSection>
-                    <PreviewBtn onClick={() => handlePreview(book?.itemId)}>
-                      미리보기
-                    </PreviewBtn>
+                    <PreviewBtn onClick={handlePreview}>미리보기</PreviewBtn>
                   </PreviewBtnSection>
 
                   {/* <BookRight /> */}
@@ -144,7 +142,7 @@ function ViewDetail() {
             </BookContentContainer>
           </BookContentResultContainer>
           <BoxContainer ref={box}>
-            <Outlet context={{ isbn }} />
+            <Outlet context={{ id: book?.itemId, title: book?.title, isbn }} />
           </BoxContainer>
         </>
       )}

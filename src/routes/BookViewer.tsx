@@ -1,83 +1,72 @@
-import { useEffect, useRef, useState } from 'react';
-import { useAppendScript } from '../hooks/appendScript';
+import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-
-declare global {
-  interface Window {
-    google: any;
-  }
-}
+import { fetchViewerImagesById } from '../apis/fetching';
+import { styled } from 'styled-components';
 
 interface IIsbn {
+  id: number;
+  title: string;
   isbn: string;
 }
-const VIEWER_SRC = process.env.REACT_APP_BOOK_VIEWER as string;
+
+export const Img = styled.img`
+  height: 300px;
+`;
 
 function BookViewer() {
-  const { isbn } = useOutletContext<IIsbn>();
-  const viewerCanvas = useRef<HTMLDivElement>(null);
-  const [loaded, setLoaded] = useState(false);
-  const [googleBooks, setGoogleBooks] = useState<any>();
-  const [bookViewer, setBookViewer] = useState<any>();
-  const $script = useAppendScript(VIEWER_SRC);
+  const { id, title, isbn } = useOutletContext<IIsbn>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isOnePage, setIsOnePage] = useState(true);
+  const [imageList, setImageList] = useState<string[]>();
+  const [closed, setClosed] = useState(false);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => initialLoad(), [$script]);
+  useEffect(() => {
+    setIsLoading(true);
+    getImages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => initialEmbed(), [loaded]);
-
-  const initialLoad = () => {
-    if ($script) {
-      $script.addEventListener('load', () => {
-        const { google } = window;
-        setGoogleBooks(google);
-        setLoaded(true);
-      });
-    }
-  };
-
-  const initialEmbed = () => {
-    if (loaded) {
-      if (bookViewer) {
-        initialize(bookViewer);
-      } else {
-        googleBooks.books.load();
-        if (viewerCanvas.current) {
-          googleBooks.books.setOnLoadCallback(() => {
-            const viewer = new googleBooks.books.DefaultViewer(
-              viewerCanvas.current
-            );
-            setBookViewer(viewer);
-            initialize(viewer);
-          });
-          viewerCanvas.current.id = 'googleBooksViewer';
-        }
-      }
-    } else {
+  const getImages = async () => {
+    const fetchedImgs = await fetchViewerImagesById(id);
+    if (!fetchedImgs || fetchedImgs.length === 0) {
+      setClosed(true);
+      console.log('Book Viewer를 불러오는데 실패하였습니다.');
       return;
     }
+    setIsOnePage(typeof fetchedImgs[0] === 'string');
+    setImageList(fetchedImgs);
+    setIsLoading(false);
   };
 
-  const handleNotFound = () => alert('could not embed the book! 🤔');
-
-  const initialize = (viewer: any) =>
-    viewer.load(`ISBN:${isbn}`, handleNotFound);
-
-  const handleNextPage = () => bookViewer.nextPage();
-
-  const handlePrevPage = () => bookViewer.previousPage();
-
-  const goToPage = (page: number) => bookViewer.goToPage(page);
-
+  if (closed) {
+    return <div> 잉잉</div>;
+  }
   return (
     <>
-      {loaded && (
-        <>
-          <div ref={viewerCanvas} style={{ width: '300px', height: '200px' }} />
-          <button onClick={handleNextPage}>다음페이지</button>
-        </>
-      )}
+      {!isLoading &&
+        imageList &&
+        imageList?.map((images, i) => {
+          if (isOnePage) {
+            return <Img src={images} alt={title} key={i} />;
+          } else {
+            if (images.length > 2) {
+              return (
+                <div key={i}>
+                  <Img src={images[1]} alt={title} />
+                  <Img src={images[2]} alt={title} />
+                  <Img src={images[0]} alt={title} />
+                </div>
+              );
+            } else {
+              return (
+                <div key={i}>
+                  <Img src={images[0]} alt={title} />
+                  <Img src={images[1]} alt={title} />
+                </div>
+              );
+            }
+          }
+        })}
     </>
   );
 }

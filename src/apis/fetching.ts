@@ -16,13 +16,30 @@ const getViewerHTMLById = async (id: number) => {
   }
 };
 
+const getScriptImages = (data: string) => {
+  if (data.includes('var jsonArray = [')) {
+    const dataSplit = data.split('var jsonArray = [')[1].split(']')[0];
+    if (!dataSplit) {
+      console.log('냐향');
+    }
+    const parcedData = JSON.parse('[' + dataSplit + ']');
+    const images: string[] = [];
+    parcedData.forEach((parced: any) => {
+      images.push(parced.imageUrl + parced.imageFile);
+    });
+    return images;
+  } else {
+    return null;
+  }
+};
+
 export const fetchViewerImagesById = async (id: number) => {
   return await getViewerHTMLById(id).then((html) => {
     if (html) {
       const $ = cheerio.load(html.data, { xmlMode: false });
       const $sections = $('#addClass > .letslook_book > section');
       if ($sections.text()) {
-        const images: any[][] = [];
+        const images: any = [];
         $sections.each(function () {
           const leftpage = $(this).find('.leftpage img').attr('src');
           const rightpage = $(this).find('.rightpage img').attr('src');
@@ -45,14 +62,4 @@ export const fetchViewerImagesById = async (id: number) => {
       }
     }
   });
-};
-
-const getScriptImages = (data: string) => {
-  const dataSplit = data.split('var jsonArray = ')[1].split(']')[0] + ']';
-  const parcedData = JSON.parse(dataSplit);
-  const images: string[] = [];
-  parcedData.forEach((parced: any) => {
-    images.push(parced.imageUrl + parced.imageFile);
-  });
-  return images;
 };
