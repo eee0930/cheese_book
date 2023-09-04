@@ -2,6 +2,7 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 
 const VIEWER_ROOT = process.env.REACT_APP_ALADIN_VIEWER;
+const DETAIL_ROOT = process.env.REACT_APP_ALADIN_DETAIL;
 
 /**
  * book viewer 이미지 가져오기
@@ -19,9 +20,6 @@ const getViewerHTMLById = async (id: number) => {
 const getScriptImages = (data: string) => {
   if (data.includes('var jsonArray = [')) {
     const dataSplit = data.split('var jsonArray = [')[1].split(']')[0];
-    if (!dataSplit) {
-      console.log('냐향');
-    }
     const parcedData = JSON.parse('[' + dataSplit + ']');
     const images: string[] = [];
     parcedData.forEach((parced: any) => {
@@ -60,6 +58,30 @@ export const fetchViewerImagesById = async (id: number) => {
         });
         return getScriptImages(source);
       }
+    }
+  });
+};
+
+/**
+ * book detail 이미지 가져오기
+ * @param id
+ * @returns
+ */
+const getDetailHTMLById = async (id: number) => {
+  try {
+    return await axios.get(`${DETAIL_ROOT}?ItemId=${id}`);
+  } catch (error) {
+    console.log('❌', error);
+  }
+};
+export const fetchDetailImagesById = async (id: number) => {
+  return await getDetailHTMLById(id).then((html) => {
+    if (html) {
+      const $ = cheerio.load(html.data);
+      const $imageContainer = $('#divFilpImg');
+      const front = $imageContainer.find('#CoverMainImage').attr('src');
+      const side = $imageContainer.find('.c_left img').attr('src');
+      return [front, side];
     }
   });
 };

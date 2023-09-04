@@ -713,6 +713,7 @@ export const CheeseStyle = createGlobalStyle`
 `;
 
 export const Loader = styled.div`
+  margin: 5rem 0;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
@@ -724,9 +725,10 @@ export const Loader = styled.div`
     width: 40px;
     height: 40px;
     margin: 0 auto;
+    transform: scale(1.3);
     div {
       position: absolute;
-      border: 2px solid ${(props) => props.theme.main3.side};
+      border: 2px solid ${(props) => props.theme.main1.main2};
       opacity: 1;
       border-radius: 50%;
       animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;

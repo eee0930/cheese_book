@@ -103,12 +103,8 @@ export const fetchBookListByQuery = async (
  * @param isbn13
  * @returns
  */
-export const fetchBookDetailByIsbn = async (isbn: string) => {
-  let type = 'ISBN13';
-  if (isbn && isbn.length < 13) {
-    type = 'ISBN';
-  }
-  return (await request(
-    `${ROOT}ItemLookUp.aspx?ItemIdType=${type}&ItemId=${isbn}&Cover=Big&OptResult=cardReviewImgList,ratingInfo,bestSellerRank`
+const DETAIL_OPTIONS = 'cardReviewImgList,ratingInfo,bestSellerRank';
+export const fetchBookDetailById = async (itemId: number) =>
+  (await request(
+    `${ROOT}ItemLookUp.aspx?ItemIdType=itemId&ItemId=${itemId}&Cover=Big&OptResult=${DETAIL_OPTIONS}`
   )) as IAladinRequestList;
-};

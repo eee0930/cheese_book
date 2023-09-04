@@ -1,16 +1,19 @@
-import { useRef } from 'react';
-import { Link, Outlet, useMatch, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useMatch } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useQuery } from 'react-query';
 // apis
 import {
   IAladinBookItem,
   IAladinRequestList,
-  fetchBookDetailByIsbn,
+  fetchBookDetailById,
 } from '../apis/aladinApi';
-// import { ISearchResult, IVolume, fetchVolumeByIsbn } from '../apis/volumeApi';
+import { fetchDetailImagesById } from '../apis/fetching';
+// components
+import Button from '../components/mixins/Button';
+import ViewerModal from '../components/ViewerModal';
 // styles
-import { Loader } from '../utils/globalStyles';
+import { Loader } from '../styles/globalStyles';
 import {
   BookContentContainer,
   BookContentResultContainer,
@@ -18,71 +21,32 @@ import {
   BookFront,
   BookImage,
   BookImageSection,
-  BoxContainer,
   TitleSection,
   CategoryContainer,
-  PreviewBtn,
   PreviewBtnSection,
-} from '../utils/screens/viewDetailStyles';
+} from '../styles/screens/viewDetailStyles';
 
 function ViewDetail() {
-  const navigator = useNavigate();
-  const useIsbn = useMatch(`/book/:isbn`);
-  const isbn = useIsbn?.params.isbn as string;
-  //const [isEmbeddable, setIsEmbeddable] = useState(false);
-
-  const box = useRef<HTMLDivElement>(null);
+  const useId = useMatch('/book/:id');
+  const itemId = Number(useId?.params.id);
+  const [openPreview, setOpenPreview] = useState(false);
 
   const { data: book, isLoading } = useQuery<
     IAladinRequestList,
     any,
     IAladinBookItem
-  >('bookDetail', () => fetchBookDetailByIsbn(isbn), {
+  >('bookDetail', () => fetchBookDetailById(itemId), {
     retry: 0,
     select: (bookDetail) => bookDetail.item[0],
   });
 
-  // const previewInfo = useQuery<ISearchResult, any, IVolume[]>(
-  //   'bookInfo',
-  //   () => fetchVolumeByIsbn(isbn),
-  //   { retry: 0, select: (bookInfo) => bookInfo.items }
-  // );
+  useEffect(() => {
+    getImages();
+  }, []);
 
-  // useEffect(() => {
-  //   getPreviewInfo();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
-  // const getPreviewInfo = async () => {
-  //   const { isLoading, data } = previewInfo;
-  //   if (!isLoading) {
-  //     if (data) {
-  //       if (data[0]?.accessInfo?.embeddable) {
-  //         setIsEmbeddable(true);
-  //       }
-  //     } else {
-  //       setIsEmbeddable(false);
-  //     }
-  //   }
-  // };
-  // const handlePreview = (id: string | undefined) => {
-  //   if (id) {
-  //     if (box.current) {
-  //       box.current.style.display = 'block';
-  //     }
-  //     navigator(`/book/${isbn}/viewer`);
-  //   } else {
-  //     console.log('isbn is not found.');
-  //     return;
-  //   }
-  // };
-
-  const handlePreview = () => {
-    if (box.current) {
-      box.current.style.display = 'block';
-    }
-
-    navigator(`/book/${isbn}/viewer`);
+  const getImages = async () => {
+    const images = await fetchDetailImagesById(itemId);
+    console.log(images);
   };
 
   return (
@@ -102,6 +66,7 @@ function ViewDetail() {
             </Helmet>
           </HelmetProvider>
           <BookContentResultContainer>
+            {/* [1. 카테고리]--------------------------------------------------*/}
             <CategoryContainer>
               <Link to="/">
                 <i className="fa fa-home" />
@@ -115,35 +80,40 @@ function ViewDetail() {
                 );
               })}
             </CategoryContainer>
+            {/* [2. 책 정보]---------------------------------------------------*/}
             <BookContentContainer>
+              {/* 2.1 제목 */}
               <TitleSection>
                 <h1>{book?.title}</h1>
                 <h3>{book?.author}</h3>
               </TitleSection>
+              {/* 2.2 책 커버 및 출판 정보 */}
               <BookContentSection className="row">
+                {/* 책 커버 */}
                 <BookImageSection className="col-12 col-lg-4">
                   <BookFront>
                     <BookImage src={book?.cover} alt={book?.title} />
                   </BookFront>
                   <PreviewBtnSection>
-                    <PreviewBtn onClick={handlePreview}>미리보기</PreviewBtn>
+                    <Button
+                      value="미리보기"
+                      styleIdx={2}
+                      handleBtn={() => setOpenPreview(true)}
+                    />
                   </PreviewBtnSection>
-
-                  {/* <BookRight /> */}
-                  {/* {isEmbeddable && (
-                    <PreviewBtnSection>
-                      <PreviewBtn onClick={() => handlePreview(book?.isbn)}>
-                        미리보기
-                      </PreviewBtn>
-                    </PreviewBtnSection>
-                  )} */}
                 </BookImageSection>
               </BookContentSection>
             </BookContentContainer>
           </BookContentResultContainer>
-          <BoxContainer ref={box}>
-            <Outlet context={{ id: book?.itemId, title: book?.title, isbn }} />
-          </BoxContainer>
+
+          {openPreview && (
+            <ViewerModal
+              itemId={book?.itemId as number}
+              title={book?.title as string}
+              cover={book?.cover as string}
+              handleClickOverview={() => setOpenPreview(false)}
+            />
+          )}
         </>
       )}
     </>

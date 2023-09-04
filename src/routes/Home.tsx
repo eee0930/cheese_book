@@ -3,7 +3,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Banner from '../components/Banner';
 import BestSellers from '../components/BestSellers';
 // styles
-import { ContentContainer, ContentTitle } from '../utils/commonStyles';
+import { ContentContainer, ContentTitle } from '../styles/commonStyles';
 import NavTaps from '../components/NavTaps';
 
 function Home() {

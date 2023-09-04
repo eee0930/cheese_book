@@ -11,8 +11,8 @@ import {
 // components
 import Book from '../components/mixins/Book';
 //styles
-import { Loader } from '../utils/globalStyles';
-import { ContentTitle } from '../utils/commonStyles';
+import { Loader } from '../styles/globalStyles';
+import { ContentTitle } from '../styles/commonStyles';
 
 function SearchResults() {
   const location = useLocation();

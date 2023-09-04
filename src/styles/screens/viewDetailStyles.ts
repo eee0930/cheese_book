@@ -61,8 +61,6 @@ export const BookContentSection = styled.div`
 `;
 export const BookImageSection = styled.div`
   position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.5s;
 `;
 export const BookFront = styled.div`
   -webkit-transform: translate3d(0, 0, 0);

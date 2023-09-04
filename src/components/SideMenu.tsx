@@ -18,7 +18,7 @@ import {
   MobileMenuCover,
   IconCover,
   MenuName,
-} from '../utils/components/sideMenuStyles';
+} from '../styles/components/sideMenuStyles';
 
 function SideMenu() {
   const loggedIn = useRecoilValue(loginState);

@@ -39,12 +39,25 @@ export const volumeInfoListOfPageState = atom<IIsbnVolumInfo[]>({
   default: [],
 });
 
+interface ILatestVolume {
+  itemId: number;
+  cover: string;
+  title: string;
+}
+interface ILatestVolumeList {
+  size: number;
+  volumeList: ILatestVolume[];
+}
+
 /**
  * 최근 본 책 목록 (10개)
  */
-export const latestVolumeListState = atom<IVolumeInfo[]>({
+export const latestVolumeListState = atom<ILatestVolumeList>({
   key: 'latestVolumeList',
-  default: [],
+  default: {
+    size: 0,
+    volumeList: [],
+  },
 });
 
 export const likedVolumeListState = atom({

@@ -1,35 +1,35 @@
 import { useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useMatch, useOutletContext } from 'react-router-dom';
 import { fetchViewerImagesById } from '../apis/fetching';
 import { styled } from 'styled-components';
+import { Loader } from '../styles/globalStyles';
 
 interface IIsbn {
-  id: number;
+  itemId: number;
   title: string;
-  isbn: string;
+  cover: string;
 }
 
 export const Img = styled.img`
   height: 300px;
 `;
 
-function BookViewer() {
-  const { id, title, isbn } = useOutletContext<IIsbn>();
+function BookViewer({ itemId, title, cover }: IIsbn) {
   const [isLoading, setIsLoading] = useState(true);
   const [isOnePage, setIsOnePage] = useState(true);
   const [imageList, setImageList] = useState<string[]>();
-  const [closed, setClosed] = useState(false);
+  const [failed, setfailed] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
     getImages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [itemId]);
 
   const getImages = async () => {
-    const fetchedImgs = await fetchViewerImagesById(id);
+    const fetchedImgs = await fetchViewerImagesById(+itemId);
     if (!fetchedImgs || fetchedImgs.length === 0) {
-      setClosed(true);
+      setfailed(true);
       console.log('Book Viewer를 불러오는데 실패하였습니다.');
       return;
     }
@@ -38,13 +38,23 @@ function BookViewer() {
     setIsLoading(false);
   };
 
-  if (closed) {
-    return <div> 잉잉</div>;
+  if (failed) {
+    return (
+      <div>
+        <Img src={cover} />
+      </div>
+    );
   }
   return (
     <>
-      {!isLoading &&
-        imageList &&
+      {isLoading ? (
+        <Loader>
+          <div>
+            <div></div>
+            <div></div>
+          </div>
+        </Loader>
+      ) : (
         imageList?.map((images, i) => {
           if (isOnePage) {
             return <Img src={images} alt={title} key={i} />;
@@ -66,7 +76,8 @@ function BookViewer() {
               );
             }
           }
-        })}
+        })
+      )}
     </>
   );
 }

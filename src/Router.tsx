@@ -15,7 +15,6 @@ import TasteResults from './routes/TasteResults';
 import NotFound from './routes/NotFound';
 // components
 import ErrorComponent from './components/ErrorComponet';
-import BookViewer from './routes/BookViewer';
 
 const router = createHashRouter([
   {
@@ -68,14 +67,8 @@ const router = createHashRouter([
             element: <SearchResults />,
           },
           {
-            path: 'book/:isbn',
+            path: 'book/:id',
             element: <ViewDetail />,
-            children: [
-              {
-                path: 'viewer',
-                element: <BookViewer />,
-              },
-            ],
           },
         ],
         errorElement: <ErrorComponent />,

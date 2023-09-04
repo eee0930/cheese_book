@@ -8,7 +8,7 @@ import {
   CheeseMainContainer,
   BaseLayoutMenu,
   MobileSideMenuContainer,
-} from '../../utils/layoutStyles';
+} from '../../styles/layoutStyles';
 import { useEffect, useRef } from 'react';
 
 function BasicLayout() {
