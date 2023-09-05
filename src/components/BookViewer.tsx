@@ -26,7 +26,7 @@ function BookViewer({ itemId, title, cover }: IIsbn) {
   }, [itemId]);
 
   const getImages = async () => {
-    const fetchedImgs = await fetchViewerImagesById(+itemId);
+    const fetchedImgs = await fetchViewerImagesById(itemId);
     if (!fetchedImgs || fetchedImgs.length === 0) {
       setfailed(true);
       console.log('Book Viewer를 불러오는데 실패하였습니다.');

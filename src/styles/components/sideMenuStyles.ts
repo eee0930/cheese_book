@@ -15,14 +15,45 @@ export const SideMenuCover = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
+export const MenuBtnCover = styled.div`
+  position: absolute;
+  background-color: ${(props) => props.theme.main3.main2};
+  width: 28px;
+  height: 45px;
+  border: ${(props) => props.theme.boxLine.md};
+  border-left: none;
+  border-radius: 0 5px 5px 0;
+  top: 55px;
+  right: calc(-28px + 2.5px);
+  // transform: translateY(-50%);
+  z-index: 5;
+  @media (min-width: 1200px) {
+    border: ${(props) => props.theme.boxLine.lg};
+    border-left: none;
+    right: calc(-28px + 3px);
+  }
+`;
+export const MenuBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 1rem;
+  font-family: ${(props) => props.theme.title};
+  color: ${(props) => props.theme.black.darker};
+  outline: none;
+  &:hover {
+    color: ${(props) => props.theme.main1.main2};
+  }
+`;
 export const LogoImg = styled.img`
   position: absolute;
   top: -1.2rem;
   right: -2.5rem;
   width: 70px;
   transform: rotate(15deg);
-  z-index: 5;
+  z-index: 10;
   @media (min-width: 1200px) {
     right: -2.8rem;
     width: 75px;
@@ -63,9 +94,11 @@ export const SideMenuIn = styled(BoxStyle)`
   max-height: 100%;
   z-index: 4;
 `;
-export const TitleCover = styled.div`
-  margin-top: 1.5rem;
-  padding: 1rem 0;
+export const TitleSection = styled.div`
+  height: 100px;
+`;
+export const TitleCover = styled(TitleSection)`
+  padding-top: 60px;
   .title {
     font-size: 1.8rem;
     text-align: center;
@@ -81,6 +114,7 @@ export const TitleCover = styled.div`
     }
   }
 `;
+
 export const UserSection = styled.div`
   padding: 0 1rem;
   margin-bottom: 1.5rem;
@@ -175,8 +209,8 @@ export const SideMenus = styled.ul`
   }
   li {
     font-family: ${(props) => props.theme.title};
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
+    //margin-bottom: 1rem;
+    height: 50px;
     color: ${(props) => props.theme.black.darker};
     text-transform: uppercase;
     i,
@@ -184,7 +218,7 @@ export const SideMenus = styled.ul`
       transition: color 0.3s ease;
     }
     i {
-      font-size: 1.2em;
+      font-size: 1.5rem;
       position: relative;
       top: 1.5px;
     }
@@ -198,20 +232,23 @@ export const SideMenus = styled.ul`
     &.active {
       color: ${(props) => props.theme.main1.main2};
     }
-    .fa-music {
-      position: absolute;
-      font-size: 0.6em;
-      padding: 1px;
-      background-color: ${(props) => props.theme.main3.main2};
-      bottom: 1px;
-      right: 0px;
-    }
   }
   .icon-cover {
     width: 32px;
     text-align: center;
     display: inline-block;
     position: relative;
+  }
+  .text-cover {
+    font-size: 1.2rem;
+    opacity: 1;
+    transition: font-size 0.3s ease, opacity 0.3s ease-in-out;
+  }
+  &.fold .text-cover {
+    display: inline;
+    font-size: 0px;
+    opacity: 0;
+    visibility: hidden;
   }
 `;
 

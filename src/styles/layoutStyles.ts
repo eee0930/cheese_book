@@ -30,8 +30,15 @@ export const CheeseMainContainer = styled.div`
 
 export const BaseLayoutMenu = styled.div`
   width: ${(props) => props.theme.sideMenu.md} !important;
+  transition: width 0.3s ease;
+  &.fold {
+    width: 110px !important;
+  }
   @media (min-width: 1200px) {
     width: ${(props) => props.theme.sideMenu.lg} !important;
+    &.fold {
+      width: 140px !important;
+    }
   }
 `;
 

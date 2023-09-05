@@ -31,3 +31,7 @@ export const FrontCover = styled(BookImage)`
     box-shadow: inset 0px 0px 12px 3px rgba(0, 0, 0, 0.05);
   }
 `;
+export const UndefinedImg = styled(BookImage)`
+  height: 35vw;
+  max-height: 50vh;
+`;

@@ -18,9 +18,17 @@ import {
   MobileMenuCover,
   IconCover,
   MenuName,
+  MenuBtnCover,
+  MenuBtn,
+  TitleSection,
 } from '../styles/components/sideMenuStyles';
 
-function SideMenu() {
+interface ISideMenu {
+  isFolded?: boolean;
+  handleMenuBtn?: () => void;
+}
+
+function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
   const loggedIn = useRecoilValue(loginState);
   const offsetInfo = useRecoilValue(offsetState);
 
@@ -58,7 +66,7 @@ function SideMenu() {
     <>
       {offset &&
         (offset === 'pc' || offset === 'tablet' ? (
-          <SideMenuContainer>
+          <SideMenuContainer className={`${isFolded && 'fold'}`}>
             <SideMenuCover>
               <LogoImg
                 className="jelly"
@@ -68,52 +76,56 @@ function SideMenu() {
                 <AnimationBox />
               </AnimationBoxCover>
               <SideMenuIn>
-                <TitleCover>
-                  <div className="title">
-                    <Link to="/">cheese book</Link>
-                  </div>
-                </TitleCover>
-                <SideMenus>
+                {isFolded ? (
+                  <TitleSection />
+                ) : (
+                  <TitleCover>
+                    <div className="title">
+                      <Link to="/">cheese book</Link>
+                    </div>
+                  </TitleCover>
+                )}
+                <SideMenus className={`${isFolded && 'fold'}`}>
                   <li className={`${homeMatch && 'active'}`}>
-                    <span className="icon-cover">
-                      <i className="fa-solid fa-house-chimney-window" />
-                    </span>
-                    <span>
-                      <Link to="/">Home</Link>
-                    </span>
+                    <Link to="/">
+                      <span className="icon-cover">
+                        <i className="fa-solid fa-house-chimney-window" />
+                      </span>
+                      <span className="text-cover">Home</span>
+                    </Link>
                   </li>
                   <li className={`${newestMatch && 'active'}`}>
-                    <span className="icon-cover">
-                      <i className="fa-solid fa-rocket" />
-                    </span>
-                    <span>
-                      <Link to="/new">New Books</Link>
-                    </span>
+                    <Link to="/new">
+                      <span className="icon-cover">
+                        <i className="fa-solid fa-rocket" />
+                      </span>
+                      <span className="text-cover">New Books</span>
+                    </Link>
                   </li>
                   <li className={`${bestSellerMatch && 'active'}`}>
-                    <span className="icon-cover">
-                      <i className="fa-solid fa-trophy" />
-                    </span>
-                    <span>
-                      <Link to="/best">Best Sellers</Link>
-                    </span>
+                    <Link to="/best">
+                      <span className="icon-cover">
+                        <i className="fa-solid fa-trophy" />
+                      </span>
+                      <span className="text-cover">Best Sellers</span>
+                    </Link>
                   </li>
                   <li className={`${tasteMatch && 'active'}`}>
-                    <span className="icon-cover">
-                      <i className="fa-solid fa-flask" />
-                    </span>
-                    <span>
-                      <Link to="/taste">Your Taste</Link>
-                    </span>
+                    <Link to="/taste">
+                      <span className="icon-cover">
+                        <i className="fa-solid fa-flask" />
+                      </span>
+                      <span className="text-cover">Your Taste</span>
+                    </Link>
                   </li>
                   {!loggedIn && (
                     <li className={`${myMatch && 'active'}`}>
-                      <span className="icon-cover">
-                        <i className="fa-solid fa-book" />
-                      </span>
-                      <span>
-                        <Link to="/my">My Books</Link>
-                      </span>
+                      <Link to="/my">
+                        <span className="icon-cover">
+                          <i className="fa-solid fa-book" />
+                        </span>
+                        <span className="text-cover">My Books</span>
+                      </Link>
                     </li>
                   )}
                 </SideMenus>
@@ -132,6 +144,15 @@ function SideMenu() {
                   </SearchCover>
                 </SearchSection>
               </SideMenuIn>
+              <MenuBtnCover>
+                <MenuBtn onClick={handleMenuBtn}>
+                  {isFolded ? (
+                    <i className="fa-solid fa-angles-right" />
+                  ) : (
+                    <i className="fa-solid fa-angles-left" />
+                  )}
+                </MenuBtn>
+              </MenuBtnCover>
             </SideMenuCover>
           </SideMenuContainer>
         ) : (

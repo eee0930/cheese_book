@@ -6,6 +6,7 @@ import {
   BookContainer,
   FrontCover,
   SideCover,
+  UndefinedImg,
 } from '../styles/components/coverStyles';
 
 interface IDetailImages {
@@ -20,6 +21,9 @@ function DetailImages({ itemId, title, cover }: IDetailImages) {
     () => fetchDetailImagesById(itemId),
     { retry: 0 }
   );
+  if (!isLoading) {
+    console.log(images);
+  }
 
   return (
     <>
@@ -31,14 +35,22 @@ function DetailImages({ itemId, title, cover }: IDetailImages) {
           </div>
         </Loader>
       ) : (
-        <BookContainer>
-          {images && (
-            <>
-              <SideCover src={images[1]} alt={title} />
-              <FrontCover src={images[0]} alt={title} />
-            </>
+        <>
+          {!images || !images[0] ? (
+            <BookContainer>
+              <UndefinedImg src={cover} alt={title} />
+            </BookContainer>
+          ) : (
+            <BookContainer>
+              {images && (
+                <>
+                  <SideCover src={images[1]} alt={title} />
+                  <FrontCover src={images[0]} alt={title} />
+                </>
+              )}
+            </BookContainer>
           )}
-        </BookContainer>
+        </>
       )}
     </>
   );
