@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useMatch } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useQuery } from 'react-query';
@@ -8,7 +8,6 @@ import {
   IAladinRequestList,
   fetchBookDetailById,
 } from '../apis/aladinApi';
-import { fetchDetailImagesById } from '../apis/fetching';
 // components
 import Button from '../components/mixins/Button';
 import ViewerModal from '../components/ViewerModal';
@@ -18,13 +17,12 @@ import {
   BookContentContainer,
   BookContentResultContainer,
   BookContentSection,
-  BookFront,
-  BookImage,
   BookImageSection,
   TitleSection,
   CategoryContainer,
   PreviewBtnSection,
 } from '../styles/screens/viewDetailStyles';
+import DetailImages from '../components/DetailImages';
 
 function ViewDetail() {
   const useId = useMatch('/book/:id');
@@ -39,15 +37,6 @@ function ViewDetail() {
     retry: 0,
     select: (bookDetail) => bookDetail.item[0],
   });
-
-  useEffect(() => {
-    getImages();
-  }, []);
-
-  const getImages = async () => {
-    const images = await fetchDetailImagesById(itemId);
-    console.log(images);
-  };
 
   return (
     <>
@@ -73,10 +62,10 @@ function ViewDetail() {
               </Link>
               {book?.categoryName?.split('>').map((cate, i) => {
                 return (
-                  <span key={i}>
-                    {i !== 0 && '/ '}
-                    {cate}
-                  </span>
+                  <label key={i}>
+                    {i !== 0 && ' > '}
+                    <span>{cate}</span>
+                  </label>
                 );
               })}
             </CategoryContainer>
@@ -88,12 +77,14 @@ function ViewDetail() {
                 <h3>{book?.author}</h3>
               </TitleSection>
               {/* 2.2 책 커버 및 출판 정보 */}
-              <BookContentSection className="row">
+              <BookContentSection>
                 {/* 책 커버 */}
-                <BookImageSection className="col-12 col-lg-4">
-                  <BookFront>
-                    <BookImage src={book?.cover} alt={book?.title} />
-                  </BookFront>
+                <BookImageSection>
+                  <DetailImages
+                    itemId={itemId}
+                    title={book?.title as string}
+                    cover={book?.cover as string}
+                  />
                   <PreviewBtnSection>
                     <Button
                       value="미리보기"
@@ -111,7 +102,7 @@ function ViewDetail() {
               itemId={book?.itemId as number}
               title={book?.title as string}
               cover={book?.cover as string}
-              handleClickOverview={() => setOpenPreview(false)}
+              closeModal={() => setOpenPreview(false)}
             />
           )}
         </>

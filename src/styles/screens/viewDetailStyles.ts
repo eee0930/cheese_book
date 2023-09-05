@@ -61,31 +61,13 @@ export const BookContentSection = styled.div`
 `;
 export const BookImageSection = styled.div`
   position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
-export const BookFront = styled.div`
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  transition: transform 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-  margin-bottom: 1rem;
-  &:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: inset 0px 0px 12px 3px rgba(0, 0, 0, 0.05);
-  }
-`;
-export const BookImage = styled.img`
-  width: 100%;
-  box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.3);
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  transition: transform 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-`;
+
 export const PreviewBtnSection = styled.div`
   margin-top: 1rem;
 `;

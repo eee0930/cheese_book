@@ -16,6 +16,11 @@ export const OverlayContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(8px);
 `;
+export const CloseButtonCover = styled.div`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+`;
 export const Modal = styled.div`
   position: absolute;
   width: calc(100vw - 10px);
@@ -30,13 +35,13 @@ export const Modal = styled.div`
   justify-content: center;
   align-items: center;
   @media (min-width: 768px) {
-    width: calc(100vw - 20px);
-    height: calc(100vh - 20px);
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    border-radius: 10px;
+    width: calc(100vw - 40px);
+    height: calc(100vh - 40px);
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    border-radius: 15px;
   }
   @media (min-width: 1200px) {
     width: 80vw;

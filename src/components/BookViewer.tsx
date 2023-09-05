@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useMatch, useOutletContext } from 'react-router-dom';
 import { fetchViewerImagesById } from '../apis/fetching';
 import { styled } from 'styled-components';
 import { Loader } from '../styles/globalStyles';

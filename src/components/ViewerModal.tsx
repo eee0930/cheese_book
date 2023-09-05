@@ -2,27 +2,33 @@ import {
   Modal,
   ModalContainer,
   OverlayContainer,
+  CloseButtonCover,
 } from '../styles/components/modalStyles';
 import BookViewer from './BookViewer';
+import Button from './mixins/Button';
 
 interface IViewerModal {
   itemId: number;
   title: string;
   cover: string;
-  handleClickOverview: () => void;
+  closeModal: () => void;
 }
 
-function ViewerModal({
-  itemId,
-  title,
-  cover,
-  handleClickOverview,
-}: IViewerModal) {
+function ViewerModal({ itemId, title, cover, closeModal }: IViewerModal) {
   return (
     <>
       <ModalContainer>
-        <OverlayContainer onClick={handleClickOverview} />
+        <OverlayContainer onClick={closeModal} />
         <Modal>
+          <CloseButtonCover>
+            <Button
+              value={'close'}
+              styleIdx={1}
+              isSquare={true}
+              size={'lg'}
+              handleBtn={closeModal}
+            />
+          </CloseButtonCover>
           <BookViewer itemId={itemId} title={title} cover={cover} />
         </Modal>
       </ModalContainer>

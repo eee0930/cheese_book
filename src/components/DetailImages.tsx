@@ -1,16 +1,47 @@
 import { useState } from 'react';
-import { styled } from 'styled-components';
-
-export const ImageCover = styled.div``;
+import { useQuery } from 'react-query';
+import { fetchDetailImagesById } from '../apis/fetching';
+import { Loader } from '../styles/globalStyles';
+import {
+  BookContainer,
+  FrontCover,
+  SideCover,
+} from '../styles/components/coverStyles';
 
 interface IDetailImages {
+  itemId: number;
+  title: string;
   cover: string;
 }
-function DetailImages({ cover }: IDetailImages) {
+function DetailImages({ itemId, title, cover }: IDetailImages) {
   const [isFront, setIsFront] = useState(true);
+  const { data: images, isLoading } = useQuery(
+    'bookCovers',
+    () => fetchDetailImagesById(itemId),
+    { retry: 0 }
+  );
 
-  // const getCoverImages =
-  return null;
+  return (
+    <>
+      {isLoading ? (
+        <Loader>
+          <div>
+            <div></div>
+            <div></div>
+          </div>
+        </Loader>
+      ) : (
+        <BookContainer>
+          {images && (
+            <>
+              <SideCover src={images[1]} alt={title} />
+              <FrontCover src={images[0]} alt={title} />
+            </>
+          )}
+        </BookContainer>
+      )}
+    </>
+  );
 }
 
 export default DetailImages;

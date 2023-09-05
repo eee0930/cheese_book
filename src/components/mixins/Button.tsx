@@ -13,12 +13,32 @@ const ButtonCover = styled.button`
   font-family: ${(props) => props.theme.title};
   z-index: 1;
   span {
-    font-size: 1rem;
     position: relative;
     top: -0.15rem;
     left: -0.15rem;
     display: block;
+  }
+  &.sm {
+    margin-left: 0.1rem;
+    margin-top: 0.1rem;
+    border-radius: 0.5rem;
+  }
+  &.sm span {
+    top: -0.075rem;
+    left: -0.075rem;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.2rem;
+  }
+  &.md span {
+    font-size: 1rem;
     padding: 0.4rem 0.8rem;
+  }
+  &.lg span {
+    font-size: 1.3rem;
+    padding: 0.5rem 0.9rem;
+  }
+  &.square span {
+    padding: 0.2rem 0.3rem 0.35rem;
   }
   &.btn-primary span {
     color: ${(props) => props.theme.white.lighter};
@@ -39,6 +59,10 @@ const ButtonCover = styled.button`
     height: 100%;
     border-radius: inherit;
   }
+  &.sm::before {
+    top: -0.3rem;
+    left: -0.3rem;
+  }
   &.btn-primary::before {
     background-color: ${(props) => props.theme.main1.main1};
   }
@@ -55,20 +79,33 @@ const BTN_COLOR = ['btn-primary', 'btn-secondary', 'btn-third'];
 interface IButton {
   value: string;
   styleIdx?: number;
+  isSquare?: boolean;
+  size?: string;
   handleBtn: () => void;
 }
 
-function Button({ value, styleIdx, handleBtn }: IButton) {
+function Button({ value, styleIdx, isSquare, size, handleBtn }: IButton) {
   const [bgColor, setBgColor] = useState('btn-primary');
+  const [btnRatio, setBtnRatio] = useState(false);
+  const [btnSize, setBtnSize] = useState('md');
   useEffect(() => {
     if (styleIdx) {
       setBgColor(BTN_COLOR[styleIdx]);
+    }
+    if (isSquare) {
+      setBtnRatio(true);
+    }
+    if (size) {
+      setBtnSize(size);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <ButtonCover className={bgColor} onClick={handleBtn}>
+    <ButtonCover
+      className={`${btnRatio && 'square'} ${bgColor} ${btnSize}`}
+      onClick={handleBtn}
+    >
       <span>{value}</span>
     </ButtonCover>
   );
