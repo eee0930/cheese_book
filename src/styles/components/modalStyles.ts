@@ -50,6 +50,6 @@ export const Modal = styled.div`
     left: 10vw;
     right: 10vw;
     bottom: 5vh;
-    border-radius: 2rem;
+    border-radius: 1rem;
   }
 `;

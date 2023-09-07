@@ -3,6 +3,7 @@ import * as cheerio from 'cheerio';
 
 const VIEWER_ROOT = process.env.REACT_APP_ALADIN_VIEWER;
 const DETAIL_ROOT = process.env.REACT_APP_ALADIN_DETAIL;
+const BANNER_ROOT = process.env.REACT_APP_GYOBO_MAIN;
 
 /**
  * book viewer 이미지 가져오기
@@ -85,3 +86,53 @@ export const fetchDetailImagesById = async (id: number) => {
     }
   });
 };
+
+/**
+ * Main Banner 가져오기
+ * @returns
+ */
+const getBannerHTML = async () => {
+  try {
+    return await axios.get(`${BANNER_ROOT}`);
+  } catch (error) {
+    console.log('❌', error);
+  }
+};
+const getBannerInfo = (
+  $: cheerio.CheerioAPI,
+  $bannerContainer: cheerio.Cheerio<cheerio.Element>
+) => {
+  const bannerArr: IFetchedBanners[] = [];
+  $bannerContainer.each(function () {
+    const title = $(this as cheerio.Element)
+      .find('.banner_title')
+      .html();
+    const image = $(this as cheerio.Element)
+      .find('.img_box img')
+      .attr('data-src');
+    if (title && image) {
+      const banner = {
+        title,
+        image,
+      } as IFetchedBanners;
+      bannerArr.push(banner);
+    }
+  });
+  return bannerArr;
+};
+export const fetchBanners = async () => {
+  return await getBannerHTML().then((html) => {
+    if (html) {
+      const $ = cheerio.load(html.data);
+      const $popularBanner = $('#welcome_main_banner ul li[data-group="1"]');
+      const $newBanner = $('#welcome_main_banner ul li[data-group="2"]');
+      const populars = getBannerInfo($, $popularBanner);
+      const news = getBannerInfo($, $newBanner);
+      return [...populars, ...news];
+    }
+  });
+};
+export interface IFetchedBanners {
+  title: string;
+  image: string;
+}

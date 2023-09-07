@@ -42,12 +42,10 @@ function DetailImages({ itemId, title, cover }: IDetailImages) {
             </BookContainer>
           ) : (
             <BookContainer>
-              {images && (
-                <>
-                  <SideCover src={images[1]} alt={title} />
-                  <FrontCover src={images[0]} alt={title} />
-                </>
-              )}
+              <>
+                {images[1] && <SideCover src={images[1]} alt={title} />}
+                {images[0] && <FrontCover src={images[0]} alt={title} />}
+              </>
             </BookContainer>
           )}
         </>

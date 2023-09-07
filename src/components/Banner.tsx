@@ -1,10 +1,15 @@
+import { useQuery } from 'react-query';
 import { styled } from 'styled-components';
+import { fetchBanners } from '../apis/fetching';
 
 const BannerContainer = styled.div`
   margin-left: -1rem;
   margin-right: -1rem;
+  padding-top: 5px;
+  padding-left: 1rem;
   @media (min-width: 768px) {
-    padding-top: 5px;
+    padding-left: 0;
+    padding-top: 2rem;
     padding-left: 0.2rem;
     margin-left: 0;
     margin-right: -1rem;
@@ -16,17 +21,26 @@ const BannerContainer = styled.div`
 `;
 const BannerCover = styled.div`
   width: 100%;
-  height: 50vh;
-  background-color: ${(props) => props.theme.main4.main1};
+  height: 30vh;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: left center;
   @media (min-width: 768px) {
-    border-radius: 3rem 0 0 0;
+    height: 50vh;
   }
 `;
 
 function Banner() {
+  const { data: bannerArr, isLoading } = useQuery('banners', fetchBanners, {
+    retry: 0,
+  });
   return (
     <BannerContainer>
-      <BannerCover>hi</BannerCover>
+      {!isLoading && bannerArr && (
+        <BannerCover
+          style={{ backgroundImage: `url(${bannerArr[0]?.image})` }}
+        />
+      )}
     </BannerContainer>
   );
 }
