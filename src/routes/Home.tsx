@@ -4,7 +4,6 @@ import Banner from '../components/Banner';
 import BestSellers from '../components/BestSellers';
 // styles
 import { ContentContainer, ContentTitle } from '../styles/commonStyles';
-import NavTaps from '../components/NavTaps';
 
 function Home() {
   return (
@@ -17,7 +16,6 @@ function Home() {
       <Banner />
       <ContentContainer>
         <ContentTitle>이번주 베스트 셀러</ContentTitle>
-        {/* <NavTaps /> */}
         <BestSellers isHome={true} maxSize={24} />
       </ContentContainer>
     </>

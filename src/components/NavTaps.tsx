@@ -30,7 +30,7 @@ interface INavTaps {
   btns: IBtns[];
 }
 
-function NavTaps({ btns }: INavTaps) {
+export function NavTaps({ btns }: INavTaps) {
   return (
     <NavTapsContainer>
       {btns.map((btn, i) => (
@@ -46,4 +46,18 @@ function NavTaps({ btns }: INavTaps) {
   );
 }
 
-export default NavTaps;
+export function MainMenu({ btns }: INavTaps) {
+  return (
+    <NavTapsContainer>
+      {btns.map((btn, i) => (
+        <NavTap
+          className={`${i === 0 && 'active'}`}
+          key={i}
+          onClick={btn.handleBtn}
+        >
+          {btn.value}
+        </NavTap>
+      ))}
+    </NavTapsContainer>
+  );
+}
