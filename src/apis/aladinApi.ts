@@ -55,11 +55,17 @@ export interface IAladinRequestList {
 /**
  * 신간 목록
  * @param isHome
+ * @param categoryId
+ * @param maxResult
  * @returns
  */
-export const fetchNewestBookList = async (isHome: boolean, maxResult: number) =>
+export const fetchNewestBookList = async (
+  isHome: boolean,
+  categoryId: number,
+  maxResult: number
+) =>
   (await request(
-    `${ROOT}ItemList.aspx?QueryType=ItemNewSpecial&Cover=MidBig&SearchTarget=${
+    `${ROOT}ItemList.aspx?QueryType=ItemNewSpecial&Cover=MidBig&categoryId=${categoryId}&SearchTarget=${
       isHome ? 'book' : 'Foreign'
     }&MaxResults=${maxResult}`
   )) as IAladinRequestList;
@@ -68,6 +74,7 @@ export const fetchNewestBookList = async (isHome: boolean, maxResult: number) =>
  * 이주의 베스트 셀러 (국내/ 해외)
  * @param isHome
  * @param categoryId
+ * @param maxResult
  * @returns
  */
 export const fetchBestSellerBookList = async (

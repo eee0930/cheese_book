@@ -1,9 +1,10 @@
-interface ICategory {
-  [key: string]: string;
+export interface ICategory {
+  id: string;
+  name: string;
 }
-export interface ICategories {
-  Korea: ICategory;
-  Overseas: ICategory;
+export interface ICategroyData {
+  nation: string;
+  categories: ICategory[];
 }
 
 const request = async (url: string) => {
@@ -18,4 +19,4 @@ const request = async (url: string) => {
 export const fetchCategories = async () =>
   (await request(
     `${process.env.PUBLIC_URL}/data/categories.json`
-  )) as ICategories;
+  )) as ICategroyData[];

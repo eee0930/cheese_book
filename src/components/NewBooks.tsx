@@ -4,12 +4,18 @@ import Book from './mixins/Book';
 
 interface INewBooks {
   isHome?: boolean;
+  cateNum?: number;
   maxSize?: number;
 }
-function NewBooks({ isHome, maxSize }: INewBooks) {
+function NewBooks({ isHome, cateNum, maxSize }: INewBooks) {
   const { data, isLoading } = useQuery<IAladinRequestList>(
-    'newBooks',
-    () => fetchNewestBookList(isHome ? isHome : true, maxSize ? maxSize : 20),
+    ['newBooks', cateNum ? cateNum : 0],
+    () =>
+      fetchNewestBookList(
+        isHome ? isHome : true,
+        cateNum ? cateNum : 0,
+        maxSize ? maxSize : 20
+      ),
     { retry: 0 }
   );
 

@@ -10,8 +10,9 @@ interface IBestSellers {
 }
 
 function BestSellers({ isHome, cateNum, maxSize }: IBestSellers) {
+  console.log(cateNum);
   const { data, isLoading } = useQuery<IAladinRequestList>(
-    'bestSellers',
+    ['bestSellers', cateNum ? cateNum : 0],
     () =>
       fetchBestSellerBookList(
         isHome ? isHome : true,
