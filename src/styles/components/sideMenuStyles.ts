@@ -211,6 +211,7 @@ export const SideMenus = styled.ul`
     font-family: ${(props) => props.theme.title};
     //margin-bottom: 1rem;
     height: 50px;
+    position: relative;
     color: ${(props) => props.theme.black.darker};
     text-transform: uppercase;
     i,
@@ -238,11 +239,17 @@ export const SideMenus = styled.ul`
     text-align: center;
     display: inline-block;
     position: relative;
+    transition: left 0.3s 0.5s ease-in-out;
   }
   .text-cover {
     font-size: 1.2rem;
     opacity: 1;
     transition: font-size 0.3s ease, opacity 0.3s ease-in-out;
+  }
+  &.fold .icon-cover {
+    position: absolute;
+    left: calc(50% - 0.5rem);
+    transform: translateX(-50%);
   }
   &.fold .text-cover {
     display: inline;
