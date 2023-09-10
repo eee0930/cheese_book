@@ -7,12 +7,14 @@ const BannerContainer = styled.div`
   margin-right: -1rem;
   padding-top: 5px;
   padding-left: 1rem;
+  margin-bottom: 1rem;
   @media (min-width: 768px) {
     padding-left: 0;
     padding-top: 2rem;
     padding-left: 0.2rem;
     margin-left: 0;
     margin-right: -1rem;
+    margin-bottom: 8rem;
   }
   @media (min-width: 1200px) {
     padding-left: 0.5rem;

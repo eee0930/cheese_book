@@ -13,10 +13,13 @@ import Book from '../components/mixins/Book';
 //styles
 import { Loader } from '../styles/globalStyles';
 import { ContentTitle } from '../styles/commonStyles';
+import { useSetRecoilState } from 'recoil';
+import { prevPageState } from '../atom';
 
 function SearchResults() {
   const location = useLocation();
   const query = new URLSearchParams(location.search).get('q') as string;
+  const setPrevPage = useSetRecoilState(prevPageState);
   const [isHome, setIsHome] = useState(true);
   const [sortResult, setSortResult] = useState('');
   const [bookList, setBookList] = useState<IAladinBookItem[]>();
@@ -27,10 +30,13 @@ function SearchResults() {
     { retry: 0 }
   );
   useEffect(() => {
+    setPrevPage(location.pathname);
     if (!isLoading) {
       setBookList(books?.item);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const handleSort = (e: any) => {
     const sort = e.target.value;
     setSortResult(sort);

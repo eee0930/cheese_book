@@ -64,3 +64,8 @@ export const likedVolumeListState = atom({
   key: 'likedVolumeList',
   default: [],
 });
+
+export const prevPageState = atom({
+  key: 'prevPage',
+  default: '/',
+});

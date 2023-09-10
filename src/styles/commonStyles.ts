@@ -3,15 +3,23 @@ import { styled } from 'styled-components';
 export const ContentContainer = styled.div`
   margin: 1rem 0 2rem;
   @media (min-width: 768px) {
-    margin: 1rem -0.2rem 2rem;
+    margin: 1rem -0.2rem 5rem;
   }
   @media (min-width: 1199.5px) {
-    margin: 1rem -0.5rem 3rem;
+    margin: 1rem -0.5rem 6rem;
   }
 `;
-
+export const ContentTitleSection = styled.div`
+  margin: 1.5rem 0;
+  @media (min-width: 768px) {
+    margin: 2rem 0;
+  }
+  @media (min-width: 1199.5px) {
+    margin: 2rem 0 2.5rem;
+  }
+`;
 export const ContentTitle = styled.h1`
-  margin: 2rem 0;
+  align-self: center;
   padding: 0 5px;
   font-size: 1.5rem;
   font-family: ${(props) => props.theme.title}, cursive;
@@ -33,10 +41,21 @@ export const ContentTitle = styled.h1`
     color: ${(props) => props.theme.main1.main2};
   }
   @media (min-width: 768px) {
-    padding: 0 0.7rem;
+    font-size: 2rem;
+    padding: 0 0.3rem;
   }
   @media (min-width: 1199.5px) {
-    margin: 2rem 0 3rem;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
+  }
+`;
+export const TitleBtnSection = styled.div`
+  align-self: center;
+  text-align: right;
+  padding: 0 5px;
+  @media (min-width: 768px) {
+    padding: 0 0.3rem;
+  }
+  @media (min-width: 1199.5px) {
+    padding: 0 0.5rem;
   }
 `;

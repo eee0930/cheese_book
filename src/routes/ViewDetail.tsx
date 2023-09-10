@@ -23,8 +23,11 @@ import {
   PreviewBtnSection,
 } from '../styles/screens/viewDetailStyles';
 import DetailImages from '../components/DetailImages';
+import { useRecoilValue } from 'recoil';
+import { prevPageState } from '../atom';
 
 function ViewDetail() {
+  const prevPage = useRecoilValue(prevPageState);
   const useId = useMatch('/book/:id');
   const itemId = Number(useId?.params.id);
   const [openPreview, setOpenPreview] = useState(false);
@@ -60,14 +63,8 @@ function ViewDetail() {
               <Link to="/">
                 <i className="fa fa-home" />
               </Link>
-              {book?.categoryName?.split('>').map((cate, i) => {
-                return (
-                  <label key={i}>
-                    {i !== 0 && ' > '}
-                    <span>{cate}</span>
-                  </label>
-                );
-              })}
+              <Link to={prevPage}>prev</Link>
+              <span>{book?.title}</span>
             </CategoryContainer>
             {/* [2. 책 정보]---------------------------------------------------*/}
             <BookContentContainer>
