@@ -56,8 +56,9 @@ function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
   }, [windowWidth]);
 
   const navigate = useNavigate();
-  const handleSearch = (e: any) => setSearchField(e.target.value);
-  const handleSubmit = async (e: any) => {
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setSearchField(e.target.value);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate(`/search?q=${searchField}`);
   };
@@ -138,7 +139,7 @@ function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
                         name="search"
                         placeholder="search"
                         value={searchField}
-                        onChange={handleSearch}
+                        onChange={handleSearchInput}
                       />
                     </form>
                   </SearchCover>

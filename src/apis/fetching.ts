@@ -18,12 +18,16 @@ const getViewerHTMLById = async (id: number) => {
   }
 };
 
+interface IParcedImage {
+  imageUrl: string;
+  imageFile: string;
+}
 const getScriptImages = (data: string) => {
   if (data.includes('var jsonArray = [')) {
     const dataSplit = data.split('var jsonArray = [')[1].split(']')[0];
     const parcedData = JSON.parse('[' + dataSplit + ']');
     const images: string[] = [];
-    parcedData.forEach((parced: any) => {
+    parcedData.forEach((parced: IParcedImage) => {
       images.push(parced.imageUrl + parced.imageFile);
     });
     return images;
@@ -38,7 +42,7 @@ export const fetchViewerImagesById = async (id: number) => {
       const $ = cheerio.load(html.data, { xmlMode: false });
       const $sections = $('#addClass > .letslook_book > section');
       if ($sections.text()) {
-        const images: any = [];
+        const images: (string | undefined)[][] = [];
         $sections.each(function () {
           const leftpage = $(this).find('.leftpage img').attr('src');
           const rightpage = $(this).find('.rightpage img').attr('src');

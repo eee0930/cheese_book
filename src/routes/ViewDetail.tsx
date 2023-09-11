@@ -34,7 +34,7 @@ function ViewDetail() {
 
   const { data: book, isLoading } = useQuery<
     IAladinRequestList,
-    any,
+    Error,
     IAladinBookItem
   >(['bookDetail', itemId], () => fetchBookDetailById(itemId), {
     retry: 0,

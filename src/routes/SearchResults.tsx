@@ -37,7 +37,7 @@ function SearchResults() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleSort = (e: any) => {
+  const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const sort = e.target.value;
     setSortResult(sort);
   };
