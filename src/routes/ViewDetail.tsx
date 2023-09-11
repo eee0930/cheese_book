@@ -36,7 +36,7 @@ function ViewDetail() {
     IAladinRequestList,
     any,
     IAladinBookItem
-  >('bookDetail', () => fetchBookDetailById(itemId), {
+  >(['bookDetail', itemId], () => fetchBookDetailById(itemId), {
     retry: 0,
     select: (bookDetail) => bookDetail.item[0],
   });

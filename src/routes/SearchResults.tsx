@@ -12,7 +12,7 @@ import {
 import Book from '../components/mixins/Book';
 //styles
 import { Loader } from '../styles/globalStyles';
-import { ContentTitle } from '../styles/commonStyles';
+import { ContentTitle, ContentTitleSection } from '../styles/commonStyles';
 import { useSetRecoilState } from 'recoil';
 import { prevPageState } from '../atom';
 
@@ -25,7 +25,7 @@ function SearchResults() {
   const [bookList, setBookList] = useState<IAladinBookItem[]>();
 
   const { data: books, isLoading } = useQuery<IAladinRequestList>(
-    'search',
+    ['search', query],
     () => fetchBookListByQuery(query, isHome, 36),
     { retry: 0 }
   );
@@ -73,10 +73,12 @@ function SearchResults() {
               <title>{query} 검색 | Cheese Book</title>
             </Helmet>
           </HelmetProvider>
-          <ContentTitle className="title">
-            <span>Search Result</span> {query}
-            <i className="fa fa-caret-down" />
-          </ContentTitle>
+          <ContentTitleSection>
+            <ContentTitle>
+              <span>Search Result</span> {query}
+              <i className="fa fa-caret-down" />
+            </ContentTitle>
+          </ContentTitleSection>
           <div className="row">
             {books?.item?.map((book, i) => (
               <Book book={book} key={i} />

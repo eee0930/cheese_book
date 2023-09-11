@@ -15,7 +15,7 @@ interface IDetailImages {
 }
 function DetailImages({ itemId, title, cover }: IDetailImages) {
   const { data: images, isLoading } = useQuery(
-    'bookCovers',
+    ['bookCovers', itemId],
     () => fetchDetailImagesById(itemId),
     { retry: 0 }
   );
