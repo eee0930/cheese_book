@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useMatch, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useMatch, useNavigate } from 'react-router-dom';
 // styles
 import {
   SideMenuContainer,
@@ -20,6 +20,9 @@ import {
   MenuBtn,
   TitleSection,
 } from '../styles/components/sideMenuStyles';
+import { useRecoilValue } from 'recoil';
+import { prevPageState } from '../atom';
+import { cheesePaths } from '../data/cheeseMainData';
 
 interface ISideMenu {
   isFolded: boolean;
@@ -27,12 +30,9 @@ interface ISideMenu {
 }
 
 export function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
-  const homeMatch = useMatch('/');
-  const newMatch = useMatch('/new/*');
-  const bestMatch = useMatch('/best/*');
-  const tasteMatch = useMatch('/taste/*');
-  const myMatch = useMatch('/my/*');
   const searchMatch = useMatch('/search/*');
+  const location = useLocation();
+  const prevPage = useRecoilValue(prevPageState);
 
   const [searchField, setSearchField] = useState('');
 
@@ -42,6 +42,7 @@ export function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate(`/search?q=${searchField}`);
+    setSearchField('');
   };
 
   return (
@@ -68,46 +69,25 @@ export function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
           )}
           {/* 사이드 메뉴 list */}
           <SideMenus className={`${isFolded && 'fold'}`}>
-            <li className={`${homeMatch && 'active'}`}>
-              <Link to="/">
-                <span className="icon-cover">
-                  <i className="fa-solid fa-house-chimney-window" />
-                </span>
-                <span className="text-cover">Home</span>
-              </Link>
-            </li>
-            <li className={`${newMatch && 'active'}`}>
-              <Link to="/new">
-                <span className="icon-cover">
-                  <i className="fa-solid fa-rocket" />
-                </span>
-                <span className="text-cover">New Books</span>
-              </Link>
-            </li>
-            <li className={`${bestMatch && 'active'}`}>
-              <Link to="/best">
-                <span className="icon-cover">
-                  <i className="fa-solid fa-trophy" />
-                </span>
-                <span className="text-cover">Best Sellers</span>
-              </Link>
-            </li>
-            <li className={`${tasteMatch && 'active'}`}>
-              <Link to="/taste">
-                <span className="icon-cover">
-                  <i className="fa-solid fa-flask" />
-                </span>
-                <span className="text-cover">Your Taste</span>
-              </Link>
-            </li>
-            <li className={`${myMatch && 'active'}`}>
-              <Link to="/my">
-                <span className="icon-cover">
-                  <i className="fa-solid fa-book" />
-                </span>
-                <span className="text-cover">My Books</span>
-              </Link>
-            </li>
+            {cheesePaths.map((cheesePath) => {
+              const { name, icon, path } = cheesePath;
+              return (
+                <li
+                  key={path}
+                  className={`${
+                    (location.pathname === path || prevPage === path) &&
+                    'active'
+                  }`}
+                >
+                  <Link to={path}>
+                    <span className="icon-cover">
+                      <i className={icon} />
+                    </span>
+                    <span className="text-cover">{name}</span>
+                  </Link>
+                </li>
+              );
+            })}
           </SideMenus>
           {/* 검색 */}
           <SearchSection>
@@ -140,54 +120,29 @@ export function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
 }
 
 export function MobileMenu() {
-  const homeMatch = useMatch('/');
-  const newMatch = useMatch('/new/*');
-  const bestMatch = useMatch('/best/*');
-  const tasteMatch = useMatch('/taste/*');
-  const myMatch = useMatch('/my/*');
+  const location = useLocation();
+  const prevPage = useRecoilValue(prevPageState);
   return (
     <MobileMenuContainer>
       <MobileMenuCover className="row">
-        <div className="col">
-          <Link to="/" className={`${homeMatch && 'active'}`}>
-            <IconCover>
-              <i className="fa-solid fa-house-chimney-window" />
-            </IconCover>
-            <MenuName>home</MenuName>
-          </Link>
-        </div>
-        <div className="col">
-          <Link to="/new" className={`${newMatch && 'active'}`}>
-            <IconCover>
-              <i className="fa-solid fa-rocket" />
-            </IconCover>
-            <MenuName>new</MenuName>
-          </Link>
-        </div>
-        <div className="col">
-          <Link to="/best" className={`${bestMatch && 'active'}`}>
-            <IconCover>
-              <i className="fa-solid fa-trophy" />
-            </IconCover>
-            <MenuName>best</MenuName>
-          </Link>
-        </div>
-        <div className="col">
-          <Link to="/taste" className={`${tasteMatch && 'active'}`}>
-            <IconCover>
-              <i className="fa-solid fa-flask" />
-            </IconCover>
-            <MenuName>taste</MenuName>
-          </Link>
-        </div>
-        <div className="col">
-          <Link to="/my" className={`${myMatch && 'active'}`}>
-            <IconCover>
-              <i className="fa-solid fa-book" />
-            </IconCover>
-            <MenuName>my</MenuName>
-          </Link>
-        </div>
+        {cheesePaths.map((cheesePath) => {
+          const { name_sm, icon, path } = cheesePath;
+          return (
+            <div key={path} className="col">
+              <Link
+                to={path}
+                className={`${
+                  (location.pathname === path || prevPage === path) && 'active'
+                }`}
+              >
+                <IconCover>
+                  <i className={icon} />
+                </IconCover>
+                <MenuName>{name_sm}</MenuName>
+              </Link>
+            </div>
+          );
+        })}
       </MobileMenuCover>
     </MobileMenuContainer>
   );

@@ -22,23 +22,31 @@ function SearchResults() {
   const setPrevPage = useSetRecoilState(prevPageState);
   const [isHome, setIsHome] = useState(true);
   const [sortResult, setSortResult] = useState('');
+  const [isSorted, setIsSorted] = useState(false);
   const [bookList, setBookList] = useState<IAladinBookItem[]>();
 
   const { data: books, isLoading } = useQuery<IAladinRequestList>(
-    ['search', query],
+    ['search', `${query} ${isHome}`],
     () => fetchBookListByQuery(query, isHome, 36),
     { retry: 0 }
   );
+
   useEffect(() => {
-    setPrevPage(location.pathname);
+    setIsSorted(false);
     if (!isLoading) {
       setBookList(books?.item);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
+
+  useEffect(() => {
+    setPrevPage(location.pathname);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const sort = e.target.value;
+    setIsSorted(true);
     setSortResult(sort);
   };
 
@@ -79,11 +87,19 @@ function SearchResults() {
               <i className="fa fa-caret-down" />
             </ContentTitle>
           </ContentTitleSection>
-          <div className="row">
-            {books?.item?.map((book, i) => (
-              <Book book={book} key={i} />
-            ))}
-          </div>
+          {isSorted ? (
+            <div className="row">
+              {bookList?.map((book, i) => (
+                <Book book={book} key={i} />
+              ))}
+            </div>
+          ) : (
+            <div className="row">
+              {books?.item?.map((book, i) => (
+                <Book book={book} key={i} />
+              ))}
+            </div>
+          )}
         </>
       )}
     </>

@@ -1,26 +1,31 @@
-export const cheesePath = [
+export const cheesePaths = [
   {
     name: 'home',
+    name_sm: 'home',
     icon: 'fa-solid fa-house-chimney-window',
     path: '/',
   },
   {
     name: 'new books',
+    name_sm: 'new',
     icon: 'fa-solid fa-rocket',
     path: '/new',
   },
   {
     name: 'best sellers',
+    name_sm: 'best',
     icon: 'fa-solid fa-trophy',
     path: '/best',
   },
   {
     name: 'your taste',
+    name_sm: 'taste',
     icon: 'fa-solid fa-flask',
-    path: '/test',
+    path: '/taste',
   },
   {
     name: 'my books',
+    name_sm: 'my',
     icon: 'fa-solid fa-book',
     path: '/my',
   },
