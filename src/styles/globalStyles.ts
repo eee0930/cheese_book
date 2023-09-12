@@ -502,7 +502,7 @@ export const BasicStyle = createGlobalStyle`
       display: inline-flex !important;
     }
   }
-  @media (min-width: 992px) {
+  @media (min-width: 991.5px) {
     .d-lg-none {display: none !important;}
     .d-lg-inline {display: inline !important;}
     .d-lg-inline-block {display: inline-block !important;}
@@ -518,7 +518,7 @@ export const BasicStyle = createGlobalStyle`
       display: inline-flex !important;
     }
   }
-  @media (min-width: 1200px) {
+  @media (min-width: 1199.5px) {
     .d-xl-none {display: none !important;}
     .d-xl-inline {display: inline !important;}
     .d-xl-inline-block {display: inline-block !important;}

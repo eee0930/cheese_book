@@ -36,21 +36,24 @@ const getScriptImages = (data: string) => {
   }
 };
 
+export type ICoverImages<T> = T;
 export const fetchViewerImagesById = async (id: number) => {
   return await getViewerHTMLById(id).then((html) => {
     if (html) {
       const $ = cheerio.load(html.data, { xmlMode: false });
       const $sections = $('#addClass > .letslook_book > section');
       if ($sections.text()) {
-        const images: (string | undefined)[][] = [];
+        const images: ICoverImages<string[][]> = [];
         $sections.each(function () {
           const leftpage = $(this).find('.leftpage img').attr('src');
           const rightpage = $(this).find('.rightpage img').attr('src');
           const middlepage = $(this).find('.bookspine img').attr('src');
-          if (middlepage) {
-            images.push([leftpage, rightpage, middlepage]);
-          } else {
-            images.push([leftpage, rightpage]);
+          if (leftpage && rightpage) {
+            if (middlepage) {
+              images.push([leftpage, rightpage, middlepage]);
+            } else {
+              images.push([leftpage, rightpage]);
+            }
           }
         });
         return images;

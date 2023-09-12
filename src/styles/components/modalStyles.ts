@@ -43,7 +43,7 @@ export const Modal = styled.div`
     bottom: 20px;
     border-radius: 15px;
   }
-  @media (min-width: 1200px) {
+  @media (min-width: 1199.5px) {
     width: 80vw;
     height: 90vh;
     top: 5vh;

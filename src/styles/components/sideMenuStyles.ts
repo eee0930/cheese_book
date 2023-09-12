@@ -4,7 +4,7 @@ export const SideMenuContainer = styled.div`
   padding: 1.8rem 1.2rem 1.2rem 1rem;
   width: 100%;
   height: 100vh;
-  @media (min-width: 1200px) {
+  @media (min-width: 1199.5px) {
     padding: 1.2rem 1.2rem 0.8rem 1rem;
   }
 `;
@@ -27,7 +27,7 @@ export const MenuBtnCover = styled.div`
   right: calc(-28px + 2.5px);
   // transform: translateY(-50%);
   z-index: 5;
-  @media (min-width: 1200px) {
+  @media (min-width: 1199.5px) {
     border: ${(props) => props.theme.boxLine.lg};
     border-left: none;
     right: calc(-28px + 3px);
@@ -54,7 +54,7 @@ export const LogoImg = styled.img`
   width: 70px;
   transform: rotate(15deg);
   z-index: 10;
-  @media (min-width: 1200px) {
+  @media (min-width: 1199.5px) {
     right: -2.8rem;
     width: 75px;
   }
@@ -65,7 +65,7 @@ const BoxStyle = styled.div`
   overflow: hidden;
   height: 100%;
   transition: color 1s ease-in-out 0s, background-color 1s ease-in-out 0s;
-  @media (min-width: 1200px) {
+  @media (min-width: 1199.5px) {
     border: ${(props) => props.theme.boxLine.lg};
   }
 `;
@@ -98,9 +98,9 @@ export const TitleSection = styled.div`
   height: 100px;
 `;
 export const TitleCover = styled(TitleSection)`
-  padding-top: 60px;
+  padding-top: 65px;
   .title {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     text-align: center;
     text-transform: uppercase;
     text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000,
@@ -108,7 +108,13 @@ export const TitleCover = styled(TitleSection)`
       0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000, 0 0 2px #000;
     color: ${(props) => props.theme.main3.main2};
   }
-  @media (min-width: 1200px) {
+  @media (min-width: 991.5px) {
+    padding-top: 60px;
+    .title {
+      font-size: 1.8rem;
+    }
+  }
+  @media (min-width: 1199.5px) {
     .title {
       font-size: 2rem;
     }
@@ -134,7 +140,7 @@ export const UserCover = styled.div`
     background-repeat: no-repeat;
     border-radius: 50%;
   }
-  @media (min-width: 1200px) {
+  @media (min-width: 1199.5px) {
     .profile {
       width: 50px;
     }
@@ -144,37 +150,6 @@ export const Nickname = styled.div`
   padding-left: 0.8rem;
   font-size: 1rem;
   font-weight: 600;
-`;
-export const DropdownBtn = styled.button`
-  background-color: transparent;
-  border: none;
-  padding: 5px 8px;
-  font-size: 1rem;
-`;
-export const DropdownMenu = styled.div`
-  position: absolute;
-  opacity: 0;
-  display: none;
-  top: 50px;
-  left: -70px;
-  width: 80px;
-  height: 30px;
-  padding: 0;
-  background-color: ${(props) => props.theme.white.lighter};
-  border-radius: 5px;
-  text-align: center;
-  transform: translateX(50%);
-  button {
-    background-color: transparent;
-    border: none;
-    padding: 5px;
-    font-size: 1rem;
-  }
-  &.active {
-    opacity: 1;
-    top: 25px;
-    display: block;
-  }
 `;
 export const LoginCover = styled.div`
   text-align: center;
@@ -209,8 +184,7 @@ export const SideMenus = styled.ul`
   }
   li {
     font-family: ${(props) => props.theme.title};
-    //margin-bottom: 1rem;
-    height: 50px;
+    height: 45px;
     position: relative;
     color: ${(props) => props.theme.black.darker};
     text-transform: uppercase;
@@ -219,12 +193,12 @@ export const SideMenus = styled.ul`
       transition: color 0.3s ease;
     }
     i {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       position: relative;
       top: 1.5px;
     }
     span {
-      margin-left: 0.5rem;
+      margin-left: 0.3rem;
     }
     &:last-child {
       margin-bottom: 0;
@@ -235,14 +209,14 @@ export const SideMenus = styled.ul`
     }
   }
   .icon-cover {
-    width: 32px;
+    width: 22px;
     text-align: center;
     display: inline-block;
     position: relative;
     transition: left 0.3s 0.5s ease-in-out;
   }
   .text-cover {
-    font-size: 1.2rem;
+    font-size: 1rem;
     opacity: 1;
     transition: font-size 0.3s ease, opacity 0.3s ease-in-out;
   }
@@ -256,6 +230,23 @@ export const SideMenus = styled.ul`
     font-size: 0px;
     opacity: 0;
     visibility: hidden;
+  }
+  @media (min-width: 991.5px) {
+    li {
+      height: 50px;
+      i {
+        font-size: 1.5rem;
+      }
+      span {
+        margin-left: 0.5rem;
+      }
+    }
+    .icon-cover {
+      width: 32px;
+    }
+    .text-cover {
+      font-size: 1.2rem;
+    }
   }
 `;
 
@@ -302,7 +293,7 @@ export const SearchCover = styled.div`
 export const MobileMenuContainer = styled.div`
   background-color: ${(props) => props.theme.main3.main2};
   width: 100vw;
-  height: ${(props) => props.theme.sideMenu.sm};
+  height: ${(props) => props.theme.sideMenu.xs};
   border-top: ${(props) => props.theme.boxLine.sm};
 `;
 

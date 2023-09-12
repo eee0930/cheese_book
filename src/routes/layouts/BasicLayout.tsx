@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation, useMatch } from 'react-router-dom';
 // components
-import SideMenu from '../../components/SideMenu';
+import { SideMenu, MobileMenu } from '../../components/SideMenu';
 // styles
 import {
   BaseLayoutContainer,
@@ -47,7 +47,7 @@ function BasicLayout() {
       </BaseLayoutContainer>
 
       <MobileSideMenuContainer>
-        <SideMenu />
+        <MobileMenu />
       </MobileSideMenuContainer>
     </>
   );

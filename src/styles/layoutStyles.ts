@@ -15,26 +15,32 @@ export const CheeseContainer = styled.div`
     padding: ${(props) => props.theme.padding.md};
     margin-bottom: 2rem;
   }
-  @media (min-width: 1200px) {
+  @media (min-width: 1199.5px) {
     padding: ${(props) => props.theme.padding.lg};
   }
 `;
 
 export const CheeseMainContainer = styled.div`
   overflow-y: auto;
-  max-height: calc(100vh - ${(props) => props.theme.sideMenu.sm});
+  max-height: calc(100vh - ${(props) => props.theme.sideMenu.xs});
   @media (min-width: 768px) {
     max-height: 100vh;
   }
 `;
 
 export const BaseLayoutMenu = styled.div`
-  width: ${(props) => props.theme.sideMenu.md} !important;
+  width: ${(props) => props.theme.sideMenu.sm} !important;
   transition: width 0.3s ease;
   &.fold {
-    width: 110px !important;
+    width: 100px !important;
   }
-  @media (min-width: 1200px) {
+  @media (min-width: 991.5px) {
+    width: ${(props) => props.theme.sideMenu.md} !important;
+    &.fold {
+      width: 110px !important;
+    }
+  }
+  @media (min-width: 1199.5px) {
     width: ${(props) => props.theme.sideMenu.lg} !important;
     &.fold {
       width: 140px !important;

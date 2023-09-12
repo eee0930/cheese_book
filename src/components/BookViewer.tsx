@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchViewerImagesById } from '../apis/fetching';
+import { ICoverImages, fetchViewerImagesById } from '../apis/fetching';
 import { styled } from 'styled-components';
 import { Loader } from '../styles/globalStyles';
 
@@ -33,7 +33,7 @@ function BookViewer({ itemId, title, cover }: IIsbn) {
       return;
     }
     setIsOnePage(typeof fetchedImgs[0] === 'string');
-    setImageList(fetchedImgs);
+    setImageList(fetchedImgs as ICoverImages<undefined | string[]>);
     setIsLoading(false);
   };
 
