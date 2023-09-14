@@ -1,7 +1,7 @@
 // components
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import Banner from '../components/Banner';
-import BestSellers from '../components/BestSellers';
+import Banner from '../components/home/Banner';
+import BestSellers from '../components/list/BestSellers';
 // styles
 import {
   ContentContainer,
@@ -9,7 +9,7 @@ import {
   ContentTitle,
   TitleBtnSection,
 } from '../styles/commonStyles';
-import NewBooks from '../components/NewBooks';
+import NewBooks from '../components/list/NewBooks';
 import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { prevPageState } from '../atom';

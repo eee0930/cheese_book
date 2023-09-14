@@ -19,7 +19,7 @@ function BookViewerGoogle() {
   const [loaded, setLoaded] = useState(false);
   const [googleBooks, setGoogleBooks] = useState<any>();
   const [bookViewer, setBookViewer] = useState<any>();
-  const $script = useAppendScript(VIEWER_SRC);
+  const { $script, isLoading } = useAppendScript(VIEWER_SRC);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => initialLoad(), [$script]);
@@ -28,12 +28,10 @@ function BookViewerGoogle() {
   useEffect(() => initialEmbed(), [loaded]);
 
   const initialLoad = () => {
-    if ($script) {
-      $script.addEventListener('load', () => {
-        const { google } = window;
-        setGoogleBooks(google);
-        setLoaded(true);
-      });
+    if (!isLoading) {
+      const { google } = window;
+      setGoogleBooks(google);
+      setLoaded(true);
     }
   };
 

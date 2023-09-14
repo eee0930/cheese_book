@@ -64,11 +64,11 @@ export const fetchNewestBookList = async (
   categoryId: number,
   maxResult: number
 ) =>
-  (await request(
-    `${ROOT}ItemList.aspx?QueryType=ItemNewSpecial&Cover=MidBig&categoryId=${categoryId}&SearchTarget=${
+  await request(
+    `${ROOT}ItemList.aspx?QueryType=ItemNewSpecial&Cover=Big&categoryId=${categoryId}&SearchTarget=${
       isHome ? 'book' : 'Foreign'
     }&MaxResults=${maxResult}`
-  )) as IAladinRequestList;
+  );
 
 /**
  * 이주의 베스트 셀러 (국내/ 해외)
@@ -82,11 +82,11 @@ export const fetchBestSellerBookList = async (
   categoryId: number,
   maxResult: number
 ) =>
-  (await request(
-    `${ROOT}ItemList.aspx?QueryType=Bestseller&Cover=MidBig&categoryId=${categoryId}&SearchTarget=${
+  await request(
+    `${ROOT}ItemList.aspx?QueryType=Bestseller&Cover=Big&categoryId=${categoryId}&SearchTarget=${
       isHome ? 'Book' : 'Foreign'
     }&MaxResults=${maxResult}`
-  )) as IAladinRequestList;
+  );
 
 /**
  * 도서 검색 결과 목록
@@ -99,11 +99,11 @@ export const fetchBookListByQuery = async (
   isHome: boolean,
   maxResult: number
 ) =>
-  (await request(
+  await request(
     `${ROOT}ItemSearch.aspx?Query=${query}&Cover=MidBig&SearchTarget=${
       isHome ? 'book' : 'Foreign'
     }&MaxResults=${maxResult}`
-  )) as IAladinRequestList;
+  );
 
 /**
  * 도서상세정보
@@ -112,6 +112,6 @@ export const fetchBookListByQuery = async (
  */
 const DETAIL_OPTIONS = 'cardReviewImgList,ratingInfo,bestSellerRank';
 export const fetchBookDetailById = async (itemId: number) =>
-  (await request(
+  await request(
     `${ROOT}ItemLookUp.aspx?ItemIdType=itemId&ItemId=${itemId}&Cover=Big&OptResult=${DETAIL_OPTIONS}`
-  )) as IAladinRequestList;
+  );

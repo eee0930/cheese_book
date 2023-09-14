@@ -3,9 +3,9 @@ import {
   ModalContainer,
   OverlayContainer,
   CloseButtonCover,
-} from '../styles/components/modalStyles';
+} from '../../styles/components/modalStyles';
 import BookViewer from './BookViewer';
-import Button from './mixins/Button';
+import Button from '../Button';
 
 interface IViewerModal {
   itemId: number;

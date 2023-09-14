@@ -9,8 +9,8 @@ import {
   fetchBookDetailById,
 } from '../apis/aladinApi';
 // components
-import Button from '../components/mixins/Button';
-import ViewerModal from '../components/ViewerModal';
+import Button from '../components/Button';
+import ViewerModal from '../components/viewDetail/ViewerModal';
 // styles
 import { Loader } from '../styles/globalStyles';
 import {
@@ -22,7 +22,7 @@ import {
   CategoryContainer,
   PreviewBtnSection,
 } from '../styles/screens/viewDetailStyles';
-import DetailImages from '../components/DetailImages';
+import DetailImages from '../components/viewDetail/DetailImages';
 import { useRecoilValue } from 'recoil';
 import { prevPageState } from '../atom';
 

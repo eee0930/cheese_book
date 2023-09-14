@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { ICoverImages, fetchViewerImagesById } from '../apis/fetching';
+import { ICoverImages, fetchViewerImagesById } from '../../apis/fetching';
 import { styled } from 'styled-components';
-import { Loader } from '../styles/globalStyles';
+import { Loader } from '../../styles/globalStyles';
 
 interface IIsbn {
   itemId: number;

@@ -1,3 +1,11 @@
+export const mainColors = [
+  ['#F9CC73', '#AC4F98'],
+  ['#F8C1BA', '#C94245'],
+  ['#61609A', '#F9CC73'],
+  ['#CBA7CC', '#F4ED36'],
+  ['#61609A', '#F4ED36'],
+];
+
 export const cheesePaths = [
   {
     name: 'home',

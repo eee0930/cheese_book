@@ -1,5 +1,10 @@
 import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import { Link, useLocation, useMatch, useNavigate } from 'react-router-dom';
+
+import { prevPageState } from '../atom';
+import { cheesePaths, mainColors } from '../data/cheeseMainData';
+
 // styles
 import {
   SideMenuContainer,
@@ -20,9 +25,6 @@ import {
   MenuBtn,
   TitleSection,
 } from '../styles/components/sideMenuStyles';
-import { useRecoilValue } from 'recoil';
-import { prevPageState } from '../atom';
-import { cheesePaths } from '../data/cheeseMainData';
 
 interface ISideMenu {
   isFolded: boolean;
@@ -119,7 +121,10 @@ export function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
   );
 }
 
-export function MobileMenu() {
+interface IMobileMenu {
+  themeIdx: number;
+}
+export function MobileMenu({ themeIdx }: IMobileMenu) {
   const location = useLocation();
   const prevPage = useRecoilValue(prevPageState);
   return (

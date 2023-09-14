@@ -10,6 +10,7 @@ import {
   BaseLayoutMenu,
   MobileSideMenuContainer,
 } from '../../styles/layoutStyles';
+import MobileHeader from '../../components/MobileHeader';
 
 function BasicLayout() {
   const [foldMenu, setFoldMenu] = useState(false);
@@ -29,6 +30,9 @@ function BasicLayout() {
   return (
     <>
       <BaseLayoutContainer>
+        <MobileSideMenuContainer>
+          <MobileHeader />
+        </MobileSideMenuContainer>
         <BaseLayoutMenu
           className={`${
             foldMenu && 'fold'
@@ -45,10 +49,6 @@ function BasicLayout() {
           </CheeseContainer>
         </CheeseMainContainer>
       </BaseLayoutContainer>
-
-      <MobileSideMenuContainer>
-        <MobileMenu />
-      </MobileSideMenuContainer>
     </>
   );
 }

@@ -9,7 +9,7 @@ import {
   ContentTitle,
   ContentTitleSection,
 } from '../styles/commonStyles';
-import BestSellers from '../components/BestSellers';
+import BestSellers from '../components/list/BestSellers';
 
 function ListBestSeller() {
   const setPrevPage = useSetRecoilState(prevPageState);

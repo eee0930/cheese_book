@@ -9,11 +9,13 @@ export const BaseLayoutContainer = styled.div`
 
 export const CheeseContainer = styled.div`
   padding: ${(props) => props.theme.padding.sm};
-  min-height: 80vh;
-  margin-bottom: 4rem;
+  min-height: calc(100vh - ${(props) => props.theme.sideMenu.xs});
+  margin-top: ${(props) => props.theme.sideMenu.xs};
   @media (min-width: 768px) {
     padding: ${(props) => props.theme.padding.md};
+    margin-top: 0;
     margin-bottom: 2rem;
+    min-height: 100vh;
   }
   @media (min-width: 1199.5px) {
     padding: ${(props) => props.theme.padding.lg};
@@ -22,10 +24,7 @@ export const CheeseContainer = styled.div`
 
 export const CheeseMainContainer = styled.div`
   overflow-y: auto;
-  max-height: calc(100vh - ${(props) => props.theme.sideMenu.xs});
-  @media (min-width: 768px) {
-    max-height: 100vh;
-  }
+  max-height: 100vh;
 `;
 
 export const BaseLayoutMenu = styled.div`

@@ -1,7 +1,10 @@
 import { useQuery } from 'react-query';
-import { IAladinRequestList, fetchBestSellerBookList } from '../apis/aladinApi';
+import {
+  IAladinRequestList,
+  fetchBestSellerBookList,
+} from '../../apis/aladinApi';
 // components
-import Book from './mixins/Book';
+import Book from '../mixins/Book';
 
 interface IBestSellers {
   isHome?: boolean;

@@ -34,13 +34,13 @@ export const lightTheme: DefaultTheme = {
   padding: {
     lg: '1rem 2rem',
     md: '0.8rem 1rem',
-    sm: '0.5rem 1rem',
+    sm: '0 1rem 0.5rem',
   },
   sideMenu: {
     lg: '300px',
     md: '270px',
     sm: '220px',
-    xs: '90px',
+    xs: '70px',
   },
   boxLine: {
     lg: '3px solid rgb(26, 26, 26)',

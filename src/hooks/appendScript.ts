@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 export const useAppendScript = (src: string) => {
   const [$script, setScript] = useState<HTMLScriptElement>();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!$script) {
@@ -16,7 +17,8 @@ export const useAppendScript = (src: string) => {
     $script.type = 'text/javascript';
     document.body.appendChild($script);
     setScript($script);
+    $script.addEventListener('load', () => setIsLoading(false));
   };
 
-  return $script;
+  return { $script, isLoading };
 };

@@ -7,13 +7,17 @@ export const BookContainer = styled.div`
 `;
 
 const BookImage = styled.img`
-  height: 40vw;
-  max-height: 65vh;
+  height: 60vw;
+  max-height: 85vh;
   border-radius: 3px;
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   transition: transform 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  @media (min-width: 991.5px) {
+    height: 40vw;
+    max-height: 65vh;
+  }
 `;
 
 export const SideCover = styled(BookImage)`

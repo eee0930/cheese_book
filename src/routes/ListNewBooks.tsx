@@ -9,7 +9,7 @@ import {
   ContentTitle,
   ContentTitleSection,
 } from '../styles/commonStyles';
-import NewBooks from '../components/NewBooks';
+import NewBooks from '../components/list/NewBooks';
 
 function ListNewBooks() {
   const setPrevPage = useSetRecoilState(prevPageState);

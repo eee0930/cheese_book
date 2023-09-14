@@ -1,12 +1,12 @@
 import { useQuery } from 'react-query';
-import { fetchDetailImagesById } from '../apis/fetching';
-import { Loader } from '../styles/globalStyles';
+import { fetchDetailImagesById } from '../../apis/fetching';
+import { Loader } from '../../styles/globalStyles';
 import {
   BookContainer,
   FrontCover,
   SideCover,
   UndefinedImg,
-} from '../styles/components/coverStyles';
+} from '../../styles/components/coverStyles';
 
 interface IDetailImages {
   itemId: number;
