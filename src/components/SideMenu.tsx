@@ -17,13 +17,17 @@ import {
   SideMenus,
   SearchSection,
   SearchCover,
-  MobileMenuContainer,
-  MobileMenuCover,
-  IconCover,
-  MenuName,
   MenuBtnCover,
   MenuBtn,
   TitleSection,
+  MobileAnimationBoxCover,
+  MobileAnimationBox,
+  MobileMenuList,
+  MobileMenuContainer,
+  MobileMenuCover,
+  MenuLi,
+  MenuName,
+  MenuNameCover,
 } from '../styles/components/sideMenuStyles';
 
 interface ISideMenu {
@@ -35,7 +39,6 @@ export function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
   const searchMatch = useMatch('/search/*');
   const location = useLocation();
   const prevPage = useRecoilValue(prevPageState);
-
   const [searchField, setSearchField] = useState('');
 
   const navigate = useNavigate();
@@ -102,6 +105,7 @@ export function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
                   placeholder="search"
                   value={searchField}
                   onChange={handleSearchInput}
+                  autoComplete="off"
                 />
               </form>
             </SearchCover>
@@ -121,33 +125,99 @@ export function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
   );
 }
 
+const menuFade = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
+const menuIn = {
+  initial: {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100vw',
+    height: '100vh',
+  },
+  animate: {
+    top: '1rem',
+    left: '1rem',
+    right: '1rem',
+    bottom: '1rem',
+    width: 'calc(100vw - 2rem)',
+    height: 'calc(100vh - 2rem)',
+    transition: {
+      duration: 0.5,
+      delayChildren: 0.1,
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const menuUp = {
+  initial: {
+    opacity: 0,
+    marginTop: 100,
+  },
+  animate: {
+    opacity: 1,
+    marginTop: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
 interface IMobileMenu {
   themeIdx: number;
+  callback: () => void;
 }
-export function MobileMenu({ themeIdx }: IMobileMenu) {
+export function MobileMenu({ themeIdx, callback }: IMobileMenu) {
   const location = useLocation();
   const prevPage = useRecoilValue(prevPageState);
   return (
-    <MobileMenuContainer>
-      <MobileMenuCover className="row">
-        {cheesePaths.map((cheesePath) => {
-          const { name_sm, icon, path } = cheesePath;
-          return (
-            <div key={path} className="col">
-              <Link
-                to={path}
-                className={`${
-                  (location.pathname === path || prevPage === path) && 'active'
-                }`}
-              >
-                <IconCover>
-                  <i className={icon} />
-                </IconCover>
-                <MenuName>{name_sm}</MenuName>
-              </Link>
-            </div>
-          );
-        })}
+    <MobileMenuContainer
+      variants={menuFade}
+      initial="initial"
+      animate="animate"
+      exit="end"
+      style={{ backgroundColor: mainColors[themeIdx][0] }}
+    >
+      <MobileAnimationBoxCover>
+        <MobileAnimationBox
+          style={{ backgroundColor: mainColors[themeIdx][0] }}
+        />
+      </MobileAnimationBoxCover>
+      <MobileMenuCover variants={menuIn}>
+        <MobileMenuList style={{ color: mainColors[themeIdx][1] }}>
+          {cheesePaths.map((cheesePath) => {
+            const { name, path } = cheesePath;
+            return (
+              <MenuLi variants={menuUp} key={path}>
+                <Link to={path} onClick={callback}>
+                  <MenuNameCover>
+                    <MenuName>
+                      <span>{name}</span>
+                    </MenuName>
+                    {/* {(location.pathname === path || prevPage === path) && (
+                      <ActiveMenuImg
+                        layoutId="active"
+                        src={`${process.env.PUBLIC_URL}/coco.png`}
+                        alt="cheese book"
+                      />
+                    )} */}
+                  </MenuNameCover>
+                </Link>
+              </MenuLi>
+            );
+          })}
+        </MobileMenuList>
       </MobileMenuCover>
     </MobileMenuContainer>
   );

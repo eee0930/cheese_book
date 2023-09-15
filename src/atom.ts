@@ -1,28 +1,21 @@
 import { atom } from 'recoil';
 
-interface ILatestVolume {
+export interface ILatestBook {
   itemId: number;
-  cover: string;
   title: string;
-}
-interface ILatestVolumeList {
-  size: number;
-  volumeList: ILatestVolume[];
+  cover: string;
 }
 
 /**
  * 최근 본 책 목록 (10개)
  */
-export const latestVolumeListState = atom<ILatestVolumeList>({
-  key: 'latestVolumeList',
-  default: {
-    size: 0,
-    volumeList: [],
-  },
+export const latestBookListState = atom<ILatestBook[]>({
+  key: 'latestBookList',
+  default: [],
 });
 
-export const likedVolumeListState = atom({
-  key: 'likedVolumeList',
+export const likedBookListState = atom<ILatestBook[]>({
+  key: 'likedBookList',
   default: [],
 });
 

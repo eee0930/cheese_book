@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation, useMatch } from 'react-router-dom';
 // components
-import { SideMenu, MobileMenu } from '../../components/SideMenu';
+import { SideMenu } from '../../components/SideMenu';
+import MobileHeader from '../../components/MobileHeader';
+import LatestBookList from '../../components/LatestBookList';
 // styles
 import {
   BaseLayoutContainer,
@@ -10,7 +12,6 @@ import {
   BaseLayoutMenu,
   MobileSideMenuContainer,
 } from '../../styles/layoutStyles';
-import MobileHeader from '../../components/MobileHeader';
 
 function BasicLayout() {
   const [foldMenu, setFoldMenu] = useState(false);
@@ -47,6 +48,7 @@ function BasicLayout() {
           <CheeseContainer>
             <Outlet />
           </CheeseContainer>
+          <LatestBookList />
         </CheeseMainContainer>
       </BaseLayoutContainer>
     </>

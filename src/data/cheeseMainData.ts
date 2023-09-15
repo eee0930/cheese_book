@@ -14,16 +14,16 @@ export const cheesePaths = [
     path: '/',
   },
   {
-    name: 'new books',
-    name_sm: 'new',
-    icon: 'fa-solid fa-rocket',
-    path: '/new',
-  },
-  {
     name: 'best sellers',
     name_sm: 'best',
     icon: 'fa-solid fa-trophy',
     path: '/best',
+  },
+  {
+    name: 'new books',
+    name_sm: 'new',
+    icon: 'fa-solid fa-rocket',
+    path: '/new',
   },
   {
     name: 'your taste',

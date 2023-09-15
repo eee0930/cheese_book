@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const SideMenuContainer = styled.div`
@@ -18,19 +19,18 @@ export const SideMenuCover = styled.div`
 export const MenuBtnCover = styled.div`
   position: absolute;
   background-color: ${(props) => props.theme.main3.main2};
-  width: 28px;
+  width: 20px;
   height: 45px;
   border: ${(props) => props.theme.boxLine.md};
   border-left: none;
   border-radius: 0 5px 5px 0;
   top: 55px;
-  right: calc(-28px + 2.5px);
-  // transform: translateY(-50%);
+  right: calc(-20px + 2.5px);
   z-index: 5;
   @media (min-width: 1199.5px) {
     border: ${(props) => props.theme.boxLine.lg};
     border-left: none;
-    right: calc(-28px + 3px);
+    right: calc(-20px + 3px);
   }
 `;
 export const MenuBtn = styled.button`
@@ -38,8 +38,9 @@ export const MenuBtn = styled.button`
   border: none;
   width: 100%;
   height: 100%;
+  padding: 0;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-family: ${(props) => props.theme.title};
   color: ${(props) => props.theme.black.darker};
   outline: none;
@@ -121,49 +122,6 @@ export const TitleCover = styled(TitleSection)`
   }
 `;
 
-export const UserSection = styled.div`
-  padding: 0 1rem;
-  margin-bottom: 1.5rem;
-`;
-export const UserCover = styled.div`
-  color: $blackd;
-  padding: 0.2rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  .profile {
-    width: 45px;
-  }
-  img {
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 50%;
-  }
-  @media (min-width: 1199.5px) {
-    .profile {
-      width: 50px;
-    }
-  }
-`;
-export const Nickname = styled.div`
-  padding-left: 0.8rem;
-  font-size: 1rem;
-  font-weight: 600;
-`;
-export const LoginCover = styled.div`
-  text-align: center;
-  align-self: center;
-  padding: 1rem 1.2rem;
-  a {
-    color: ${(props) => props.theme.main1.main1};
-    font-size: 1.1rem;
-  }
-  .button {
-    color: ${(props) => props.theme.white.lighter};
-    width: 95px;
-  }
-`;
 export const SideMenus = styled.ul`
   padding: 2rem 0.8rem;
   position: relative;
@@ -290,41 +248,76 @@ export const SearchCover = styled.div`
   }
 `;
 
-export const MobileMenuContainer = styled.div`
-  background-color: ${(props) => props.theme.main3.main2};
+export const MobileMenuContainer = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100vw;
-  height: ${(props) => props.theme.sideMenu.xs};
-  border-top: ${(props) => props.theme.boxLine.sm};
+  height: 100vh;
+  z-index: 60;
+  transition: background-color 0.5s ease;
 `;
-
-export const MobileMenuCover = styled.div`
-  margin-top: 10px;
+export const MobileMenuCover = styled(motion.div)`
+  background-color: inherit;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  width: calc(100vw - 2rem);
+  height: calc(100vh - 2rem);
+  border: 3px solid rgb(26, 26, 26);
+  transition: background-color 0.5s ease;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const MobileMenuList = styled.ul`
+  list-style: none;
   text-align: center;
-  font-weight: 600;
-  a {
-    color: ${(props) => props.theme.black.lighter};
-  }
-  a.active {
-    color: ${(props) => props.theme.main1.main2};
-  }
+  margin-bottom: 2rem;
 `;
-
-export const IconCover = styled.div`
-  margin-bottom: 5px;
-  font-size: 1.4rem;
-  position: relative;
-  .fa-music {
-    position: absolute;
-    font-size: 0.6em;
-    padding: 1px;
-    background-color: ${(props) => props.theme.main3.main2};
-    bottom: 1px;
-    right: 35%;
-  }
+export const MenuLi = styled(motion.li)`
+  margin-bottom: 2.5rem;
 `;
-
-export const MenuName = styled.div`
-  font-size: 0.8rem;
-  letter-spacing: -0.05em;
+export const MenuNameCover = styled.span`
+  font-family: ${(props) => props.theme.title};
+  font-size: 2.5rem;
   text-transform: uppercase;
+  position: relative;
+`;
+export const ActiveMenuImg = styled(motion.img)`
+  width: 50px;
+  position: absolute;
+  top: -40%;
+  left: -35px;
+`;
+export const MenuName = styled.span`
+  display: flex;
+  transform: scaleY(1.5) scaleX(0.8);
+`;
+export const MobileAnimationBoxCover = styled.div`
+  overflow: hidden;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  width: 100%;
+  height: 100%;
+`;
+export const MobileAnimationBox = styled.div`
+  position: absolute;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  top: -20px;
+  left: -20px;
+  pointer-events: none;
+  background-image: radial-gradient(rgb(26, 26, 26) 30%, transparent 30%),
+    radial-gradient(rgb(26, 26, 26) 30%, transparent 30%);
+  background-position: 0px 0px, 20px 20px;
+  background-size: 8px 8px;
+  transition: inherit;
+  animation: 4s linear 0s infinite normal none running bURGXq;
 `;

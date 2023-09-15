@@ -40,7 +40,7 @@ export const lightTheme: DefaultTheme = {
     lg: '300px',
     md: '270px',
     sm: '220px',
-    xs: '70px',
+    xs: '80px',
   },
   boxLine: {
     lg: '3px solid rgb(26, 26, 26)',
