@@ -28,6 +28,9 @@ import {
   MenuLi,
   MenuName,
   MenuNameCover,
+  menuFade,
+  menuIn,
+  menuUp,
 } from '../styles/components/sideMenuStyles';
 
 interface ISideMenu {
@@ -125,55 +128,6 @@ export function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
   );
 }
 
-const menuFade = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-    },
-  },
-};
-
-const menuIn = {
-  initial: {
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    width: '100vw',
-    height: '100vh',
-  },
-  animate: {
-    top: '1rem',
-    left: '1rem',
-    right: '1rem',
-    bottom: '1rem',
-    width: 'calc(100vw - 2rem)',
-    height: 'calc(100vh - 2rem)',
-    transition: {
-      duration: 0.5,
-      delayChildren: 0.1,
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const menuUp = {
-  initial: {
-    opacity: 0,
-    marginTop: 100,
-  },
-  animate: {
-    opacity: 1,
-    marginTop: 0,
-    transition: {
-      duration: 0.5,
-    },
-  },
-};
 interface IMobileMenu {
   themeIdx: number;
   callback: () => void;

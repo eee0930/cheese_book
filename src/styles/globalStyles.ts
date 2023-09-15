@@ -47,7 +47,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     background-color: #F5F5F7;
-    color: #333;
+    color: ${(props) => props.theme.black.darker};
     overflow: hidden;
     width: 100vw;
     height: 100vh;

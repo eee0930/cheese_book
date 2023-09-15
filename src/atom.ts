@@ -23,3 +23,8 @@ export const prevPageState = atom({
   key: 'prevPage',
   default: '/',
 });
+
+export const latestSearchListState = atom({
+  key: 'latestSearchList',
+  default: [],
+});

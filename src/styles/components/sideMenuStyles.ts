@@ -6,7 +6,7 @@ export const SideMenuContainer = styled.div`
   width: 100%;
   height: 100vh;
   @media (min-width: 1199.5px) {
-    padding: 1.2rem 1.2rem 0.8rem 1rem;
+    padding: 1.8rem 1.2rem 1rem 1rem;
   }
 `;
 
@@ -321,3 +321,53 @@ export const MobileAnimationBox = styled.div`
   transition: inherit;
   animation: 4s linear 0s infinite normal none running bURGXq;
 `;
+
+export const menuFade = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
+export const menuIn = {
+  initial: {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100vw',
+    height: '100vh',
+  },
+  animate: {
+    top: '1rem',
+    left: '1rem',
+    right: '1rem',
+    bottom: '1rem',
+    width: 'calc(100vw - 2rem)',
+    height: 'calc(100vh - 2rem)',
+    transition: {
+      duration: 0.5,
+      delayChildren: 0.1,
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+export const menuUp = {
+  initial: {
+    opacity: 0,
+    marginTop: 100,
+  },
+  animate: {
+    opacity: 1,
+    marginTop: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};

@@ -16,7 +16,7 @@ import {
   BookCoverPerspect,
   JumpBook,
   JumpTitle,
-} from '../../styles/components/BannerStyles';
+} from '../../styles/components/bannerStyles';
 
 function Banner() {
   const { data, isLoading } = useQuery<IAladinRequestList>(

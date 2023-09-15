@@ -37,7 +37,6 @@ function Book({ book, rankInfo }: IBook) {
     const idx = latestBooks.findIndex(
       (latestBook) => latestBook.itemId === itemId
     );
-    console.log(idx);
     if (idx > -1) {
       setLatestBooks((prevArr) => {
         return [...prevArr.slice(0, idx), ...prevArr.slice(idx + 1), nowBook];
