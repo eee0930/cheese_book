@@ -107,3 +107,12 @@ export const categoryList = [
     ],
   },
 ];
+
+export const bannerMent = [
+  ['CHEESE BOOK', '크으, 많이 보고 있는 책'],
+  ['내 안의 흑염룡을 깨울', 'LOOK & BOOK VOL. 2'],
+  ['이 책을 읽은 당신께 행운을', 'GOOD LUCK!'],
+  ['Book Mate와 함께하는', 'CHEESE BOOK 이달의 신작'],
+  ['한 권이면 충분하다', 'The Essential'],
+  ['알쓸Cheese잡', '나에게 혁신을 가져다줄 책'],
+];

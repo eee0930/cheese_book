@@ -29,6 +29,7 @@ export const BannerBackground = styled(motion.div)`
   background-size: auto 90%;
   background-position: left center;
   background-image: url(${process.env.PUBLIC_URL}/img/banner_twinkle.png);
+  transition: background-color 0.2s ease;
   @media (min-width: 768px) {
     border-radius: 2rem 0 0 3px;
     margin-top: 5vh;
@@ -147,6 +148,46 @@ export const BannerTitle = styled(motion.div)`
     font-size: 2rem;
   }
 `;
+export const BannerPagination = styled.div`
+  display: none;
+  position: absolute;
+  top: 0rem;
+  right: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  width: 220px;
+  height: 40px;
+  z-index: 10;
+  @media (min-width: 768px) {
+    display: flex;
+  }
+  @media (min-width: 991.5px) {
+    top: 1rem;
+    right: 1.5rem;
+  }
+  @media (min-width: 1199.5px) {
+    top: 3rem;
+    right: 1.5rem;
+  }
+`;
+export const BannerBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+`;
+export const BannerPages = styled.div`
+  width: 150px;
+  display: grid;
+  text-align: center;
+  font-size: 0.5rem;
+  grid-template-columns: repeat(6, 1fr);
+  color: rgba(0, 0, 0, 0.2);
+  i.active {
+    color: ${(props) => props.theme.main1.main2};
+  }
+`;
+
 export const JumpBook = {
   initial: {
     top: '100%',
@@ -156,12 +197,42 @@ export const JumpBook = {
     transition: { type: 'spring', bounce: 0.3, delay: 0.3, duration: 0.7 },
   },
 };
-export const JumpTitle = {
-  initial: {
+
+export const JumpBookVariants = {
+  hidden: {
     top: '100%',
   },
+  visible: {
+    top: '1rem',
+    transition: { type: 'spring', bounce: 0.3, delay: 0.3, duration: 0.7 },
+  },
+  exit: {
+    top: '100%',
+  },
+};
+export const JumpTitleVariants = {
+  initial: { top: '100%' },
   animate: {
     top: '50%',
-    transition: { type: 'spring', bounce: 0.6, delay: 0.6, duration: 1 },
+    transition: {
+      type: 'spring',
+      bounce: 0.3,
+      delay: 0.2,
+      duration: 0.4,
+      delayChildren: 0.2,
+      staggerChildren: 0.2,
+    },
+  },
+  exit: { top: '100%' },
+};
+export const JumpTitle = {
+  initial: {
+    x: '100%',
+  },
+  animate: {
+    x: '0%',
+  },
+  exit: {
+    x: '100%',
   },
 };

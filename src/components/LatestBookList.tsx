@@ -25,6 +25,7 @@ import {
   slideUp,
 } from '../styles/components/latestBookListStyles';
 import { useNavigate } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 
 function LatestBookList() {
   const [latestBooks, setLatestBooks] = useRecoilState(latestBookListState);
@@ -37,7 +38,7 @@ function LatestBookList() {
       setLatestBooks([]);
       setOpenLatestList(false);
       setDeleteAll(false);
-    }, 500);
+    }, 300);
   };
   const handleClickBook = (itemId: number) => {
     setOpenLatestList(false);
@@ -63,44 +64,47 @@ function LatestBookList() {
           {!openLatestList && <CountLabel>{latestBooks.length}</CountLabel>}
         </LatestBookBtnCover>
       )}
-      {openLatestList && (
-        <LatestBookListSection>
-          <LatestBookOverlay onClick={() => setOpenLatestList(false)} />
-          <LatestBookListContainer>
-            <LatestBookListCover
-              variants={slideUp}
-              initial="initial"
-              animate="animate"
-            >
-              <Title>최근 본 책</Title>
-              <BookListInfo>
-                <BookInfoCount>{latestBooks.length} 권</BookInfoCount>
-                <DeleteBtn onClick={handleClickDeleteAll}>
-                  <i className="fa-solid fa-trash-alt" /> 전체삭제
-                </DeleteBtn>
-              </BookListInfo>
-              <BookListContainer>
-                <BookListUl>
-                  {latestBooks.map((book) => (
-                    <BookList
-                      variants={slideLeft}
-                      initial="initial"
-                      animate={deleteAll && 'animate'}
-                      key={book.itemId}
-                      onClick={() => handleClickBook(book.itemId)}
-                    >
-                      <BookCover
-                        style={{ backgroundImage: `url(${book.cover})` }}
-                      />
-                      <BookTitle>{book.title}</BookTitle>
-                    </BookList>
-                  ))}
-                </BookListUl>
-              </BookListContainer>
-            </LatestBookListCover>
-          </LatestBookListContainer>
-        </LatestBookListSection>
-      )}
+      <AnimatePresence>
+        {openLatestList && (
+          <LatestBookListSection>
+            <LatestBookOverlay onClick={() => setOpenLatestList(false)} />
+            <LatestBookListContainer>
+              <LatestBookListCover
+                variants={slideUp}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+              >
+                <Title>최근 본 책</Title>
+                <BookListInfo>
+                  <BookInfoCount>{latestBooks.length} 권</BookInfoCount>
+                  <DeleteBtn onClick={handleClickDeleteAll}>
+                    <i className="fa-solid fa-trash-alt" /> 전체삭제
+                  </DeleteBtn>
+                </BookListInfo>
+                <BookListContainer>
+                  <BookListUl>
+                    {latestBooks.map((book) => (
+                      <BookList
+                        variants={slideLeft}
+                        initial="initial"
+                        animate={deleteAll && 'animate'}
+                        key={book.itemId}
+                        onClick={() => handleClickBook(book.itemId)}
+                      >
+                        <BookCover
+                          style={{ backgroundImage: `url(${book.cover})` }}
+                        />
+                        <BookTitle>{book.title}</BookTitle>
+                      </BookList>
+                    ))}
+                  </BookListUl>
+                </BookListContainer>
+              </LatestBookListCover>
+            </LatestBookListContainer>
+          </LatestBookListSection>
+        )}
+      </AnimatePresence>
     </>
   );
 }

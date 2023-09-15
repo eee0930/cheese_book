@@ -251,11 +251,17 @@ export const slideUp = {
       bounce: 0.5,
     },
   },
+  exit: {
+    x: '100%',
+    transition: {
+      duration: 0.2,
+    },
+  },
 };
 
 export const slideLeft = {
   initial: {
-    x: 0,
+    x: '0',
   },
   animate: {
     x: '200%',
