@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 
 const ButtonCover = styled.button`
@@ -84,26 +83,16 @@ interface IButton {
   handleBtn: () => void;
 }
 
-function Button({ value, styleIdx, isSquare, size, handleBtn }: IButton) {
-  const [bgColor, setBgColor] = useState('btn-primary');
-  const [btnRatio, setBtnRatio] = useState(false);
-  const [btnSize, setBtnSize] = useState('md');
-  useEffect(() => {
-    if (styleIdx) {
-      setBgColor(BTN_COLOR[styleIdx]);
-    }
-    if (isSquare) {
-      setBtnRatio(true);
-    }
-    if (size) {
-      setBtnSize(size);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+function Button({
+  value,
+  styleIdx = 0,
+  isSquare = false,
+  size = 'md',
+  handleBtn,
+}: IButton) {
   return (
     <ButtonCover
-      className={`${btnRatio && 'square'} ${bgColor} ${btnSize}`}
+      className={`${isSquare && 'square'} ${BTN_COLOR[styleIdx]} ${size}`}
       onClick={handleBtn}
     >
       <span>{value}</span>

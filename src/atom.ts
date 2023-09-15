@@ -1,4 +1,10 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+
+const { persistAtom } = recoilPersist({
+  key: 'cheeseBookStorage',
+  storage: localStorage,
+});
 
 export interface ILatestBook {
   itemId: number;
@@ -12,11 +18,13 @@ export interface ILatestBook {
 export const latestBookListState = atom<ILatestBook[]>({
   key: 'latestBookList',
   default: [],
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const likedBookListState = atom<ILatestBook[]>({
   key: 'likedBookList',
   default: [],
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const prevPageState = atom({
@@ -27,4 +35,5 @@ export const prevPageState = atom({
 export const latestSearchListState = atom({
   key: 'latestSearchList',
   default: [],
+  effects_UNSTABLE: [persistAtom],
 });

@@ -12,15 +12,14 @@ interface IBestSellers {
   maxSize?: number;
 }
 
-function BestSellers({ isHome, cateNum, maxSize }: IBestSellers) {
+function BestSellers({
+  isHome = true,
+  cateNum = 0,
+  maxSize = 20,
+}: IBestSellers) {
   const { data, isLoading } = useQuery<IAladinRequestList>(
     ['bestSellers', cateNum ? cateNum : 0],
-    () =>
-      fetchBestSellerBookList(
-        isHome ? isHome : true,
-        cateNum ? cateNum : 0,
-        maxSize ? maxSize : 20
-      ),
+    () => fetchBestSellerBookList(isHome, cateNum, maxSize),
     { retry: 0 }
   );
 

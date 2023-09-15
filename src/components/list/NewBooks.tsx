@@ -7,15 +7,10 @@ interface INewBooks {
   cateNum?: number;
   maxSize?: number;
 }
-function NewBooks({ isHome, cateNum, maxSize }: INewBooks) {
+function NewBooks({ isHome = true, cateNum = 0, maxSize = 20 }: INewBooks) {
   const { data, isLoading } = useQuery<IAladinRequestList>(
-    ['newBooks', cateNum ? cateNum : 0],
-    () =>
-      fetchNewestBookList(
-        isHome ? isHome : true,
-        cateNum ? cateNum : 0,
-        maxSize ? maxSize : 20
-      ),
+    ['newBooks', cateNum],
+    () => fetchNewestBookList(isHome, cateNum, maxSize),
     { retry: 0 }
   );
 

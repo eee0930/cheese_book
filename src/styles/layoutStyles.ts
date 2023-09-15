@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const BaseLayoutContainer = styled.div`
@@ -50,5 +51,37 @@ export const BaseLayoutMenu = styled.div`
 export const MobileSideMenuContainer = styled.div`
   @media (min-width: 768px) {
     display: none !important;
+  }
+`;
+export const ScrollTopContainer = styled(motion.div)`
+  position: fixed;
+  bottom: calc(1rem + 55px);
+  right: 1rem;
+  z-index: 30;
+  @media (min-width: 991.5px) {
+    bottom: calc(1.5rem + 60px);
+    right: 2rem;
+  }
+  @media (min-width: 1199.5px) {
+    bottom: calc(2rem + 65px);
+    right: 2.5rem;
+  }
+`;
+export const TopBtn = styled.button`
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #fff;
+  text-transform: uppercase;
+  border: ${(props) => props.theme.boxLine.sm};
+  @media (min-width: 991.5px) {
+    width: 50px;
+    height: 50px;
+    border: ${(props) => props.theme.boxLine.md};
+  }
+  @media (min-width: 1199.5px) {
+    width: 55px;
+    height: 55px;
+    border: ${(props) => props.theme.boxLine.lg};
   }
 `;
