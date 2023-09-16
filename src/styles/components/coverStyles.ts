@@ -1,11 +1,24 @@
+import { motion } from 'framer-motion';
 import { styled } from 'styled-components';
 
 export const BookContainer = styled.div`
   width: 100%;
   margin-bottom: 1rem;
   text-align: center;
+  display: flex;
+  justify-content: center;
 `;
-
+export const BookImagesCovers = styled(motion.div)`
+  display: inline-block;
+  position: relative;
+  transition: transform 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  &:hover {
+    transform: perspective(1800px) rotateY(45deg);
+  }
+  &:hover > div > img {
+    transform: perspective(400px) rotateY(-35deg) translateX(-50%);
+  }
+`;
 const BookImage = styled.img`
   height: 60vw;
   max-height: 85vh;
@@ -19,9 +32,21 @@ const BookImage = styled.img`
     max-height: 65vh;
   }
 `;
-
-export const SideCover = styled(BookImage)`
+export const SideImgCover = styled.div`
+  position: absolute;
+  top: 0;
+`;
+export const SideCover = styled(motion.img)`
+  height: 60vw;
+  max-height: 85vh;
+  border-radius: 3px;
+  transition: transform 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  @media (min-width: 991.5px) {
+    height: 40vw;
+    max-height: 65vh;
+  }
   border-radius: 3px 1px 1px 3px;
+  transform: perspective(500px) rotateY(-89deg) translateX(-50%);
 `;
 export const FrontCover = styled(BookImage)`
   box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.3);

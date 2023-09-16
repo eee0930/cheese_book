@@ -18,27 +18,27 @@ function BestSellers({
   maxSize = 20,
 }: IBestSellers) {
   const { data, isLoading } = useQuery<IAladinRequestList>(
-    ['bestSellers', cateNum ? cateNum : 0],
+    ['bestSellers', cateNum],
     () => fetchBestSellerBookList(isHome, cateNum, maxSize),
     { retry: 0 }
   );
 
   return (
-    <>
+    <div className="row">
       {isLoading ? (
-        <div className="row">
+        <>
           {new Array(12).fill(0).map((_, i) => (
             <BookLoader key={i} />
           ))}
-        </div>
+        </>
       ) : (
-        <div className="row">
+        <>
           {data?.item?.map((book, i) => (
             <Book key={book.isbn} rankInfo={i + 1} book={book} />
           ))}
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 }
 

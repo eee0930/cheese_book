@@ -11,7 +11,6 @@ import {
 // components
 import { Book, BookLoader } from '../components/mixins/Book';
 //styles
-import { Loader } from '../styles/globalStyles';
 import { ContentTitle, ContentTitleSection } from '../styles/commonStyles';
 import { useSetRecoilState } from 'recoil';
 import { prevPageState } from '../atom';
@@ -80,8 +79,8 @@ function SearchResults() {
       </ContentTitleSection>
       {isLoading ? (
         <div className="row">
-          {new Array(12).fill(0).map(() => (
-            <BookLoader />
+          {new Array(12).fill(0).map((_, i) => (
+            <BookLoader key={i} />
           ))}
         </div>
       ) : (

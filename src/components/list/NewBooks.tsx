@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { IAladinRequestList, fetchNewestBookList } from '../../apis/aladinApi';
-import { Book } from '../mixins/Book';
+import { Book, BookLoader } from '../mixins/Book';
 
 interface INewBooks {
   isHome?: boolean;
@@ -15,15 +15,21 @@ function NewBooks({ isHome = true, cateNum = 0, maxSize = 20 }: INewBooks) {
   );
 
   return (
-    <>
-      {!isLoading && (
-        <div className="row">
-          {data?.item?.map((book) => (
+    <div className="row">
+      {isLoading ? (
+        <>
+          {new Array(12).fill(0).map((_, i) => (
+            <BookLoader key={i} />
+          ))}
+        </>
+      ) : (
+        <>
+          {data?.item?.map((book, i) => (
             <Book key={book.isbn} book={book} />
           ))}
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 }
 

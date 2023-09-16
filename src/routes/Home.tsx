@@ -39,7 +39,7 @@ function Home() {
             </Link>
           </TitleBtnSection>
         </ContentTitleSection>
-        <BestSellers isHome={true} maxSize={12} />
+        <BestSellers maxSize={12} />
       </ContentContainer>
       <ContentContainer>
         <ContentTitleSection className="row">
@@ -53,7 +53,7 @@ function Home() {
             </Link>
           </TitleBtnSection>
         </ContentTitleSection>
-        <NewBooks isHome={true} maxSize={12} />
+        <NewBooks maxSize={12} />
       </ContentContainer>
     </>
   );
