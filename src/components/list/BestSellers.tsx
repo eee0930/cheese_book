@@ -4,7 +4,7 @@ import {
   fetchBestSellerBookList,
 } from '../../apis/aladinApi';
 // components
-import Book from '../mixins/Book';
+import { Book, BookLoader } from '../mixins/Book';
 
 interface IBestSellers {
   isHome?: boolean;
@@ -25,7 +25,13 @@ function BestSellers({
 
   return (
     <>
-      {!isLoading && (
+      {isLoading ? (
+        <div className="row">
+          {new Array(12).fill(0).map((_, i) => (
+            <BookLoader key={i} />
+          ))}
+        </div>
+      ) : (
         <div className="row">
           {data?.item?.map((book, i) => (
             <Book key={book.isbn} rankInfo={i + 1} book={book} />

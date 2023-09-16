@@ -25,6 +25,8 @@ function BasicLayout() {
   useEffect(() => {
     if (bookMatch) {
       setFoldMenu(true);
+    } else {
+      setFoldMenu(false);
     }
     if (mainContainer.current) {
       mainContainer.current.scrollTo(0, 0);

@@ -41,6 +41,9 @@ export const BookCover = styled.div`
   background-position: top center;
   margin-bottom: 5px;
   cursor: pointer;
+  &.loader {
+    aspect-ratio: 10 / 18;
+  }
   @media (min-width: 768px) {
     margin-bottom: 0.5rem;
   }

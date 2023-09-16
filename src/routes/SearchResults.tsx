@@ -9,7 +9,7 @@ import {
   fetchBookListByQuery,
 } from '../apis/aladinApi';
 // components
-import Book from '../components/mixins/Book';
+import { Book, BookLoader } from '../components/mixins/Book';
 //styles
 import { Loader } from '../styles/globalStyles';
 import { ContentTitle, ContentTitleSection } from '../styles/commonStyles';
@@ -67,26 +67,25 @@ function SearchResults() {
 
   return (
     <>
+      <HelmetProvider>
+        <Helmet>
+          <title>{query} 검색 | Cheese Book</title>
+        </Helmet>
+      </HelmetProvider>
+      <ContentTitleSection>
+        <ContentTitle>
+          <span>Search Result</span> {query}
+          <i className="fa fa-caret-down" />
+        </ContentTitle>
+      </ContentTitleSection>
       {isLoading ? (
-        <Loader>
-          <div>
-            <div></div>
-            <div></div>
-          </div>
-        </Loader>
+        <div className="row">
+          {new Array(12).fill(0).map(() => (
+            <BookLoader />
+          ))}
+        </div>
       ) : (
         <>
-          <HelmetProvider>
-            <Helmet>
-              <title>{query} 검색 | Cheese Book</title>
-            </Helmet>
-          </HelmetProvider>
-          <ContentTitleSection>
-            <ContentTitle>
-              <span>Search Result</span> {query}
-              <i className="fa fa-caret-down" />
-            </ContentTitle>
-          </ContentTitleSection>
           {isSorted ? (
             <div className="row">
               {bookList?.map((book, i) => (

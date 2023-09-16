@@ -162,7 +162,6 @@ export const BannerPagination = styled.div`
     display: flex;
   }
   @media (min-width: 991.5px) {
-    top: 1rem;
     right: 1.5rem;
   }
   @media (min-width: 1199.5px) {
@@ -183,6 +182,9 @@ export const BannerPages = styled.div`
   font-size: 0.5rem;
   grid-template-columns: repeat(6, 1fr);
   color: rgba(0, 0, 0, 0.2);
+  i {
+    cursor: pointer;
+  }
   i.active {
     color: ${(props) => props.theme.main1.main2};
   }

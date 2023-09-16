@@ -46,24 +46,30 @@ function LatestBookList() {
   };
   return (
     <>
-      {latestBooks.length > 0 && (
-        <LatestBookBtnCover>
-          <LatestBookBtnContainer>
-            <LatestBookBtnImgCover className={`${openLatestList && 'active'}`}>
+      <LatestBookBtnCover>
+        <LatestBookBtnContainer>
+          <LatestBookBtnImgCover className={`${openLatestList && 'active'}`}>
+            {latestBooks.length > 0 ? (
               <LatestBookBtnImg
                 onClick={() => setOpenLatestList(true)}
                 style={{
                   backgroundImage: `url(${latestBooks?.at(-1)?.cover})`,
                 }}
               />
-              <LatestBookCloseBtn onClick={() => setOpenLatestList(false)}>
-                <i className="fa-solid fa-times" />
-              </LatestBookCloseBtn>
-            </LatestBookBtnImgCover>
-          </LatestBookBtnContainer>
-          {!openLatestList && <CountLabel>{latestBooks.length}</CountLabel>}
-        </LatestBookBtnCover>
-      )}
+            ) : (
+              <LatestBookBtnImg
+                style={{
+                  backgroundImage: `url(${process.env.PUBLIC_URL}/img/default_profile.jpg)`,
+                }}
+              />
+            )}
+            <LatestBookCloseBtn onClick={() => setOpenLatestList(false)}>
+              <i className="fa-solid fa-times" />
+            </LatestBookCloseBtn>
+          </LatestBookBtnImgCover>
+        </LatestBookBtnContainer>
+        {!openLatestList && <CountLabel>{latestBooks.length}</CountLabel>}
+      </LatestBookBtnCover>
       <AnimatePresence>
         {openLatestList && (
           <LatestBookListSection>

@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { IAladinRequestList, fetchNewestBookList } from '../../apis/aladinApi';
-import Book from '../mixins/Book';
+import { Book } from '../mixins/Book';
 
 interface INewBooks {
   isHome?: boolean;

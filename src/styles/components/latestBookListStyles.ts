@@ -55,7 +55,6 @@ export const LatestBookBtnContainer = styled.div`
 export const LatestBookBtnImgCover = styled.div`
   width: 100%;
   height: 90px;
-  cursor: pointer;
   transition: transform 0.3s ease-in-out;
   &.active {
     transform: translateY(calc(-50% + 2px));
@@ -79,6 +78,7 @@ export const LatestBookBtnImg = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  cursor: pointer;
   transition: background-image 0.3s ease;
   @media (min-width: 991.5px) {
     height: 46px;
@@ -93,6 +93,7 @@ export const LatestBookCloseBtn = styled.button`
   background-color: #fff;
   outline: none;
   border: none;
+  cursor: pointer;
   color: ${(props) => props.theme.black.darker};
   font-size: 1.5rem;
   @media (min-width: 991.5px) {
