@@ -139,11 +139,10 @@ export const BannerTitle = styled(motion.div)`
     transform: translateY(20%);
   }
   @media (min-width: 991.5px) {
-    width: 45vh;
+    width: 50vh;
     font-size: 1.8rem;
   }
   @media (min-width: 1199.5px) {
-    width: 50vh;
     right: 2.5rem;
     font-size: 2rem;
   }

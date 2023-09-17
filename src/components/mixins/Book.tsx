@@ -6,6 +6,7 @@ import { latestBookListState } from '../../atom';
 import { useAuthors } from '../../hooks/redesignData';
 // styles
 import {
+  bookContainerVariants,
   BookContentContainer,
   BookCover,
   BookInfo,
@@ -56,7 +57,13 @@ export function Book({ book, rankInfo }: IBook) {
     navigate(`/book/${itemId}`);
   };
   return (
-    <BookContentContainer className={GRID_SIZE} onClick={handleClickBook}>
+    <BookContentContainer
+      variants={bookContainerVariants}
+      initial="start"
+      whileHover="hover"
+      className={GRID_SIZE}
+      onClick={handleClickBook}
+    >
       {rankInfo && (
         <>
           {rankInfo === 1 && <i className="rankCrown fa fa-crown" />}
