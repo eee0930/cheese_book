@@ -68,27 +68,51 @@ export const BookCoverContainer = styled(motion.div)`
 `;
 export const BookCoverPerspect = styled.div`
   position: absolute;
-  top: 12.5%;
-  left: 7%;
   right: 0;
-  height: 109%;
-  width: 55%;
   z-index: 0;
   perspective: 1800px;
-  @media (min-width: 768px) {
-    top: 17%;
-    left: 10%;
-    right: 0;
-    height: 104%;
+  &.style1 {
+    top: 10%;
+    left: 16%;
+    height: 92.5%;
+    width: 59%;
+  }
+  &.style2 {
+    top: 12.5%;
+    left: 7%;
+    height: 109%;
     width: 55%;
   }
-  @media (min-width: 1199.5px) {
-    top: 18.5%;
-    left: 11.5%;
+  @media (min-width: 768px) {
     right: 0;
-    height: 103%;
-    width: 51.5%;
+    &.style1 {
+      top: 10.5%;
+      left: 16%;
+      height: 105.5%;
+      width: 59%;
+    }
+    &.style2 {
+      top: 17%;
+      left: 10%;
+      height: 104%;
+      width: 55%;
+    }
+  }
+  @media (min-width: 1199.5px) {
     perspective: 1700px;
+    right: 0;
+    &.style1 {
+      top: 10.5%;
+      left: 16%;
+      height: 105.5%;
+      width: 59%;
+    }
+    &.style2 {
+      top: 18.5%;
+      left: 11.5%;
+      height: 103%;
+      width: 51.5%;
+    }
   }
 `;
 export const BookCover = styled.img`
@@ -100,13 +124,28 @@ export const BookCover = styled.img`
   background-repeat: no-repeat;
   background-size: 102% 102%;
   box-shadow: inset 3px 0px 3px rgba(0, 0, 0, 0.2);
-  transform: rotateZ(44.8deg) rotateY(-22deg) rotateX(-21deg) skew(6deg);
+  &.style1 {
+    transform: rotateZ(37deg) rotateY(-13deg) rotateX(0deg) skew(2.5deg);
+  }
+  &.style2 {
+    transform: rotateZ(44.8deg) rotateY(-22deg) rotateX(-21deg) skew(6deg);
+  }
   @media (min-width: 768px) {
-    transform: rotateZ(43deg) rotateY(-20deg) rotateX(-12deg) skew(9deg);
+    &.style1 {
+      transform: rotateZ(38deg) rotateY(-13deg) rotateX(0deg) skew(3.5deg);
+    }
+    &.style2 {
+      transform: rotateZ(43deg) rotateY(-20deg) rotateX(-12deg) skew(9deg);
+    }
   }
   @media (min-width: 1199.5px) {
     border-radius: 7px;
-    transform: rotateZ(44.8deg) rotateY(-7deg) rotateX(-10deg) skew(13deg);
+    &.style1 {
+      transform: rotateZ(37deg) rotateY(-13deg) rotateX(0deg) skew(2.5deg);
+    }
+    &.style2 {
+      transform: rotateZ(44.8deg) rotateY(-7deg) rotateX(-10deg) skew(13deg);
+    }
   }
 `;
 export const BannerBook = styled.img`
@@ -143,7 +182,7 @@ export const BannerTitle = styled(motion.div)`
     font-size: 1.8rem;
   }
   @media (min-width: 1199.5px) {
-    right: 2.5rem;
+    right: 5rem;
     font-size: 2rem;
   }
 `;
@@ -165,7 +204,7 @@ export const BannerPagination = styled.div`
   }
   @media (min-width: 1199.5px) {
     top: 3rem;
-    right: 1.5rem;
+    right: 5rem;
   }
 `;
 export const BannerBtn = styled.button`

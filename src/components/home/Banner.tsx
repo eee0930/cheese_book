@@ -137,8 +137,11 @@ function Banner() {
                 )
               }
             >
-              <BookCoverPerspect>
+              <BookCoverPerspect
+                className={`style${Math.floor(index / 3) + 1}`}
+              >
                 <BookCover
+                  className={`style${Math.floor(index / 3) + 1}`}
                   style={{
                     backgroundImage: `url(${data?.item[index].cover})`,
                   }}
@@ -146,7 +149,9 @@ function Banner() {
               </BookCoverPerspect>
               <BannerBook
                 alt="cheese book"
-                src={`${process.env.PUBLIC_URL}/img/banner_book2.png`}
+                src={`${process.env.PUBLIC_URL}/img/banner_book${
+                  Math.floor(index / 3) + 1
+                }.png`}
               />
             </BookCoverContainer>
             <BannerTitle
