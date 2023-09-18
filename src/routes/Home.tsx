@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { prevPageState } from '../atom';
 import { useEffect } from 'react';
+import HomeMenu from '../components/home/HomeMenu';
 
 function Home() {
   const setPrevPage = useSetRecoilState(prevPageState);
@@ -27,6 +28,7 @@ function Home() {
         </Helmet>
       </HelmetProvider>
       <Banner />
+      <HomeMenu />
       <ContentContainer>
         <ContentTitleSection className="row">
           <ContentTitle className="col-12 col-lg-auto">

@@ -50,14 +50,20 @@ export const MenuBtn = styled.button`
 `;
 export const LogoImg = styled.img`
   position: absolute;
-  top: -1.2rem;
-  right: -2.5rem;
-  width: 70px;
-  transform: rotate(15deg);
+  top: -0.8rem;
+  left: calc(50% - 40px);
+  width: 80px;
   z-index: 10;
+  transition: width 0.3s ease, top 0.3s ease, left 0.3s ease;
+  &.fold {
+    top: 3rem;
+    left: calc(50% - 30px);
+    width: 60px;
+  }
   @media (min-width: 1199.5px) {
-    right: -2.8rem;
-    width: 75px;
+    top: -1.5rem;
+    width: 90px;
+    left: calc(50% - 45px);
   }
 `;
 const BoxStyle = styled.div`
@@ -283,17 +289,39 @@ export const MobileMenuList = styled.ul`
 export const MenuLi = styled(motion.li)`
   margin-bottom: 2.5rem;
 `;
-export const MenuNameCover = styled.span`
+export const MenuNameCover = styled.div`
   font-family: ${(props) => props.theme.title};
   font-size: 2.5rem;
   text-transform: uppercase;
   position: relative;
 `;
 export const ActiveMenuImg = styled(motion.img)`
-  width: 50px;
   position: absolute;
-  top: -40%;
-  left: -35px;
+  &.style0 {
+    width: 70px;
+    top: -30%;
+    left: 40%;
+  }
+  &.style1 {
+    width: 60px;
+    top: -120%;
+    left: 10%;
+  }
+  &.style2 {
+    width: 70px;
+    top: -140%;
+    left: 60%;
+  }
+  &.style3 {
+    width: 65px;
+    top: -130%;
+    left: 15%;
+  }
+  &.style4 {
+    width: 80px;
+    top: -40%;
+    left: 70%;
+  }
 `;
 export const MenuName = styled.span`
   display: flex;

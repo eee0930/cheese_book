@@ -36,6 +36,7 @@ function Banner() {
     () => fetchBestSellerBookList(true, 0, BANNER_LEN)
   );
   const [index, setIndex] = useState(0);
+  const [bookStyleIdx, setBookStyleIdx] = useState(1);
   const [bannerTimer, setBannerTimer] =
     useState<ReturnType<typeof setTimeout>>();
 
@@ -67,6 +68,7 @@ function Banner() {
   };
   useEffect(() => {
     clearTimeout(bannerTimer);
+    setBookStyleIdx(Math.floor(index / 3) + 1);
     const bannerTimeout = setTimeout(handleNextIdx, 5000);
     setBannerTimer(bannerTimeout);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -121,11 +123,9 @@ function Banner() {
                 )
               }
             >
-              <BookCoverPerspect
-                className={`style${Math.floor(index / 3) + 1}`}
-              >
+              <BookCoverPerspect className={`style${bookStyleIdx}`}>
                 <BookCover
-                  className={`style${Math.floor(index / 3) + 1}`}
+                  className={`style${bookStyleIdx}`}
                   style={{
                     backgroundImage: `url(${data?.item[index].cover})`,
                   }}
@@ -133,9 +133,7 @@ function Banner() {
               </BookCoverPerspect>
               <BannerBook
                 alt="cheese book"
-                src={`${process.env.PUBLIC_URL}/img/banner_book${
-                  Math.floor(index / 3) + 1
-                }.png`}
+                src={`${process.env.PUBLIC_URL}/img/banner_book${bookStyleIdx}.png`}
               />
             </BookCoverContainer>
             <BannerTitle

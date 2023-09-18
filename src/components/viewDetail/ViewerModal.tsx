@@ -22,12 +22,13 @@ function ViewerModal({ itemId, title, cover, closeModal }: IViewerModal) {
         <Modal>
           <CloseButtonCover>
             <Button
-              value={'close'}
               styleIdx={1}
               isSquare={true}
               size={'lg'}
               handleBtn={closeModal}
-            />
+            >
+              close
+            </Button>
           </CloseButtonCover>
           <BookViewer itemId={itemId} title={title} cover={cover} />
         </Modal>

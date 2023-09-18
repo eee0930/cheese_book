@@ -31,6 +31,7 @@ import {
   menuFade,
   menuIn,
   menuUp,
+  ActiveMenuImg,
 } from '../styles/components/sideMenuStyles';
 
 interface ISideMenu {
@@ -56,11 +57,19 @@ export function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
   return (
     <SideMenuContainer className={`${isFolded && 'fold'}`}>
       <SideMenuCover>
-        <LogoImg
-          className="jelly"
-          alt="cheese book"
-          src={`${process.env.PUBLIC_URL}/coco.png`}
-        />
+        {isFolded ? (
+          <LogoImg
+            className="jelly fold"
+            alt="cheese book"
+            src={`${process.env.PUBLIC_URL}/img/cheese0.png`}
+          />
+        ) : (
+          <LogoImg
+            className="jelly"
+            alt="cheese book"
+            src={`${process.env.PUBLIC_URL}/cheese.png`}
+          />
+        )}
         <AnimationBoxCover>
           <AnimationBox />
         </AnimationBoxCover>
@@ -150,7 +159,7 @@ export function MobileMenu({ themeIdx, callback }: IMobileMenu) {
       </MobileAnimationBoxCover>
       <MobileMenuCover variants={menuIn}>
         <MobileMenuList style={{ color: mainColors[themeIdx][1] }}>
-          {cheesePaths.map((cheesePath) => {
+          {cheesePaths.map((cheesePath, i) => {
             const { name, path } = cheesePath;
             return (
               <MenuLi variants={menuUp} key={path}>
@@ -159,13 +168,13 @@ export function MobileMenu({ themeIdx, callback }: IMobileMenu) {
                     <MenuName>
                       <span>{name}</span>
                     </MenuName>
-                    {/* {(location.pathname === path || prevPage === path) && (
+                    {(location.pathname === path || prevPage === path) && (
                       <ActiveMenuImg
-                        layoutId="active"
-                        src={`${process.env.PUBLIC_URL}/coco.png`}
+                        src={`${process.env.PUBLIC_URL}/img/cheese${i}.png`}
                         alt="cheese book"
+                        className={`style${i}`}
                       />
-                    )} */}
+                    )}
                   </MenuNameCover>
                 </Link>
               </MenuLi>

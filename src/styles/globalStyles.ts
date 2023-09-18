@@ -42,7 +42,12 @@ export const GlobalStyle = createGlobalStyle`
     color: inherit;
     text-decoration: none;
   }
-  button { cursor: pointer; }
+  button { 
+    cursor: pointer; 
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;

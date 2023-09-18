@@ -83,11 +83,9 @@ function ViewDetail() {
                     cover={book?.cover as string}
                   />
                   <PreviewBtnSection>
-                    <Button
-                      value="미리보기"
-                      styleIdx={2}
-                      handleBtn={() => setOpenPreview(true)}
-                    />
+                    <Button styleIdx={2} handleBtn={() => setOpenPreview(true)}>
+                      미리보기
+                    </Button>
                   </PreviewBtnSection>
                 </BookImageSection>
               </BookContentSection>

@@ -10,30 +10,35 @@ export const cheesePaths = [
   {
     name: 'home',
     name_sm: 'home',
+    name_kr: '홈',
     icon: 'fa-solid fa-house-chimney-window',
     path: '/',
   },
   {
     name: 'best sellers',
     name_sm: 'best',
+    name_kr: '베스트셀러',
     icon: 'fa-solid fa-trophy',
     path: '/best',
   },
   {
     name: 'new books',
     name_sm: 'new',
+    name_kr: '신작',
     icon: 'fa-solid fa-rocket',
     path: '/new',
   },
   {
     name: 'your taste',
     name_sm: 'taste',
+    name_kr: '내취향추천',
     icon: 'fa-solid fa-flask',
     path: '/taste',
   },
   {
     name: 'my books',
     name_sm: 'my',
+    name_kr: '좋아요',
     icon: 'fa-solid fa-book',
     path: '/my',
   },
@@ -45,7 +50,7 @@ export const categoryList = [
     categories: [
       {
         id: '0',
-        name: '이주의',
+        name: '이번주',
       },
       {
         id: '1',
@@ -109,7 +114,7 @@ export const categoryList = [
 ];
 
 export const bannerMent = [
-  ['CHEESE BOOK', '크으, 많이 보고 있는 책'],
+  ['CHEESE BOOK', '급상승_ 많이 보고 있는 책'],
   ['내 안의 흑염룡을 깨울', 'LOOK & BOOK VOL. 2'],
   ['이 책을 읽은 당신께 행운을', 'GOOD LUCK!'],
   ['Book Mate와 함께하는', 'CHEESE BOOK 이달의 신작'],

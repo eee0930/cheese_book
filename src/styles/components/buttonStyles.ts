@@ -73,6 +73,10 @@ export const ButtonCover = styled.button`
   }
 `;
 
+export const ButtonGroupContainer = styled.div`
+  display: flex;
+`;
+
 export const HeartButton = styled.button`
   width: 40px;
   height: 40px;
@@ -87,4 +91,48 @@ export const HeartButton = styled.button`
   &:focus i {
     animation: bigToSmall 0.5s ease;
   }
+`;
+
+export const NavTapsContainer = styled.div`
+  margin: 2rem 0 3rem;
+  padding: 0 0.5rem;
+  border-bottom: ${(props) => props.theme.boxLine.sm};
+  display: flex;
+  align-items: center;
+  @media (min-width: 991.5px) {
+    border-bottom: ${(props) => props.theme.boxLine.md};
+  }
+  @media (min-width: 1199.5px) {
+    border-bottom: ${(props) => props.theme.boxLine.lg};
+  }
+`;
+export const HomeTapsContainer = styled.div`
+  display: none;
+  margin: 0 0 3rem;
+  padding: 0 0.5rem;
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+export const MainMenuConver = styled.div`
+  margin: 0 20px;
+  text-align: center;
+`;
+export const MainMenuImg = styled.div`
+  width: 68px;
+  height: 68px;
+  border-radius: 1rem;
+  background-color: #fff;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+export const MainMenuText = styled.div`
+  margin-top: 0.5rem;
+  font-size: 14px;
+  font-weight: 600;
+  color: ${(props) => props.theme.black.darker};
+  letter-spacing: -0.01em;
 `;

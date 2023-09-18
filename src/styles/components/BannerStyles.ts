@@ -14,12 +14,11 @@ export const BannerContainer = styled.div`
     padding-left: 0.2rem;
     margin-left: 0;
     margin-right: -1rem;
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
   }
   @media (min-width: 1199.5px) {
     padding-left: 0.5rem;
     margin-right: -2rem;
-    margin-bottom: 6rem;
   }
 `;
 export const BannerBackground = styled(motion.div)`

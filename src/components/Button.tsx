@@ -6,15 +6,16 @@ import { useEffect, useState } from 'react';
 const BTN_COLOR = ['btn-primary', 'btn-secondary', 'btn-third'];
 
 interface IButton {
-  value: string;
+  children: React.ReactNode;
+  disabled?: boolean;
   styleIdx?: number;
   isSquare?: boolean;
   size?: string;
   handleBtn: () => void;
 }
-
 export function Button({
-  value,
+  children,
+  disabled = false,
   styleIdx = 0,
   isSquare = false,
   size = 'md',
@@ -24,8 +25,9 @@ export function Button({
     <ButtonCover
       className={`${isSquare && 'square'} ${BTN_COLOR[styleIdx]} ${size}`}
       onClick={handleBtn}
+      disabled={disabled}
     >
-      <span>{value}</span>
+      <span>{children}</span>
     </ButtonCover>
   );
 }
