@@ -1,7 +1,6 @@
-import { motion } from 'framer-motion';
 import { styled } from 'styled-components';
 
-export const BookContentContainer = styled(motion.div)`
+export const BookContentContainer = styled.div`
   padding: 5px !important;
   margin-bottom: 10px;
   .rankCrown {
@@ -19,18 +18,6 @@ export const BookContentContainer = styled(motion.div)`
     margin-bottom: 1.5rem;
   }
 `;
-export const bookContainerVariants = {
-  start: { scale: 1 },
-  hover: {
-    scale: 1.05,
-    transition: {
-      type: 'spring',
-      damping: 7,
-      delay: 0.2,
-      duration: 0.2,
-    },
-  },
-};
 
 export const Rank = styled.div`
   position: absolute;

@@ -6,7 +6,6 @@ import { latestBookListState } from '../../atom';
 import { useAuthors } from '../../hooks/redesignData';
 // styles
 import {
-  bookContainerVariants,
   BookContentContainer,
   BookCover,
   BookInfo,
@@ -57,22 +56,23 @@ export function Book({ book, rankInfo }: IBook) {
     navigate(`/book/${itemId}`);
   };
   return (
-    <BookContentContainer
-      variants={bookContainerVariants}
-      initial="start"
-      whileHover="hover"
-      className={GRID_SIZE}
-      onClick={handleClickBook}
-    >
+    <BookContentContainer className={GRID_SIZE}>
       {rankInfo && (
         <>
           {rankInfo === 1 && <i className="rankCrown fa fa-crown" />}
           <Rank>{rankInfo}</Rank>
         </>
       )}
-      <BookCover title={title} style={{ backgroundImage: `url(${cover})` }} />
-      <BookTitle title={title}>{title}</BookTitle>
+      <BookCover
+        onClick={handleClickBook}
+        title={title}
+        style={{ backgroundImage: `url(${cover})` }}
+      />
+      <BookTitle onClick={handleClickBook} title={title}>
+        {title}
+      </BookTitle>
       <BookInfo
+        onClick={handleClickBook}
         title={`${oneAuthor} · ${publisher}`}
       >{`${oneAuthor} · ${publisher}`}</BookInfo>
     </BookContentContainer>

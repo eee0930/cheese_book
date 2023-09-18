@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
+import { useRecoilState } from 'recoil';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import Color from 'color-thief-react';
@@ -8,6 +9,7 @@ import {
   IAladinRequestList,
   fetchBestSellerBookList,
 } from '../../apis/aladinApi';
+import { latestBookListState } from '../../atom';
 import {
   BannerBackground,
   BannerBook,
@@ -23,22 +25,16 @@ import {
   JumpTitle,
   JumpTitleVariants,
 } from '../../styles/components/bannerStyles';
-import { useRecoilState } from 'recoil';
-import { latestBookListState } from '../../atom';
 
 const BANNER_LEN = bannerMent.length;
 
 function Banner() {
+  const navigate = useNavigate();
   const [latestBooks, setLatestBooks] = useRecoilState(latestBookListState);
   const { data, isLoading } = useQuery<IAladinRequestList>(
     'bestSellersBanner',
     () => fetchBestSellerBookList(true, 0, BANNER_LEN)
   );
-  const navigate = useNavigate();
-  const handleClickBanner = (itemId: number, title: string, cover: string) => {
-    saveLastestBook(itemId, title, cover);
-    navigate(`/book/${itemId}`);
-  };
   const [index, setIndex] = useState(0);
   const [bannerTimer, setBannerTimer] =
     useState<ReturnType<typeof setTimeout>>();
@@ -47,7 +43,6 @@ function Banner() {
     setIndex((prev) => (prev === 0 ? BANNER_LEN - 1 : prev - 1));
   const handleNextIdx = () =>
     setIndex((prev) => (prev === BANNER_LEN - 1 ? 0 : prev + 1));
-
   const saveLastestBook = (itemId: number, title: string, cover: string) => {
     const len = latestBooks.length;
     const nowBook = { itemId, title, cover };
@@ -66,14 +61,13 @@ function Banner() {
       });
     }
   };
-
+  const handleClickBanner = (itemId: number, title: string, cover: string) => {
+    saveLastestBook(itemId, title, cover);
+    navigate(`/book/${itemId}`);
+  };
   useEffect(() => {
-    if (bannerTimer) {
-      clearTimeout(bannerTimer);
-    }
-    const bannerTimeout = setTimeout(() => {
-      setIndex((prev) => (prev === BANNER_LEN - 1 ? 0 : prev + 1));
-    }, 5000);
+    clearTimeout(bannerTimer);
+    const bannerTimeout = setTimeout(handleNextIdx, 5000);
     setBannerTimer(bannerTimeout);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
@@ -95,25 +89,15 @@ function Banner() {
                     <i className="fa-solid fa-angle-left" />
                   </BannerBtn>
                   <BannerPages>
-                    {new Array(BANNER_LEN).fill(0).map((_, i) => {
-                      if (i === index) {
-                        return (
-                          <i
-                            key={i}
-                            onClick={() => setIndex(i)}
-                            className="fa-solid fa-circle active"
-                          />
-                        );
-                      } else {
-                        return (
-                          <i
-                            key={i}
-                            onClick={() => setIndex(i)}
-                            className="fa-solid fa-circle"
-                          />
-                        );
-                      }
-                    })}
+                    {new Array(BANNER_LEN).fill(0).map((_, i) => (
+                      <i
+                        key={i}
+                        onClick={() => setIndex(i)}
+                        className={`fa-solid fa-circle ${
+                          i === index && 'active'
+                        }`}
+                      />
+                    ))}
                   </BannerPages>
                   <BannerBtn onClick={handleNextIdx} style={{ color: data }}>
                     <i className="fa-solid fa-angle-right" />

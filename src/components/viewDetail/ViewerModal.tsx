@@ -5,7 +5,7 @@ import {
   CloseButtonCover,
 } from '../../styles/components/modalStyles';
 import BookViewer from './BookViewer';
-import Button from '../Button';
+import { Button } from '../Button';
 
 interface IViewerModal {
   itemId: number;

@@ -9,7 +9,7 @@ import {
   fetchBookDetailById,
 } from '../apis/aladinApi';
 // components
-import Button from '../components/Button';
+import { Button } from '../components/Button';
 import ViewerModal from '../components/viewDetail/ViewerModal';
 // styles
 import { Loader } from '../styles/globalStyles';
