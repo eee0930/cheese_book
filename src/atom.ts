@@ -37,3 +37,9 @@ export const latestSearchListState = atom({
   default: [],
   effects_UNSTABLE: [persistAtom],
 });
+
+export const myTasteResultState = atom({
+  key: 'myTasteResult',
+  default: 'CHEESE',
+  effects_UNSTABLE: [persistAtom],
+});

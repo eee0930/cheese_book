@@ -50,7 +50,6 @@ export function HeartBlast({ book }: IHeartBlast) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleClickBtn = () => {
-    console.log('하핫');
     if (isActive) {
       const likedIdx = likedBooks.findIndex(
         (liked) => liked.itemId === book.itemId
@@ -60,7 +59,6 @@ export function HeartBlast({ book }: IHeartBlast) {
         ...prev.slice(likedIdx + 1),
       ]);
     } else {
-      console.log('오호');
       setLikedBooks((prev) => [...prev, book]);
     }
     setIsActive((isLiked) => !isLiked);

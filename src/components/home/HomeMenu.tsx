@@ -14,6 +14,7 @@ function HomeMenu() {
         <Link key={cheesePath.name_sm} to={cheesePath.path}>
           <MainMenuConver>
             <MainMenuImg
+              className="jelly"
               style={{
                 backgroundImage: `url(${process.env.PUBLIC_URL}/img/cheese${i}.png)`,
               }}

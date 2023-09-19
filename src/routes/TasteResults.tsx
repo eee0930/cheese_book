@@ -1,15 +1,15 @@
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { useQuery } from 'react-query';
+import { useOutletContext } from 'react-router-dom';
+import { fetchTasteResult } from '../apis/localApi';
+
+interface ITestResult {
+  result: string;
+}
 
 function TasteResults() {
-  return (
-    <>
-      <HelmetProvider>
-        <Helmet>
-          <title>My Taste | Cheese Book</title>
-        </Helmet>
-      </HelmetProvider>
-    </>
-  );
+  const { result } = useOutletContext<ITestResult>();
+  const { data: mbtis, isLoading } = useQuery('mytaste', fetchTasteResult);
+  return <>{!isLoading && mbtis[result][0]?.cover}</>;
 }
 
 export default TasteResults;

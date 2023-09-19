@@ -15,17 +15,6 @@ export interface ICategroyData {
   nation: string;
   categories: ICategory[];
 }
-export const fetchCategories = async () =>
-  (await request(
-    `${process.env.PUBLIC_URL}/data/categories.json`
-  )) as ICategroyData[];
 
-export interface ICheeseMenus {
-  name: string;
-  icon: string;
-  path: string;
-}
-export const fetchCheeseMenus = async () =>
-  (await request(
-    `${process.env.PUBLIC_URL}/data/menuLink.json`
-  )) as ICheeseMenus[];
+export const fetchTasteResult = () =>
+  request(`${process.env.PUBLIC_URL}/data/cheeseTaste.json`);

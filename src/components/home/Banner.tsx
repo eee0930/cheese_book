@@ -86,28 +86,26 @@ function Banner() {
             {({ data }) => (
               <>
                 <BannerBackground style={{ backgroundColor: data }} />
-                <BannerPagination>
-                  <BannerBtn onClick={handlePrevIdx} style={{ color: data }}>
-                    <i className="fa-solid fa-angle-left" />
-                  </BannerBtn>
-                  <BannerPages>
-                    {new Array(BANNER_LEN).fill(0).map((_, i) => (
-                      <i
-                        key={i}
-                        onClick={() => setIndex(i)}
-                        className={`fa-solid fa-circle ${
-                          i === index && 'active'
-                        }`}
-                      />
-                    ))}
-                  </BannerPages>
-                  <BannerBtn onClick={handleNextIdx} style={{ color: data }}>
-                    <i className="fa-solid fa-angle-right" />
-                  </BannerBtn>
-                </BannerPagination>
               </>
             )}
           </Color>
+          <BannerPagination>
+            <BannerBtn onClick={handlePrevIdx}>
+              <i className="fa-solid fa-angle-left" />
+            </BannerBtn>
+            <BannerPages>
+              {new Array(BANNER_LEN).fill(0).map((_, i) => (
+                <i
+                  key={i}
+                  onClick={() => setIndex(i)}
+                  className={`fa-solid fa-circle ${i === index && 'active'}`}
+                />
+              ))}
+            </BannerPages>
+            <BannerBtn onClick={handleNextIdx}>
+              <i className="fa-solid fa-angle-right" />
+            </BannerBtn>
+          </BannerPagination>
           <AnimatePresence>
             <BookCoverContainer
               variants={JumpBookVariants}

@@ -3,14 +3,14 @@ import { IAladinRequestList, fetchNewestBookList } from '../../apis/aladinApi';
 import { Book, BookLoader } from '../mixins/Book';
 
 interface INewBooks {
-  isHome?: boolean;
+  isKorea?: boolean;
   cateNum?: number;
   maxSize?: number;
 }
-function NewBooks({ isHome = true, cateNum = 0, maxSize = 20 }: INewBooks) {
+function NewBooks({ isKorea = true, cateNum = 0, maxSize = 20 }: INewBooks) {
   const { data, isLoading } = useQuery<IAladinRequestList>(
     ['newBooks', cateNum],
-    () => fetchNewestBookList(isHome, cateNum, maxSize),
+    () => fetchNewestBookList(isKorea, cateNum, maxSize),
     { retry: 0 }
   );
 

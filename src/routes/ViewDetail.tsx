@@ -19,8 +19,8 @@ import {
   BookContentSection,
   BookImageSection,
   TitleSection,
-  CategoryContainer,
   PreviewBtnSection,
+  PrevBtnContainer,
 } from '../styles/screens/viewDetailStyles';
 import DetailImages from '../components/viewDetail/DetailImages';
 import { useRecoilValue } from 'recoil';
@@ -54,23 +54,22 @@ function ViewDetail() {
         <>
           <HelmetProvider>
             <Helmet>
-              <title>{book?.title + ' | '}Cheese Book</title>
+              <title>{book?.title.split('-')[0] + ' | '}Cheese Book</title>
             </Helmet>
           </HelmetProvider>
           <BookContentResultContainer>
             {/* [1. 카테고리]--------------------------------------------------*/}
-            <CategoryContainer>
-              <Link to="/">
-                <i className="fa fa-home" />
+            <PrevBtnContainer>
+              <Link to={prevPage}>
+                <i className="fa-solid fa-angle-left" /> prev
               </Link>
-              <Link to={prevPage}>prev</Link>
-              <span>{book?.title}</span>
-            </CategoryContainer>
+            </PrevBtnContainer>
             {/* [2. 책 정보]---------------------------------------------------*/}
             <BookContentContainer>
               {/* 2.1 제목 */}
               <TitleSection>
-                <h1>{book?.title}</h1>
+                <h1>{book?.title.split('-')[0]}</h1>
+                <h1 className="subTitle">{book?.title.split('-').slice(1)}</h1>
                 <h3>{book?.author}</h3>
               </TitleSection>
               {/* 2.2 책 커버 및 출판 정보 */}

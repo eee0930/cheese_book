@@ -9,7 +9,7 @@ import Login from './routes/Login';
 import ListNewBooks from './routes/ListNewBooks';
 import Taste from './routes/Taste';
 import ViewDetail from './routes/ViewDetail';
-import Bookshelves from './routes/Bookshelves';
+import MyBooks from './routes/MyBooks';
 import SearchResults from './routes/SearchResults';
 import TasteResults from './routes/TasteResults';
 import NotFound from './routes/NotFound';
@@ -60,7 +60,7 @@ const router = createHashRouter([
           },
           {
             path: 'my',
-            element: <Bookshelves />,
+            element: <MyBooks />,
           },
           {
             path: 'search',

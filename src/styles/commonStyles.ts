@@ -9,6 +9,37 @@ export const ContentContainer = styled.div`
     margin: 1rem -0.5rem 6rem;
   }
 `;
+export const PageTitleCover = styled.div`
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+    margin: 1.5rem 0;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+export const PageTitleImg = styled.div`
+  width: 60px;
+  height: 60px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  @media (min-width: 1199.5px) {
+    width: 70px;
+    height: 70px;
+  }
+`;
+export const PageTitle = styled.h1`
+  text-align: center;
+  text-transform: uppercase;
+  font-family: ${(props) => props.theme.title}, cursive;
+  font-size: 1.6rem;
+  color: ${(props) => props.theme.main1.main1};
+  @media (min-width: 768px) {
+    font-size: 2.2rem;
+    letter-spacing: -0.2px;
+  }
+`;
 export const ContentTitleSection = styled.div`
   margin: 1.5rem 0;
   @media (min-width: 768px) {

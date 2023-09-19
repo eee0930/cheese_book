@@ -3,30 +3,35 @@ import { styled } from 'styled-components';
 export const BookContentResultContainer = styled.div`
   margin: 1rem 0;
 `;
-export const CategoryContainer = styled.div`
-  padding: 5px;
-  font-size: 14px;
+export const PrevBtnContainer = styled.div`
+  padding: 5px 0.5rem;
+  font-size: 1.2rem;
   font-weight: 600;
+  font-family: ${(props) => props.theme.title};
   color: ${(props) => props.theme.black.lighter};
-  span {
-    padding: 0 3px;
+  i {
+    margin-right: 0.5rem;
+    font-size: 1rem;
   }
   @media (min-width: 768px) {
-    padding: 0.7rem;
+    padding: 0.7rem 1.2rem;
+    &:hover {
+      color: ${(props) => props.theme.main1.main2};
+    }
   }
   @media (min-width: 1199.5px) {
-    padding: 1rem;
+    padding: 1rem 1.5rem;
   }
 `;
 export const BookContentContainer = styled.div`
   margin-top: 1rem;
   padding: 5px;
   @media (min-width: 768px) {
-    padding: 0.7rem;
+    padding: 0 0.7rem;
     margin-top: 2rem;
   }
   @media (min-width: 1199.5px) {
-    padding: 1rem;
+    padding: 0 1rem;
     margin-top: 2.5rem;
   }
 `;
@@ -37,10 +42,15 @@ export const TitleSection = styled.div`
     font-family: ${(props) => props.theme.title};
     font-size: 1.8rem;
     color: ${(props) => props.theme.black.veryDark};
-    margin-bottom: 1rem;
+    margin-bottom: 0.3rem;
+    font-weight: 400;
+    &.subTitle {
+      font-size: 1.4rem;
+    }
   }
   h3 {
-    font-size: 1rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
     color: ${(props) => props.theme.black.lighter};
   }
   @media (min-width: 768px) {

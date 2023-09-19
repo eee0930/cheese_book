@@ -54,54 +54,54 @@ export interface IAladinRequestList {
 
 /**
  * 신간 목록
- * @param isHome
+ * @param isKorea
  * @param categoryId
  * @param maxResult
  * @returns
  */
 export const fetchNewestBookList = async (
-  isHome: boolean,
+  isKorea: boolean,
   categoryId: number,
   maxResult: number
 ) =>
   await request(
     `${ROOT}ItemList.aspx?QueryType=ItemNewSpecial&Cover=Big&categoryId=${categoryId}&SearchTarget=${
-      isHome ? 'book' : 'Foreign'
+      isKorea ? 'book' : 'Foreign'
     }&MaxResults=${maxResult}`
   );
 
 /**
  * 이주의 베스트 셀러 (국내/ 해외)
- * @param isHome
+ * @param isKorea
  * @param categoryId
  * @param maxResult
  * @returns
  */
 export const fetchBestSellerBookList = async (
-  isHome: boolean,
+  isKorea: boolean,
   categoryId: number,
   maxResult: number
 ) =>
   await request(
     `${ROOT}ItemList.aspx?QueryType=Bestseller&Cover=Big&categoryId=${categoryId}&SearchTarget=${
-      isHome ? 'Book' : 'Foreign'
+      isKorea ? 'Book' : 'Foreign'
     }&MaxResults=${maxResult}`
   );
 
 /**
  * 도서 검색 결과 목록
  * @param query
- * @param isHome
+ * @param isKorea
  * @returns
  */
 export const fetchBookListByQuery = async (
   query: string,
-  isHome: boolean,
+  isKorea: boolean,
   maxResult: number
 ) =>
   await request(
     `${ROOT}ItemSearch.aspx?Query=${query}&Cover=MidBig&SearchTarget=${
-      isHome ? 'book' : 'Foreign'
+      isKorea ? 'book' : 'Foreign'
     }&MaxResults=${maxResult}`
   );
 

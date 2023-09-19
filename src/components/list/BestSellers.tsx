@@ -7,19 +7,19 @@ import {
 import { Book, BookLoader } from '../mixins/Book';
 
 interface IBestSellers {
-  isHome?: boolean;
+  isKorea?: boolean;
   cateNum?: number;
   maxSize?: number;
 }
 
 function BestSellers({
-  isHome = true,
+  isKorea = true,
   cateNum = 0,
   maxSize = 20,
 }: IBestSellers) {
   const { data, isLoading } = useQuery<IAladinRequestList>(
     ['bestSellers', cateNum],
-    () => fetchBestSellerBookList(isHome, cateNum, maxSize),
+    () => fetchBestSellerBookList(isKorea, cateNum, maxSize),
     { retry: 0 }
   );
 

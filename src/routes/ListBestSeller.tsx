@@ -8,6 +8,9 @@ import {
   ContentContainer,
   ContentTitle,
   ContentTitleSection,
+  PageTitle,
+  PageTitleCover,
+  PageTitleImg,
 } from '../styles/commonStyles';
 import BestSellers from '../components/list/BestSellers';
 
@@ -23,13 +26,21 @@ function ListBestSeller() {
           <title>Best Sellers | Cheese Book</title>
         </Helmet>
       </HelmetProvider>
+      <PageTitleCover>
+        <PageTitleImg
+          style={{
+            backgroundImage: `url(${process.env.PUBLIC_URL}/img/cheese1.png)`,
+          }}
+        />
+        <PageTitle>BEST SELLERS</PageTitle>
+      </PageTitleCover>
       {categoryList?.at(0)?.categories.map((cate) => {
         return (
           <ContentContainer key={cate.id}>
             <ContentTitleSection>
               <ContentTitle>{cate?.name} 베스트</ContentTitle>
             </ContentTitleSection>
-            <BestSellers isHome={true} cateNum={+cate.id} maxSize={12} />
+            <BestSellers isKorea={true} cateNum={+cate.id} maxSize={12} />
           </ContentContainer>
         );
       })}

@@ -50,7 +50,7 @@ export const MenuBtn = styled.button`
 `;
 export const LogoImg = styled.img`
   position: absolute;
-  top: -0.8rem;
+  top: -0.5rem;
   left: calc(50% - 40px);
   width: 80px;
   z-index: 10;
@@ -60,10 +60,18 @@ export const LogoImg = styled.img`
     left: calc(50% - 30px);
     width: 60px;
   }
+  @media (min-width: 991.5px) {
+    top: -0.8rem;
+  }
   @media (min-width: 1199.5px) {
-    top: -1.5rem;
+    top: -1.3rem;
     width: 90px;
     left: calc(50% - 45px);
+    &.fold {
+      top: 2.5rem;
+      left: calc(50% - 37px);
+      width: 74px;
+    }
   }
 `;
 const BoxStyle = styled.div`

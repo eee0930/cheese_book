@@ -211,6 +211,7 @@ export const BannerBtn = styled.button`
   border: none;
   outline: none;
   font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.4);
 `;
 export const BannerPages = styled.div`
   width: 150px;

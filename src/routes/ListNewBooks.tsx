@@ -8,6 +8,9 @@ import {
   ContentContainer,
   ContentTitle,
   ContentTitleSection,
+  PageTitle,
+  PageTitleCover,
+  PageTitleImg,
 } from '../styles/commonStyles';
 import NewBooks from '../components/list/NewBooks';
 
@@ -23,13 +26,21 @@ function ListNewBooks() {
           <title>New Books | Cheese Book</title>
         </Helmet>
       </HelmetProvider>
+      <PageTitleCover>
+        <PageTitleImg
+          style={{
+            backgroundImage: `url(${process.env.PUBLIC_URL}/img/cheese2.png)`,
+          }}
+        />
+        <PageTitle>new books</PageTitle>
+      </PageTitleCover>
       {categoryList?.at(0)?.categories.map((cate) => {
         return (
           <ContentContainer key={cate.id}>
             <ContentTitleSection>
               <ContentTitle>{cate?.name} 신작</ContentTitle>
             </ContentTitleSection>
-            <NewBooks isHome={true} cateNum={+cate.id} maxSize={12} />
+            <NewBooks isKorea={true} cateNum={+cate.id} maxSize={12} />
           </ContentContainer>
         );
       })}

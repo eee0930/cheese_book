@@ -19,14 +19,14 @@ function SearchResults() {
   const location = useLocation();
   const query = new URLSearchParams(location.search).get('q') as string;
   const setPrevPage = useSetRecoilState(prevPageState);
-  const [isHome, setIsHome] = useState(true);
+  const [isKorea, setIsKorea] = useState(true);
   const [sortResult, setSortResult] = useState('');
   const [isSorted, setIsSorted] = useState(false);
   const [bookList, setBookList] = useState<IAladinBookItem[]>();
 
   const { data: books, isLoading } = useQuery<IAladinRequestList>(
-    ['search', `${query} ${isHome}`],
-    () => fetchBookListByQuery(query, isHome, 36),
+    ['search', `${query} ${isKorea}`],
+    () => fetchBookListByQuery(query, isKorea, 36),
     { retry: 0 }
   );
 
@@ -35,13 +35,9 @@ function SearchResults() {
     if (!isLoading) {
       setBookList(books?.item);
     }
+    setPrevPage(`${location.pathname}${location.search}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
-
-  useEffect(() => {
-    setPrevPage(location.pathname);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const sort = e.target.value;
@@ -68,7 +64,7 @@ function SearchResults() {
     <>
       <HelmetProvider>
         <Helmet>
-          <title>{query} 검색 | Cheese Book</title>
+          <title>{`${query}`} 검색 | Cheese Book</title>
         </Helmet>
       </HelmetProvider>
       <ContentTitleSection>
