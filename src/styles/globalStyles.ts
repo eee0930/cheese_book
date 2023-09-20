@@ -49,7 +49,7 @@ export const GlobalStyle = createGlobalStyle`
     outline: none;
   }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    font-family: -apple-system, 'Nanum Square', BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     background-color: #F5F5F7;
     color: ${(props) => props.theme.black.darker};
@@ -692,6 +692,18 @@ export const CheeseStyle = createGlobalStyle`
     65% {transform: scale(.95, 1.05)}
     75% {transform: scale(1.05, .95)}
   }
+  @keyframes twinkle {
+    0%, 50%, 100% {
+      transform: scale(1);
+      opacity: 0.3;
+    }
+    25%, 75% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  }
+  
+
   // /* box dots animation */
   @-webkit-keyframes bURGXq {
     0% {-webkit-transform: translate(0px, 0px);}

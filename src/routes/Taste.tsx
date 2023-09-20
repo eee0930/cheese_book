@@ -31,8 +31,10 @@ function Taste() {
   useEffect(() => setPrevPage(location.pathname), []);
 
   const getTestResult = (result: string) => setMyTasteResult(result);
-  const handleClickRetry = () => setMyTasteResult('CHEESE');
-
+  const handleRetry = () => {
+    setMyTasteResult('CHEESE');
+    setTestStart(false);
+  };
   return (
     <>
       <HelmetProvider>
@@ -79,10 +81,7 @@ function Taste() {
         </>
       ) : (
         <TasteTestResultContainer>
-          <TasteResults />
-          <Button handleBtn={handleClickRetry} size="lg">
-            RETRY <i className="fa-solid fa-undo" />
-          </Button>
+          <TasteResults callBack={handleRetry} />
         </TasteTestResultContainer>
       )}
     </>

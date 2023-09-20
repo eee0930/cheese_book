@@ -28,8 +28,8 @@ export const IntroMent = styled.div`
 `;
 export const TasteTestContainer = styled(motion.div)`
   width: 100%;
-  min-height: 90vh;
-  margin: 3rem auto;
+  //min-height: 90vh;
+  margin: 3rem auto 0;
   @media (min-width: 911.5px) {
     width: 80%;
     height: 70vh;
@@ -50,8 +50,11 @@ export const testContainerVariants = {
     scale: 1,
     transition: {
       type: 'spring',
+      duration: 0.5,
     },
   },
 };
 
-export const TasteTestResultContainer = styled.div``;
+export const TasteTestResultContainer = styled.div`
+  text-align: center;
+`;
