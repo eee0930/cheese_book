@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 import { ICoverImages, fetchViewerImagesById } from '../../apis/fetching';
-import { styled } from 'styled-components';
 import { Loader } from '../../styles/globalStyles';
+import {
+  BookImagesGroup,
+  LeftSideImage,
+  RightSideImage,
+  MiddleSideImage,
+} from '../../styles/components/viewerStyles';
 
 interface IIsbn {
   itemId: number;
@@ -9,15 +14,12 @@ interface IIsbn {
   cover: string;
 }
 
-export const Img = styled.img`
-  height: 300px;
-`;
-
 function BookViewer({ itemId, title, cover }: IIsbn) {
   const [isLoading, setIsLoading] = useState(true);
   const [isOnePage, setIsOnePage] = useState(true);
   const [imageList, setImageList] = useState<string[]>();
   const [failed, setfailed] = useState(false);
+  const [setIdx, setSetIdx] = useState(0);
 
   useEffect(() => {
     setIsLoading(true);
@@ -40,7 +42,7 @@ function BookViewer({ itemId, title, cover }: IIsbn) {
   if (failed) {
     return (
       <div>
-        <Img src={cover} />
+        <LeftSideImage src={cover} />
       </div>
     );
   }
@@ -54,28 +56,22 @@ function BookViewer({ itemId, title, cover }: IIsbn) {
           </div>
         </Loader>
       ) : (
-        imageList?.map((images, i) => {
-          if (isOnePage) {
-            return <Img src={images} alt={title} key={i} />;
-          } else {
-            if (images.length > 2) {
-              return (
-                <div key={i}>
-                  <Img src={images[1]} alt={title} />
-                  <Img src={images[2]} alt={title} />
-                  <Img src={images[0]} alt={title} />
-                </div>
-              );
-            } else {
-              return (
-                <div key={i}>
-                  <Img src={images[0]} alt={title} />
-                  <Img src={images[1]} alt={title} />
-                </div>
-              );
-            }
-          }
-        })
+        <>
+          {isOnePage ? (
+            <LeftSideImage src={imageList?.at(0)} alt={title} />
+          ) : (
+            <BookImagesGroup>
+              <LeftSideImage src={imageList?.at(setIdx)?.at(1)} alt={title} />
+              {imageList?.at(setIdx)?.at(2) && (
+                <MiddleSideImage
+                  src={imageList?.at(setIdx)?.at(2)}
+                  alt={title}
+                />
+              )}
+              <RightSideImage src={imageList?.at(setIdx)?.at(0)} alt={title} />
+            </BookImagesGroup>
+          )}
+        </>
       )}
     </>
   );

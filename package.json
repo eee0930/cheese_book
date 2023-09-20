@@ -63,5 +63,6 @@
     "@types/react-helmet": "^6.1.6",
     "@types/react-router-dom": "^5.3.3"
   },
-  "homepage": "https://eee0930.github.io/cheese_book/"
+  "homepage": "https://eee0930.github.io/cheese_book/",
+  "proxy": "https://www.aladin.co.kr/"
 }
