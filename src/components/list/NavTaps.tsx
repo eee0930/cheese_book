@@ -1,26 +1,23 @@
-import { ButtonGroupContainer } from '../../styles/components/buttonStyles';
-import { Button } from '../Button';
+import {
+  ButtonGroupContainer,
+  ButtonGroupEle,
+} from '../../styles/components/buttonStyles';
 
 interface IButtonGroup {
-  styleIdx?: number;
-  btnGroup: {
-    value: string;
-    handleBtn: () => void;
+  groupInfo: {
+    id: string;
+    name: string;
   }[];
+  callBack: (idx: number) => void;
 }
 
-function NavTaps({ styleIdx = 0, btnGroup }: IButtonGroup) {
+function NavTaps({ groupInfo, callBack }: IButtonGroup) {
   return (
     <ButtonGroupContainer>
-      {btnGroup.map((btn, i) => (
-        <Button
-          key={i}
-          size={'sm'}
-          styleIdx={styleIdx}
-          handleBtn={btn.handleBtn}
-        >
-          {btn.value}
-        </Button>
+      {groupInfo.map((info, i) => (
+        <ButtonGroupEle key={i} onClick={() => callBack(i)}>
+          {info.name}
+        </ButtonGroupEle>
       ))}
     </ButtonGroupContainer>
   );

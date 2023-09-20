@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
@@ -13,12 +13,26 @@ import {
   PageTitleImg,
 } from '../styles/commonStyles';
 import BestSellers from '../components/list/BestSellers';
+import NavTaps from '../components/list/NavTaps';
+
+interface IGroupInfo {
+  id: string;
+  name: string;
+}
+const cateList = categoryList?.at(0)?.categories;
 
 function ListBestSeller() {
   const setPrevPage = useSetRecoilState(prevPageState);
   const location = useLocation();
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => setPrevPage(location.pathname), []);
+
+  const scrollRef = useRef<HTMLDivElement[]>([]);
+  const handleScrollView = (idx: number) => {
+    scrollRef?.current[idx]?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <>
       <HelmetProvider>
@@ -34,9 +48,16 @@ function ListBestSeller() {
         />
         <PageTitle>BEST SELLERS</PageTitle>
       </PageTitleCover>
-      {categoryList?.at(0)?.categories.map((cate) => {
+      <NavTaps
+        groupInfo={cateList as IGroupInfo[]}
+        callBack={handleScrollView}
+      />
+      {cateList?.map((cate, i) => {
         return (
-          <ContentContainer key={cate.id}>
+          <ContentContainer
+            key={cate.id}
+            ref={(el: HTMLDivElement) => (scrollRef.current[i] = el)}
+          >
             <ContentTitleSection>
               <ContentTitle>{cate?.name} 베스트</ContentTitle>
             </ContentTitleSection>

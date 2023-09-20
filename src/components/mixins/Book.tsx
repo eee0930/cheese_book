@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import ContentLoader from 'react-content-loader';
 import { latestBookListState } from '../../atom';
 
-import { useAuthors } from '../../hooks/redesignData';
+import { useAuthors } from '../../hooks/useRedesignData';
 // styles
 import {
   BookContentContainer,

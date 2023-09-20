@@ -50,15 +50,15 @@ export const categoryList = [
     categories: [
       {
         id: '0',
-        name: '이번주',
+        name: '전체',
       },
       {
         id: '1',
-        name: '소설.시.문학',
+        name: '소설·시·문학',
       },
       {
         id: '50926',
-        name: '탐정.추리',
+        name: '탐정·추리',
       },
       {
         id: '50933',

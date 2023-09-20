@@ -75,7 +75,35 @@ export const ButtonCover = styled.button`
 `;
 
 export const ButtonGroupContainer = styled.div`
-  display: flex;
+  display: none;
+  @media (min-width: 768px) {
+    position: sticky;
+    top: 1rem;
+    display: flex;
+    z-index: 15;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
+    margin: 3rem 0;
+  }
+  @media (min-width: 991.5px) {
+    justify-content: start;
+  }
+`;
+export const ButtonGroupEle = styled.a`
+  margin-right: 0.8rem;
+  font-weight: bold;
+  font-size: 15px;
+  color: ${(props) => props.theme.black.lighter};
+  transition: color 0.3s ease;
+  &:hover {
+    color: ${(props) => props.theme.main1.main1};
+  }
+  @media (min-width: 991.5px) {
+    margin-right: 1.5rem;
+  }
 `;
 
 export const HeartButton = styled.button`
