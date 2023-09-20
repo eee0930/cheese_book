@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
 // apis
 import {
   IAladinBookItem,
@@ -14,7 +13,9 @@ import { Book, BookLoader } from '../components/mixins/Book';
 import { ContentTitle, ContentTitleSection } from '../styles/commonStyles';
 import { useSetRecoilState } from 'recoil';
 import { prevPageState } from '../atom';
+import CheeseHead from '../components/CheeseHead';
 
+const CATE_NAME = 'Search Results';
 function SearchResults() {
   const location = useLocation();
   const query = new URLSearchParams(location.search).get('q') as string;
@@ -62,14 +63,10 @@ function SearchResults() {
 
   return (
     <>
-      <HelmetProvider>
-        <Helmet>
-          <title>{`${query}`} 검색 | Cheese Book</title>
-        </Helmet>
-      </HelmetProvider>
+      <CheeseHead title={`${query} ${CATE_NAME}`} />
       <ContentTitleSection>
         <ContentTitle>
-          <span>Search Result</span> {query}
+          <span>{CATE_NAME}</span> {query}
           <i className="fa fa-caret-down" />
         </ContentTitle>
       </ContentTitleSection>

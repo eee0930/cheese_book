@@ -49,39 +49,39 @@ export const categoryList = [
     nation: '국내',
     categories: [
       {
-        id: '0',
+        id: 0,
         name: '전체',
       },
       {
-        id: '1',
+        id: 1,
         name: '소설·시·문학',
       },
       {
-        id: '50926',
+        id: 50926,
         name: '탐정·추리',
       },
       {
-        id: '50933',
+        id: 50933,
         name: '액션',
       },
       {
-        id: '50931',
+        id: 50931,
         name: '공포',
       },
       {
-        id: '987',
+        id: 987,
         name: '과학',
       },
       {
-        id: '55889',
+        id: 55889,
         name: '에세이',
       },
       {
-        id: '1196',
+        id: 1196,
         name: '여행',
       },
       {
-        id: '336',
+        id: 336,
         name: '자기계발',
       },
     ],
@@ -90,23 +90,23 @@ export const categoryList = [
     nation: '해외',
     categories: [
       {
-        id: '97456',
+        id: 97456,
         name: '소설',
       },
       {
-        id: '90845',
+        id: 90845,
         name: '에세이',
       },
       {
-        id: '90846',
+        id: 90846,
         name: '여행',
       },
       {
-        id: '90854',
+        id: 90854,
         name: '자기계발',
       },
       {
-        id: '90859',
+        id: 90859,
         name: '컴퓨터',
       },
     ],

@@ -1,13 +1,9 @@
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import CheeseHead from '../components/CheeseHead';
 
 function Login() {
   return (
     <>
-      <HelmetProvider>
-        <Helmet>
-          <title>Login | Cheese Book</title>
-        </Helmet>
-      </HelmetProvider>
+      <CheeseHead title={'Login'} />
     </>
   );
 }

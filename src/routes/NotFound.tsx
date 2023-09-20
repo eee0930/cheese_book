@@ -1,6 +1,6 @@
-import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
+import CheeseHead from '../components/CheeseHead';
 
 const ErrorContainer = styled.div`
   display: flex;
@@ -16,11 +16,7 @@ const Image = styled.img`
 function NotFound() {
   return (
     <>
-      <HelmetProvider>
-        <Helmet>
-          <title>Cheese Book</title>
-        </Helmet>
-      </HelmetProvider>
+      <CheeseHead />
 
       <ErrorContainer>
         <Link to="/">

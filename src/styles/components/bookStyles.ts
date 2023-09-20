@@ -14,6 +14,12 @@ export const BookContentContainer = styled.div`
     padding: 0.7rem !important;
     margin-bottom: 1rem;
   }
+  @media (min-width: 991.5px) {
+    transition: transform 0.2s ease-out;
+    &:hover {
+      transform: translateY(-8px);
+    }
+  }
   @media (min-width: 1199.5px) {
     margin-bottom: 1.5rem;
   }

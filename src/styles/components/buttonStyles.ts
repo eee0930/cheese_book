@@ -161,7 +161,8 @@ export const MainMenuImg = styled.div`
 export const MainMenuText = styled.div`
   margin-top: 0.5rem;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
   color: ${(props) => props.theme.black.darker};
   letter-spacing: -0.01em;
+  font-family: ${(props) => props.theme.title};
 `;

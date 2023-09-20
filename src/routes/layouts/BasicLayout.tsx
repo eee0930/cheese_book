@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation, useMatch } from 'react-router-dom';
+import { Variants, useAnimation, useScroll } from 'framer-motion';
 // components
 import { SideMenu } from '../../components/SideMenu';
 import MobileHeader from '../../components/MobileHeader';
@@ -14,7 +15,6 @@ import {
   ScrollTopContainer,
   TopBtn,
 } from '../../styles/layoutStyles';
-import { Variants, useAnimation, useScroll } from 'framer-motion';
 
 function BasicLayout() {
   const [foldMenu, setFoldMenu] = useState(false);

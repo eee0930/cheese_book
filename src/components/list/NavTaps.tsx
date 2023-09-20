@@ -5,7 +5,7 @@ import {
 
 interface IButtonGroup {
   groupInfo: {
-    id: string;
+    id: number;
     name: string;
   }[];
   callBack: (idx: number) => void;

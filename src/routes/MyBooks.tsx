@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { ILatestBook, likedBookListState, prevPageState } from '../atom';
 
+import CheeseHead from '../components/CheeseHead';
 // styles
 import {
   MyBooksSetContainer,
@@ -15,13 +16,13 @@ import {
   EmptyMyBooksImg,
   EmptyBooksContainer,
 } from '../styles/screens/myBooksStyles';
-import { Link } from 'react-router-dom';
 import {
   PageTitle,
   PageTitleCover,
   PageTitleImg,
 } from '../styles/commonStyles';
 
+const CATE_NAME = 'My Books';
 function MyBooks() {
   const setPrevPage = useSetRecoilState(prevPageState);
   const likedBookList = useRecoilValue(likedBookListState);
@@ -44,18 +45,14 @@ function MyBooks() {
   }, []);
   return (
     <>
-      <HelmetProvider>
-        <Helmet>
-          <title>My Books | Cheese Book</title>
-        </Helmet>
-      </HelmetProvider>
+      <CheeseHead title={`${CATE_NAME}`} />
       <PageTitleCover>
         <PageTitleImg
           style={{
             backgroundImage: `url(${process.env.PUBLIC_URL}/img/cheese4.png)`,
           }}
         />
-        <PageTitle>MY BOOKS</PageTitle>
+        <PageTitle>{CATE_NAME}</PageTitle>
       </PageTitleCover>
       {likedBookList.length ? (
         <>

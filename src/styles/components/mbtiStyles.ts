@@ -59,8 +59,9 @@ export const Answer = styled.div`
   font-size: 1.2rem;
   color: #fff;
   line-height: 1.5;
-  //font-weight: bold;
   height: 100%;
+  font-family: ${(props) => props.theme.title};
+  font-weight: 400;
   cursor: pointer;
   @media (min-width: 768px) {
     padding: 1.2rem;
@@ -112,9 +113,10 @@ export const ResultDescription = styled.div`
     color: ${(props) => props.theme.main1.main1};
     font-family: ${(props) => props.theme.title};
     font-size: 1.5rem;
-    letter-spacing: -2px;
+    letter-spacing: -1px;
     margin-bottom: 1rem;
     cursor: pointer;
+    word-spacing: 2px;
   }
   @media (min-width: 768px) {
     max-width: 450px;

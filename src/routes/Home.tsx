@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { prevPageState } from '../atom';
 // components
-import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Banner from '../components/home/Banner';
 import BestSellers from '../components/list/BestSellers';
+import HomeMenu from '../components/home/HomeMenu';
+import CheeseHead from '../components/CheeseHead';
+import NewBooks from '../components/list/NewBooks';
 // styles
 import {
   ContentContainer,
@@ -9,12 +15,6 @@ import {
   ContentTitle,
   TitleBtnSection,
 } from '../styles/commonStyles';
-import NewBooks from '../components/list/NewBooks';
-import { Link } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
-import { prevPageState } from '../atom';
-import { useEffect } from 'react';
-import HomeMenu from '../components/home/HomeMenu';
 
 function Home() {
   const setPrevPage = useSetRecoilState(prevPageState);
@@ -22,11 +22,7 @@ function Home() {
   useEffect(() => setPrevPage('/'), []);
   return (
     <>
-      <HelmetProvider>
-        <Helmet>
-          <title>Cheese Book</title>
-        </Helmet>
-      </HelmetProvider>
+      <CheeseHead />
       <Banner />
       <HomeMenu />
       <ContentContainer>

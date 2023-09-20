@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useMatch } from 'react-router-dom';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { useRecoilValue } from 'recoil';
 import { useQuery } from 'react-query';
 // apis
 import {
@@ -8,9 +8,11 @@ import {
   IAladinRequestList,
   fetchBookDetailById,
 } from '../apis/aladinApi';
+import { prevPageState } from '../atom';
 // components
 import { Button } from '../components/Button';
 import ViewerModal from '../components/viewDetail/ViewerModal';
+import CheeseHead from '../components/CheeseHead';
 // styles
 import { Loader } from '../styles/globalStyles';
 import {
@@ -23,8 +25,6 @@ import {
   PrevBtnContainer,
 } from '../styles/screens/viewDetailStyles';
 import DetailImages from '../components/viewDetail/DetailImages';
-import { useRecoilValue } from 'recoil';
-import { prevPageState } from '../atom';
 
 function ViewDetail() {
   const prevPage = useRecoilValue(prevPageState);
@@ -52,11 +52,7 @@ function ViewDetail() {
         </Loader>
       ) : (
         <>
-          <HelmetProvider>
-            <Helmet>
-              <title>{book?.title.split('-')[0] + ' | '}Cheese Book</title>
-            </Helmet>
-          </HelmetProvider>
+          <CheeseHead title={`${book?.title.split('-')[0]}`} />
           <BookContentResultContainer>
             {/* [1. 카테고리]--------------------------------------------------*/}
             <PrevBtnContainer>

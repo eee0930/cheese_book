@@ -67,6 +67,7 @@ export function Book({ book, rankInfo }: IBook) {
       <BookCover
         onClick={handleClickBook}
         title={title}
+        className="bookCover"
         style={{ backgroundImage: `url(${cover})` }}
       />
       <BookTitle onClick={handleClickBook} title={title}>

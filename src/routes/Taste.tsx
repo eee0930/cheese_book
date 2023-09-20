@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useLocation } from 'react-router-dom';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { myTasteResultState, prevPageState } from '../atom';
 // styles
 import {
@@ -21,7 +20,9 @@ import {
 import { Button } from '../components/Button';
 import MbtiTest from '../components/taste/MbtiTest';
 import TasteResults from '../components/taste/TasteResults';
+import CheeseHead from '../components/CheeseHead';
 
+const CATE_NAME = 'Your Taste';
 function Taste() {
   const setPrevPage = useSetRecoilState(prevPageState);
   const [myTasteResult, setMyTasteResult] = useRecoilState(myTasteResultState);
@@ -37,11 +38,7 @@ function Taste() {
   };
   return (
     <>
-      <HelmetProvider>
-        <Helmet>
-          <title>My Taste | Cheese Book</title>
-        </Helmet>
-      </HelmetProvider>
+      <CheeseHead title={`${CATE_NAME}`} />
 
       <PageTitleCover>
         <PageTitleImg
@@ -49,7 +46,7 @@ function Taste() {
             backgroundImage: `url(${process.env.PUBLIC_URL}/img/cheese3.png)`,
           }}
         />
-        <PageTitle>your taste</PageTitle>
+        <PageTitle>{CATE_NAME}</PageTitle>
       </PageTitleCover>
       {myTasteResult === 'CHEESE' ? (
         <>
