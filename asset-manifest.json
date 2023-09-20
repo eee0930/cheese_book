@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/cheese_book/static/js/main.ed914802.js",
+    "main.js": "/cheese_book/static/js/main.c203266c.js",
     "index.html": "/cheese_book/index.html",
-    "main.ed914802.js.map": "/cheese_book/static/js/main.ed914802.js.map"
+    "main.c203266c.js.map": "/cheese_book/static/js/main.c203266c.js.map"
   },
   "entrypoints": [
-    "static/js/main.ed914802.js"
+    "static/js/main.c203266c.js"
   ]
 }
