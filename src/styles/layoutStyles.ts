@@ -16,7 +16,7 @@ export const CheeseContainer = styled.div`
     padding: ${(props) => props.theme.padding.md};
     margin-top: 0;
     margin-bottom: 2rem;
-    min-height: 100vh;
+    min-height: 90vh;
   }
   @media (min-width: 1199.5px) {
     padding: ${(props) => props.theme.padding.lg};

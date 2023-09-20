@@ -219,16 +219,22 @@ export const BannerPages = styled.div`
   text-align: center;
   font-size: 0.5rem;
   grid-template-columns: repeat(6, 1fr);
-  color: rgba(0, 0, 0, 0.2);
-  i {
-    cursor: pointer;
-  }
-  i.active {
-    color: ${(props) => props.theme.main1.main2};
+  align-items: center;
+  justify-content: center;
+`;
+export const PageDots = styled(motion.div)`
+  width: 10px;
+  height: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  margin: 0 auto;
+  transition: width 0.4s ease-in-out, background-color 0.4s ease;
+  &.active {
+    width: 20px;
+    background-color: ${(props) => props.theme.main1.main2};
   }
 `;
-
-export const JumpBook = {
+export const jumpBook = {
   initial: {
     top: '100%',
   },
@@ -238,7 +244,7 @@ export const JumpBook = {
   },
 };
 
-export const JumpBookVariants = {
+export const jumpBookVariants = {
   hidden: {
     top: '100%',
   },
@@ -250,7 +256,7 @@ export const JumpBookVariants = {
     top: '100%',
   },
 };
-export const JumpTitleVariants = {
+export const jumpTitleVariants = {
   initial: { top: '100%' },
   animate: {
     top: '50%',
@@ -265,7 +271,7 @@ export const JumpTitleVariants = {
   },
   exit: { top: '100%' },
 };
-export const JumpTitle = {
+export const jumpTitle = {
   initial: {
     x: '100%',
   },

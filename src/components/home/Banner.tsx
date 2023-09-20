@@ -21,9 +21,10 @@ import {
   BookCover,
   BookCoverContainer,
   BookCoverPerspect,
-  JumpBookVariants,
-  JumpTitle,
-  JumpTitleVariants,
+  jumpBookVariants,
+  jumpTitle,
+  jumpTitleVariants,
+  PageDots,
 } from '../../styles/components/bannerStyles';
 
 const BANNER_LEN = bannerMent.length;
@@ -89,18 +90,19 @@ function Banner() {
               </>
             )}
           </Color>
+
           <BannerPagination>
             <BannerBtn onClick={handlePrevIdx}>
               <i className="fa-solid fa-angle-left" />
             </BannerBtn>
             <BannerPages>
-              {new Array(BANNER_LEN).fill(0).map((_, i) => (
-                <i
-                  key={i}
-                  onClick={() => setIndex(i)}
-                  className={`fa-solid fa-circle ${i === index && 'active'}`}
-                />
-              ))}
+              {bannerMent.map((_, i) => {
+                if (i === index) {
+                  return <PageDots key={i} className="active" />;
+                } else {
+                  return <PageDots key={i} onClick={() => setIndex(i)} />;
+                }
+              })}
             </BannerPages>
             <BannerBtn onClick={handleNextIdx}>
               <i className="fa-solid fa-angle-right" />
@@ -108,7 +110,7 @@ function Banner() {
           </BannerPagination>
           <AnimatePresence>
             <BookCoverContainer
-              variants={JumpBookVariants}
+              variants={jumpBookVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
@@ -135,7 +137,7 @@ function Banner() {
               />
             </BookCoverContainer>
             <BannerTitle
-              variants={JumpTitleVariants}
+              variants={jumpTitleVariants}
               initial="initial"
               animate="animate"
               exit="exit"
@@ -149,7 +151,7 @@ function Banner() {
               }
             >
               {bannerMent[index].map((ment, i) => (
-                <motion.div variants={JumpTitle} key={i}>
+                <motion.div variants={jumpTitle} key={i}>
                   {ment}
                 </motion.div>
               ))}

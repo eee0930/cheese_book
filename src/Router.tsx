@@ -11,7 +11,6 @@ import Taste from './routes/Taste';
 import ViewDetail from './routes/ViewDetail';
 import MyBooks from './routes/MyBooks';
 import SearchResults from './routes/SearchResults';
-import TasteResults from './routes/TasteResults';
 import NotFound from './routes/NotFound';
 // components
 import ErrorComponent from './components/ErrorComponet';
@@ -51,12 +50,6 @@ const router = createHashRouter([
           {
             path: 'taste',
             element: <Taste />,
-            children: [
-              {
-                path: 'result',
-                element: <TasteResults />,
-              },
-            ],
           },
           {
             path: 'my',

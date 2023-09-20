@@ -101,7 +101,7 @@ function LatestBookList() {
                         <BookCover
                           style={{ backgroundImage: `url(${book.cover})` }}
                         />
-                        <BookTitle>{book.title}</BookTitle>
+                        <BookTitle>{book.title.split('-')[0]}</BookTitle>
                       </BookList>
                     ))}
                   </BookListUl>

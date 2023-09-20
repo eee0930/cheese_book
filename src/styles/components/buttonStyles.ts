@@ -10,6 +10,7 @@ export const ButtonCover = styled.button`
   transition: transform 0.3s ease 0s, color 1s ease-in-out 0s,
     background-color 1s ease-in-out 0s;
   font-family: ${(props) => props.theme.title};
+  font-weight: 400;
   z-index: 1;
   span {
     position: relative;
