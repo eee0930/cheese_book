@@ -1,17 +1,18 @@
+import fetchJsonp from 'fetch-jsonp';
+
 const KEY = process.env.REACT_APP_ALADIN_KEY;
 const ROOT = process.env.REACT_APP_ALADIN_ROOT;
 
 const VERSION = '20131101';
 
-const request = async (url: string) => {
+const request = (url: string) => {
   const options = `&TTBKey=${KEY}&Output=js&Version=${VERSION}`;
-  try {
-    const response = await fetch(`${url}${options}`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log('❌', error);
-  }
+  const result = fetchJsonp(`${url}${options}`);
+  return result
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log('parsing failed', err));
 };
 
 interface ISubInfo {
@@ -88,6 +89,16 @@ export const fetchBestSellerBookList = async (
     }&MaxResults=${maxResult}`
   );
 
+const searchRequest = async (url: string) => {
+  const options = `&TTBKey=${KEY}&Output=js&Version=${VERSION}`;
+  try {
+    const response = fetch(`${url}${options}`);
+    return (await response).json();
+  } catch (error) {
+    console.log('❌', error);
+  }
+};
+
 /**
  * 도서 검색 결과 목록
  * @param query
@@ -99,7 +110,7 @@ export const fetchBookListByQuery = async (
   isKorea: boolean,
   maxResult: number
 ) =>
-  await request(
+  await searchRequest(
     `${ROOT}ItemSearch.aspx?Query=${query}&Cover=MidBig&SearchTarget=${
       isKorea ? 'book' : 'Foreign'
     }&MaxResults=${maxResult}`
