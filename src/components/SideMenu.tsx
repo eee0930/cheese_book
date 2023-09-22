@@ -114,20 +114,10 @@ export function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
             {/* 검색 */}
             <SearchSection>
               <SearchCover
-                className={`${searchMatch && 'active'}`}
+                className={`${searchMatch && 'active'} ${isFolded && 'fold'}`}
                 onClick={() => setIsOpenSearch(true)}
               >
                 <i className="fa-solid fa-magnifying-glass" />
-                {/* <form method="get" onSubmit={handleSubmit}>
-                  <input
-                    type="search"
-                    name="search"
-                    placeholder="search"
-                    value={searchField}
-                    onChange={handleSearchInput}
-                    autoComplete="off"
-                  />
-                </form> */}
               </SearchCover>
             </SearchSection>
           </SideMenuIn>

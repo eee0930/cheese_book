@@ -80,6 +80,12 @@ export const LatestBookBtnImg = styled.div`
   background-size: cover;
   cursor: pointer;
   transition: background-image 0.3s ease;
+  &.empty {
+    background-color: #fff;
+    background-position: bottom center;
+    background-size: 80% 80%;
+    cursor: default;
+  }
   @media (min-width: 991.5px) {
     height: 46px;
   }

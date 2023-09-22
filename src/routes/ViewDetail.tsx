@@ -23,9 +23,45 @@ import {
   TitleSection,
   PreviewBtnSection,
   PrevBtnContainer,
+  DetialInfoContainer,
+  DetailInfoTitle,
+  DetailInfoCover,
+  DetialInfoContainer2,
+  CardReview,
 } from '../styles/screens/viewDetailStyles';
 import DetailImages from '../components/viewDetail/DetailImages';
 
+const getRedesignPrice = (price: number) => {
+  const priceStr = String(price);
+  const len = priceStr.length;
+  return Array.from(Array(Math.ceil(len / 3)), (_, i) => {
+    let newPrice = '';
+    const po = len % 3;
+    const idx = (i - 1) * 3 + po;
+    if (i === 0) {
+      newPrice = priceStr.slice(0, po);
+    } else {
+      newPrice = priceStr.slice(idx, idx + 3);
+    }
+    return newPrice;
+  }).join(',');
+};
+
+const getCardReviews = (reviewList: string[]) => {
+  const last = reviewList.at(-1);
+  const [startIdx, endIdx] = [last?.lastIndexOf('_'), last?.lastIndexOf('.')];
+  let ROOT = '';
+  let idx = 0;
+  if (startIdx) {
+    idx = Number(last?.slice(startIdx + 2, endIdx));
+    ROOT = last?.slice(0, startIdx + 2) as string;
+  }
+  if (isNaN(idx)) {
+    return reviewList;
+  } else {
+    return Array.from(Array(idx), (_, i) => `${ROOT}${i + 1}.jpg`);
+  }
+};
 function ViewDetail() {
   const prevPage = useRecoilValue(prevPageState);
   const useId = useMatch('/book/:id');
@@ -84,6 +120,72 @@ function ViewDetail() {
                     </Button>
                   </PreviewBtnSection>
                 </BookImageSection>
+                <DetialInfoContainer className="row">
+                  <DetailInfoTitle className="col-12 col-lg-3">
+                    책 소개
+                  </DetailInfoTitle>
+                  <DetailInfoCover className="col-12 col-lg-9">
+                    <div>
+                      <span>{book?.description}</span>
+                    </div>
+                  </DetailInfoCover>
+                </DetialInfoContainer>
+                <DetialInfoContainer2 className="row">
+                  <DetailInfoTitle className="col-12 col-lg-3">
+                    기본 정보
+                  </DetailInfoTitle>
+                  <DetailInfoCover className="col-12 col-lg-9">
+                    <div>
+                      <span className="label">출판사</span>
+                      <span>{book?.publisher}</span>
+                    </div>
+                    <div>
+                      <span className="label">주제분류</span>
+                      <span>{book?.categoryName.split('>').join(' > ')}</span>
+                    </div>
+                    <div>
+                      <span className="label">출간일</span>
+                      <span>{book?.pubDate}</span>
+                    </div>
+                    <div>
+                      <span className="label">정가</span>
+                      <span>
+                        {getRedesignPrice(book?.priceStandard as number)}원
+                      </span>
+                    </div>
+                    {book?.subInfo && (
+                      <div>
+                        <span className="label">페이지 수</span>
+                        <span>{book?.subInfo?.itemPage}쪽</span>
+                      </div>
+                    )}
+                    {book?.bestDuration && (
+                      <div>
+                        <span className="label">종합주간</span>
+                        <span>
+                          {book.bestRank} {book.bestDuration}
+                        </span>
+                      </div>
+                    )}
+                  </DetailInfoCover>
+                </DetialInfoContainer2>
+
+                {book?.subInfo?.cardReviewImgList && (
+                  <DetialInfoContainer className="row">
+                    <DetailInfoTitle className="col-12 col-lg-3">
+                      카드 리뷰
+                    </DetailInfoTitle>
+                    <DetailInfoCover className="col-12 col-lg-9">
+                      <CardReview>
+                        {getCardReviews(book?.subInfo?.cardReviewImgList).map(
+                          (review, i) => (
+                            <img key={i} src={review} alt={book?.title} />
+                          )
+                        )}
+                      </CardReview>
+                    </DetailInfoCover>
+                  </DetialInfoContainer>
+                )}
               </BookContentSection>
             </BookContentContainer>
           </BookContentResultContainer>

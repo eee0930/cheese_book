@@ -115,3 +115,53 @@ export const BoxContainer = styled.div`
     transform: translateX(-50%);
   }
 `;
+export const DetialInfoContainer = styled.div`
+  margin: 4rem 0;
+  background-color: #fff;
+  padding: 4rem 5rem;
+`;
+export const DetialInfoContainer2 = styled.div`
+  margin: 4rem 0;
+  background-color: transparent;
+  padding: 0rem 5rem;
+`;
+export const DetailInfoTitle = styled.h3`
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-family: ${(props) => props.theme.tilte};
+  margin-bottom: 2rem;
+  @media (max-width: 991.5px) {
+    magin-bottom: 0;
+  }
+`;
+export const DetailInfoCover = styled.h3`
+  font-size: 15px;
+  line-height: 2;
+  .label {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  div {
+    margin-bottom: 1rem;
+  }
+`;
+export const CardReview = styled.div`
+  text-align: center;
+  img {
+    width: 100%;
+    max-width: 300px;
+  }
+  @media (min-width: 768px) {
+    img {
+      max-width: 400px;
+    }
+  }
+  @media (min-width: 991.5px) {
+    text-align: left;
+  }
+  @media (min-width: 1199.5px) {
+    img {
+      max-width: 600px;
+    }
+  }
+`;

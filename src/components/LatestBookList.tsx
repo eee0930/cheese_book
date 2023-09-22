@@ -58,8 +58,9 @@ function LatestBookList() {
               />
             ) : (
               <LatestBookBtnImg
+                className="empty"
                 style={{
-                  backgroundImage: `url(${process.env.PUBLIC_URL}/img/default_profile.jpg)`,
+                  backgroundImage: `url(${process.env.PUBLIC_URL}/img/cheese_null.png)`,
                 }}
               />
             )}

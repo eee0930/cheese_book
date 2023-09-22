@@ -250,6 +250,7 @@ export const SearchCover = styled.div`
   border: solid 3px ${(props) => props.theme.black.veryDark};
   padding-left: 1.7rem;
   background-color: ${(props) => props.theme.white.lighter};
+  cursor: pointer;
   i {
     position: absolute;
     top: 50%;
@@ -259,6 +260,21 @@ export const SearchCover = styled.div`
   }
   &.active {
     border: solid 3px ${(props) => props.theme.main1.main2};
+  }
+  &.fold {
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    i {
+      left: calc(50% - 7.5px);
+      font-size: 1.5rem;
+    }
+  }
+  &.fold.active {
+    border: none;
+    i {
+      color: ${(props) => props.theme.main1.main2};
+    }
   }
 `;
 
