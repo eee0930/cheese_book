@@ -106,31 +106,3 @@ export const MyBookCover = styled.div`
   background-position: center;
   border-radius: 2px;
 `;
-
-export const EmptyBooksContainer = styled.div`
-  min-height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  @media (min-width: 991.5px) {
-    min-height: 60vh;
-  }
-`;
-export const EmptyMyBooksImg = styled.div`
-  width: 200px;
-  height: 200px;
-  margin: 1rem auto;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.4;
-`;
-export const EmptyMyBooksMent = styled.div`
-  text-align: center;
-  font-size: 3rem;
-  opacity: 0.3;
-  text-transform: uppercase;
-  color: #000;
-  font-family: ${(props) => props.theme.title};
-`;

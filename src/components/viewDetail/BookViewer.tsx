@@ -5,8 +5,8 @@ import {
   BookImagesGroup,
   CoverSideImage,
   nexPageVariants,
+  pageVariants,
 } from '../../styles/components/viewerStyles';
-import { AnimatePresence } from 'framer-motion';
 
 interface IIsbn {
   itemId: number;
@@ -20,8 +20,7 @@ function BookViewer({ itemId, isbn, title, cover }: IIsbn) {
   const [imageList, setImageList] = useState<string[][]>();
   const [index, setIndex] = useState(0);
   const [totalIdx, setTotalIdx] = useState(0);
-  const [mobileIdx, setMobileIdx] = useState(0);
-  const [isNext, setIsNext] = useState(true);
+  const [mobileIdx, setMobileIdx] = useState(1);
   const [prevent, setPrevent] = useState(false);
 
   useEffect(() => {
@@ -35,6 +34,7 @@ function BookViewer({ itemId, isbn, title, cover }: IIsbn) {
     if (index !== 0) {
       setTotalIdx(index - 1);
       setIndex((prev) => prev - 1);
+      setMobileIdx((prev) => prev - 2);
     } else {
       setPrevent(true);
     }
@@ -48,19 +48,43 @@ function BookViewer({ itemId, isbn, title, cover }: IIsbn) {
       return;
     }
     if (isRight) {
-      setIsNext(true);
       if (index === 0) {
         return;
       }
       setIndex((prev) => prev - 1);
+      setMobileIdx((prev) => prev - 2);
     } else {
-      setIsNext(false);
       if (index === totalIdx) {
         return;
       }
       setIndex((prev) => prev + 1);
+      setMobileIdx((prev) => prev + 2);
     }
   };
+
+  const handleClickMobileViewer = (
+    event: React.MouseEvent<HTMLImageElement, MouseEvent>,
+    isRight: boolean
+  ) => {
+    if (prevent) {
+      event.preventDefault();
+      return;
+    }
+    if (isRight) {
+      if (index === 0 && mobileIdx === 1) {
+        return;
+      }
+      setIndex((prev) => prev - 1);
+      setMobileIdx((prev) => prev - 2);
+    } else {
+      if (index === totalIdx && mobileIdx === totalIdx * 2 + 1) {
+        return;
+      }
+      setIndex((prev) => prev + 1);
+      setMobileIdx((prev) => prev + 2);
+    }
+  };
+
   const onImageError = (
     target: EventTarget & HTMLImageElement,
     isReplace: boolean
@@ -89,8 +113,7 @@ function BookViewer({ itemId, isbn, title, cover }: IIsbn) {
               key={`key${index}`}
               variants={nexPageVariants}
               initial="initial"
-              animate="animate"
-              exit="exit"
+              whileTap="animate"
             >
               <CoverSideImage
                 src={
@@ -105,6 +128,7 @@ function BookViewer({ itemId, isbn, title, cover }: IIsbn) {
                 onClick={(event) => handleClickViewer(event, true)}
               />
               <CoverSideImage
+                variants={pageVariants}
                 key={`key${index}-1`}
                 src={
                   index === 0
@@ -112,6 +136,7 @@ function BookViewer({ itemId, isbn, title, cover }: IIsbn) {
                     : (imageList?.at(index)?.at(1) as string)
                 }
                 alt={title}
+                className="right"
                 onError={({ currentTarget }) =>
                   onImageError(currentTarget, true)
                 }

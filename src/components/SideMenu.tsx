@@ -33,6 +33,7 @@ import {
   menuUp,
   ActiveMenuImg,
 } from '../styles/components/sideMenuStyles';
+import { SearchForm } from './SearchForm';
 
 interface ISideMenu {
   isFolded: boolean;
@@ -45,6 +46,8 @@ export function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
   const prevPage = useRecoilValue(prevPageState);
   const [searchField, setSearchField] = useState('');
 
+  const [isOpenSearch, setIsOpenSearch] = useState(false);
+
   const navigate = useNavigate();
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchField(e.target.value);
@@ -55,85 +58,91 @@ export function SideMenu({ isFolded, handleMenuBtn }: ISideMenu) {
   };
 
   return (
-    <SideMenuContainer className={`${isFolded && 'fold'}`}>
-      <SideMenuCover>
-        {isFolded ? (
-          <LogoImg
-            className="jelly fold"
-            alt="cheese book"
-            src={`${process.env.PUBLIC_URL}/img/cheese0.png`}
-          />
-        ) : (
-          <LogoImg
-            className="jelly"
-            alt="cheese book"
-            src={`${process.env.PUBLIC_URL}/cheese.png`}
-          />
-        )}
-        <AnimationBoxCover>
-          <AnimationBox />
-        </AnimationBoxCover>
-        <SideMenuIn>
-          {/* [타이틀 영역] */}
+    <>
+      {isOpenSearch && <SearchForm callback={() => setIsOpenSearch(false)} />}
+      <SideMenuContainer className={`${isFolded && 'fold'}`}>
+        <SideMenuCover>
           {isFolded ? (
-            <TitleSection />
+            <LogoImg
+              className="jelly fold"
+              alt="cheese book"
+              src={`${process.env.PUBLIC_URL}/img/cheese0.png`}
+            />
           ) : (
-            <TitleCover>
-              <div className="title">
-                <Link to="/">cheese book</Link>
-              </div>
-            </TitleCover>
+            <LogoImg
+              className="jelly"
+              alt="cheese book"
+              src={`${process.env.PUBLIC_URL}/cheese.png`}
+            />
           )}
-          {/* 사이드 메뉴 list */}
-          <SideMenus className={`${isFolded && 'fold'}`}>
-            {cheesePaths.map((cheesePath) => {
-              const { name, icon, path } = cheesePath;
-              return (
-                <li
-                  key={path}
-                  className={`${
-                    (location.pathname === path || prevPage === path) &&
-                    'active'
-                  }`}
-                >
-                  <Link to={path}>
-                    <span className="icon-cover">
-                      <i className={icon} />
-                    </span>
-                    <span className="text-cover">{name}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </SideMenus>
-          {/* 검색 */}
-          <SearchSection>
-            <SearchCover className={`${searchMatch && 'active'}`}>
-              <i className="fa-solid fa-magnifying-glass" />
-              <form method="get" onSubmit={handleSubmit}>
-                <input
-                  type="search"
-                  name="search"
-                  placeholder="search"
-                  value={searchField}
-                  onChange={handleSearchInput}
-                  autoComplete="off"
-                />
-              </form>
-            </SearchCover>
-          </SearchSection>
-        </SideMenuIn>
-        <MenuBtnCover>
-          <MenuBtn onClick={handleMenuBtn}>
+          <AnimationBoxCover>
+            <AnimationBox />
+          </AnimationBoxCover>
+          <SideMenuIn>
+            {/* [타이틀 영역] */}
             {isFolded ? (
-              <i className="fa-solid fa-angles-right" />
+              <TitleSection />
             ) : (
-              <i className="fa-solid fa-angles-left" />
+              <TitleCover>
+                <div className="title">
+                  <Link to="/">cheese book</Link>
+                </div>
+              </TitleCover>
             )}
-          </MenuBtn>
-        </MenuBtnCover>
-      </SideMenuCover>
-    </SideMenuContainer>
+            {/* 사이드 메뉴 list */}
+            <SideMenus className={`${isFolded && 'fold'}`}>
+              {cheesePaths.map((cheesePath) => {
+                const { name, icon, path } = cheesePath;
+                return (
+                  <li
+                    key={path}
+                    className={`${
+                      (location.pathname === path || prevPage === path) &&
+                      'active'
+                    }`}
+                  >
+                    <Link to={path}>
+                      <span className="icon-cover">
+                        <i className={icon} />
+                      </span>
+                      <span className="text-cover">{name}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </SideMenus>
+            {/* 검색 */}
+            <SearchSection>
+              <SearchCover
+                className={`${searchMatch && 'active'}`}
+                onClick={() => setIsOpenSearch(true)}
+              >
+                <i className="fa-solid fa-magnifying-glass" />
+                {/* <form method="get" onSubmit={handleSubmit}>
+                  <input
+                    type="search"
+                    name="search"
+                    placeholder="search"
+                    value={searchField}
+                    onChange={handleSearchInput}
+                    autoComplete="off"
+                  />
+                </form> */}
+              </SearchCover>
+            </SearchSection>
+          </SideMenuIn>
+          <MenuBtnCover>
+            <MenuBtn onClick={handleMenuBtn}>
+              {isFolded ? (
+                <i className="fa-solid fa-angles-right" />
+              ) : (
+                <i className="fa-solid fa-angles-left" />
+              )}
+            </MenuBtn>
+          </MenuBtnCover>
+        </SideMenuCover>
+      </SideMenuContainer>
+    </>
   );
 }
 

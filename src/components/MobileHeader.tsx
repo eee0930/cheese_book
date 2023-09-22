@@ -12,6 +12,7 @@ import {
   MobileHeaderCover,
   SearchButton,
 } from '../styles/components/mobileHeaderStyles';
+import { MobileSearchForm } from './SearchForm';
 
 function MobileHeader() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -45,22 +46,25 @@ function MobileHeader() {
       return !prev;
     });
   };
+
   return (
     <>
       {isOpenMenu && <MobileMenu themeIdx={randomIdx} callback={closeMenu} />}
-      {isOpenSearch}
+      {isOpenSearch && (
+        <MobileSearchForm themeIdx={randomIdx} callback={toggleSearchForm} />
+      )}
       <MobileHeaderContainer>
         <MobileHeaderCover className={`${headerActive && 'active'}`}>
           <MenuBtnSection>
             <MenuButton
               onClick={openMenu}
-              className={`${headerActive && 'active'}`}
+              className={`${isOpenMenu && 'active'}`}
             >
               <MenuButtonValue>menu</MenuButtonValue>
             </MenuButton>
             <MenuButton
               onClick={closeMenu}
-              className={`${headerActive && 'active'}`}
+              className={`${isOpenMenu && 'active'}`}
             >
               <MenuButtonValue>close</MenuButtonValue>
             </MenuButton>

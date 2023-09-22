@@ -9,18 +9,16 @@ import CheeseHead from '../components/CheeseHead';
 import {
   MyBooksSetContainer,
   MyBooksSetCover,
-  EmptyMyBooksMent,
   MyBook,
   MyBookCover,
   BookShelves,
-  EmptyMyBooksImg,
-  EmptyBooksContainer,
 } from '../styles/screens/myBooksStyles';
 import {
   PageTitle,
   PageTitleCover,
   PageTitleImg,
 } from '../styles/commonStyles';
+import EmptyData from '../components/EmptyData';
 
 const CATE_NAME = 'My Books';
 function MyBooks() {
@@ -74,14 +72,7 @@ function MyBooks() {
           ))}
         </>
       ) : (
-        <EmptyBooksContainer>
-          <EmptyMyBooksImg
-            style={{
-              backgroundImage: `url(${process.env.PUBLIC_URL}/img/cheese_null.png)`,
-            }}
-          />
-          <EmptyMyBooksMent>empty...</EmptyMyBooksMent>
-        </EmptyBooksContainer>
+        <EmptyData>empty...</EmptyData>
       )}
     </>
   );

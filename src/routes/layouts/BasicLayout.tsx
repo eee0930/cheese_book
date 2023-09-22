@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Outlet, useLocation, useMatch } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Variants, useAnimation, useScroll } from 'framer-motion';
 // components
 import { SideMenu } from '../../components/SideMenu';
@@ -19,15 +19,9 @@ import {
 function BasicLayout() {
   const [foldMenu, setFoldMenu] = useState(false);
   const location = useLocation();
-  const bookMatch = useMatch('/book/*');
   const mainContainer = useRef<HTMLDivElement>(null);
   const topBtnAnimate = useAnimation();
   useEffect(() => {
-    if (bookMatch) {
-      setFoldMenu(true);
-    } else {
-      setFoldMenu(false);
-    }
     if (mainContainer.current) {
       mainContainer.current.scrollTo(0, 0);
     }

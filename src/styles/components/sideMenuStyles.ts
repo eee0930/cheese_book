@@ -272,6 +272,12 @@ export const MobileMenuContainer = styled(motion.div)`
   height: 100vh;
   z-index: 60;
   transition: background-color 0.5s ease;
+  @media (min-width: 991.5px) {
+    top: calc(50% - 25vh);
+    left: calc(50% - 25vw);
+    width: 50vw;
+    height: 50vh;
+  }
 `;
 export const MobileMenuCover = styled(motion.div)`
   background-color: inherit;
@@ -288,6 +294,20 @@ export const MobileMenuCover = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (min-width: 991.5px) {
+    top: calc(50% - 25vh + 1rem);
+    left: calc(50% - 25vw + 1rem);
+    width: calc(50vw - 2rem);
+    height: calc(50vh - 2rem);
+  }
+`;
+export const FormCharacter = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 120px;
+  transform: translate(-50%, -100%);
+  z-index: -1;
 `;
 export const MobileMenuList = styled.ul`
   list-style: none;
@@ -356,6 +376,26 @@ export const MobileAnimationBox = styled.div`
   background-size: 8px 8px;
   transition: inherit;
   animation: 4s linear 0s infinite normal none running bURGXq;
+`;
+
+export const SearchFormInput = styled.input`
+  border: none;
+  border-bottom: solid 2px #000;
+  outline: none;
+  width: 300px;
+  height: 50px;
+  font-size: 1.5rem;
+  background-color: transparent;
+  margin-bottom: 10rem;
+  &::placeholder {
+    color: #777;
+  }
+  @media (min-width: 991.5px) {
+    margin-bottom: 0;
+    border: solid 2px #000;
+    background-color: #fff;
+    padding: 0.5rem 1rem;
+  }
 `;
 
 export const menuFade = {

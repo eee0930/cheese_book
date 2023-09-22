@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from 'react-query';
+import { useSetRecoilState } from 'recoil';
+import { prevPageState } from '../atom';
 // apis
 import {
   IAladinBookItem,
@@ -9,11 +11,10 @@ import {
 } from '../apis/aladinApi';
 // components
 import { Book, BookLoader } from '../components/mixins/Book';
+import CheeseHead from '../components/CheeseHead';
+import EmptyData from '../components/EmptyData';
 //styles
 import { ContentTitle, ContentTitleSection } from '../styles/commonStyles';
-import { useSetRecoilState } from 'recoil';
-import { prevPageState } from '../atom';
-import CheeseHead from '../components/CheeseHead';
 
 const CATE_NAME = 'Search Results';
 function SearchResults() {
@@ -27,7 +28,7 @@ function SearchResults() {
 
   const { data: books, isLoading } = useQuery<IAladinRequestList>(
     ['search', `${query} ${isKorea}`],
-    () => fetchBookListByQuery(query, isKorea, 12),
+    () => fetchBookListByQuery(query, isKorea, 24),
     { retry: 0 }
   );
 
@@ -85,11 +86,19 @@ function SearchResults() {
               ))}
             </div>
           ) : (
-            <div className="row">
-              {books?.item?.map((book, i) => (
-                <Book book={book} key={i} />
-              ))}
-            </div>
+            <>
+              {books ? (
+                <div className="row">
+                  {books.item?.map((book, i) => (
+                    <Book book={book} key={i} />
+                  ))}
+                </div>
+              ) : (
+                <EmptyData>
+                  Sorry... <br /> No search results
+                </EmptyData>
+              )}
+            </>
           )}
         </>
       )}
