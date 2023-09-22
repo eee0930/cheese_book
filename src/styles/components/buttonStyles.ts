@@ -84,8 +84,7 @@ export const ButtonGroupContainer = styled.div`
     align-items: center;
     justify-content: center;
     padding: 1rem 1.5rem;
-    background-color: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(15px);
+    background-color: ${(props) => props.theme.white.lighter};
     margin: 3rem 0;
   }
   @media (min-width: 991.5px) {

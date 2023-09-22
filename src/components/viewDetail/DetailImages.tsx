@@ -1,27 +1,29 @@
-import { useQuery } from 'react-query';
-import { fetchDetailImagesById } from '../../apis/fetching';
+import { useEffect, useState } from 'react';
+import { getDetailImagesByIsbnId } from '../../apis/fetching';
+//styles
 import { Loader } from '../../styles/globalStyles';
 import {
   BookContainer,
   BookImagesCovers,
-  FrontCover,
   FrontImageCover,
-  SideCover,
   SideImgCover,
-  UndefinedImg,
 } from '../../styles/components/coverStyles';
+import CoverImage from '../mixins/CoverImage';
 
 interface IDetailImages {
   itemId: number;
+  isbn: string;
   title: string;
   cover: string;
 }
-function DetailImages({ itemId, title, cover }: IDetailImages) {
-  const { data: images, isLoading } = useQuery(
-    ['bookCovers', itemId],
-    () => fetchDetailImagesById(itemId),
-    { retry: 0 }
-  );
+function DetailImages({ itemId, isbn, title, cover }: IDetailImages) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [images, setImages] = useState<string[]>();
+  useEffect(() => {
+    const imageList = getDetailImagesByIsbnId(isbn, itemId);
+    setImages(imageList);
+    setIsLoading(false);
+  }, [isbn, itemId]);
 
   return (
     <>
@@ -34,18 +36,23 @@ function DetailImages({ itemId, title, cover }: IDetailImages) {
         </Loader>
       ) : (
         <>
-          {!images || !images[0] || !images[1] ? (
-            <BookContainer>
-              <UndefinedImg src={cover} alt={title} />
-            </BookContainer>
-          ) : (
+          {images && (
             <BookContainer>
               <BookImagesCovers>
                 <SideImgCover className="side">
-                  <SideCover src={images[1]} alt={title} />
+                  <CoverImage
+                    src={images?.at(1) as string}
+                    alt={title}
+                    className={'SideCover'}
+                  />
                 </SideImgCover>
                 <FrontImageCover className="front">
-                  <FrontCover src={images[0]} alt={title} />
+                  <CoverImage
+                    src={images?.at(0) as string}
+                    alt={title}
+                    className={'FrontCover'}
+                    replace={cover}
+                  />
                 </FrontImageCover>
               </BookImagesCovers>
             </BookContainer>

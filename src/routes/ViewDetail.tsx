@@ -74,6 +74,7 @@ function ViewDetail() {
                 <BookImageSection>
                   <DetailImages
                     itemId={itemId}
+                    isbn={book?.isbn as string}
                     title={book?.title as string}
                     cover={book?.cover as string}
                   />
@@ -90,6 +91,7 @@ function ViewDetail() {
           {openPreview && (
             <ViewerModal
               itemId={book?.itemId as number}
+              isbn={book?.isbn as string}
               title={book?.title as string}
               cover={book?.cover as string}
               closeModal={() => setOpenPreview(false)}

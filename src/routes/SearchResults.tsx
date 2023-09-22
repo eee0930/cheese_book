@@ -27,7 +27,7 @@ function SearchResults() {
 
   const { data: books, isLoading } = useQuery<IAladinRequestList>(
     ['search', `${query} ${isKorea}`],
-    () => fetchBookListByQuery(query, isKorea, 36),
+    () => fetchBookListByQuery(query, isKorea, 12),
     { retry: 0 }
   );
 

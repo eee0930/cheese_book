@@ -1,51 +1,78 @@
 import { useEffect, useState } from 'react';
-import { ICoverImages, fetchViewerImagesById } from '../../apis/fetching';
+import { getViewerImagesByIsbnId } from '../../apis/fetching';
 import { Loader } from '../../styles/globalStyles';
 import {
   BookImagesGroup,
-  LeftSideImage,
-  RightSideImage,
-  MiddleSideImage,
+  CoverSideImage,
+  nexPageVariants,
 } from '../../styles/components/viewerStyles';
+import { AnimatePresence } from 'framer-motion';
 
 interface IIsbn {
   itemId: number;
+  isbn: string;
   title: string;
   cover: string;
 }
 
-function BookViewer({ itemId, title, cover }: IIsbn) {
+function BookViewer({ itemId, isbn, title, cover }: IIsbn) {
   const [isLoading, setIsLoading] = useState(true);
-  const [isOnePage, setIsOnePage] = useState(true);
-  const [imageList, setImageList] = useState<string[]>();
-  const [failed, setfailed] = useState(false);
-  const [setIdx, setSetIdx] = useState(0);
+  const [imageList, setImageList] = useState<string[][]>();
+  const [index, setIndex] = useState(0);
+  const [totalIdx, setTotalIdx] = useState(0);
+  const [mobileIdx, setMobileIdx] = useState(0);
+  const [isNext, setIsNext] = useState(true);
+  const [prevent, setPrevent] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    getImages();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [itemId]);
+    const imageListArr = getViewerImagesByIsbnId(isbn, itemId);
+    setImageList(imageListArr);
+    setTotalIdx(imageListArr.length - 1);
+    setIsLoading(false);
+  }, [isbn, itemId]);
 
-  const getImages = async () => {
-    const fetchedImgs = await fetchViewerImagesById(itemId);
-    if (!fetchedImgs || fetchedImgs.length === 0) {
-      setfailed(true);
-      console.log('Book Viewer를 불러오는데 실패하였습니다.');
+  const handleErrorCallback = () => {
+    if (index !== 0) {
+      setTotalIdx(index - 1);
+      setIndex((prev) => prev - 1);
+    } else {
+      setPrevent(true);
+    }
+  };
+  const handleClickViewer = (
+    event: React.MouseEvent<HTMLImageElement, MouseEvent>,
+    isRight: boolean
+  ) => {
+    if (prevent) {
+      event.preventDefault();
       return;
     }
-    setIsOnePage(typeof fetchedImgs[0] === 'string');
-    setImageList(fetchedImgs as ICoverImages<undefined | string[]>);
-    setIsLoading(false);
+    if (isRight) {
+      setIsNext(true);
+      if (index === 0) {
+        return;
+      }
+      setIndex((prev) => prev - 1);
+    } else {
+      setIsNext(false);
+      if (index === totalIdx) {
+        return;
+      }
+      setIndex((prev) => prev + 1);
+    }
   };
-
-  if (failed) {
-    return (
-      <div>
-        <LeftSideImage src={cover} />
-      </div>
-    );
-  }
+  const onImageError = (
+    target: EventTarget & HTMLImageElement,
+    isReplace: boolean
+  ) => {
+    target.onerror = null;
+    handleErrorCallback();
+    if (isReplace) {
+      target.src = cover;
+    } else {
+      target.style.display = 'none';
+    }
+  };
   return (
     <>
       {isLoading ? (
@@ -57,18 +84,39 @@ function BookViewer({ itemId, title, cover }: IIsbn) {
         </Loader>
       ) : (
         <>
-          {isOnePage ? (
-            <LeftSideImage src={imageList?.at(0)} alt={title} />
-          ) : (
-            <BookImagesGroup>
-              <LeftSideImage src={imageList?.at(setIdx)?.at(1)} alt={title} />
-              {imageList?.at(setIdx)?.at(2) && (
-                <MiddleSideImage
-                  src={imageList?.at(setIdx)?.at(2)}
-                  alt={title}
-                />
-              )}
-              <RightSideImage src={imageList?.at(setIdx)?.at(0)} alt={title} />
+          {imageList && (
+            <BookImagesGroup
+              key={`key${index}`}
+              variants={nexPageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+            >
+              <CoverSideImage
+                src={
+                  index === 0
+                    ? (imageList?.at(index)?.at(1) as string)
+                    : (imageList?.at(index)?.at(0) as string)
+                }
+                alt={title}
+                onError={({ currentTarget }) =>
+                  onImageError(currentTarget, false)
+                }
+                onClick={(event) => handleClickViewer(event, true)}
+              />
+              <CoverSideImage
+                key={`key${index}-1`}
+                src={
+                  index === 0
+                    ? (imageList?.at(index)?.at(0) as string)
+                    : (imageList?.at(index)?.at(1) as string)
+                }
+                alt={title}
+                onError={({ currentTarget }) =>
+                  onImageError(currentTarget, true)
+                }
+                onClick={(event) => handleClickViewer(event, false)}
+              />
             </BookImagesGroup>
           )}
         </>

@@ -9,12 +9,13 @@ import { Button } from '../Button';
 
 interface IViewerModal {
   itemId: number;
+  isbn: string;
   title: string;
   cover: string;
   closeModal: () => void;
 }
 
-function ViewerModal({ itemId, title, cover, closeModal }: IViewerModal) {
+function ViewerModal({ itemId, isbn, title, cover, closeModal }: IViewerModal) {
   return (
     <>
       <ModalContainer>
@@ -30,7 +31,7 @@ function ViewerModal({ itemId, title, cover, closeModal }: IViewerModal) {
               close
             </Button>
           </CloseButtonCover>
-          <BookViewer itemId={itemId} title={title} cover={cover} />
+          <BookViewer itemId={itemId} isbn={isbn} title={title} cover={cover} />
         </Modal>
       </ModalContainer>
     </>

@@ -2,17 +2,17 @@ import fetchJsonp from 'fetch-jsonp';
 
 const KEY = process.env.REACT_APP_ALADIN_KEY;
 const ROOT = process.env.REACT_APP_ALADIN_ROOT;
-
 const VERSION = '20131101';
 
-const request = (url: string) => {
+const request = async (url: string) => {
   const options = `&TTBKey=${KEY}&Output=js&Version=${VERSION}`;
-  const result = fetchJsonp(`${url}${options}`);
-  return result
-    .then((response) => {
-      return response.json();
-    })
-    .catch((err) => console.log('parsing failed', err));
+  const result = fetchJsonp(`${url}${options}`, { timeout: 3000 });
+  try {
+    const response = await result;
+    return await response.json();
+  } catch (err) {
+    return console.log('parsing failed', err);
+  }
 };
 
 interface ISubInfo {

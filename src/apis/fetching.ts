@@ -92,3 +92,46 @@ export const fetchDetailImagesById = async (id: number) => {
     }
   });
 };
+
+export const getDetailImagesByIsbnId = (isbn: string, itemId: number) => {
+  const itemIdStr = String(itemId);
+  const [PATH_ROOT, COVER, SPIN] = [
+    'https://image.aladin.co.kr/product/',
+    'cover500',
+    'spineflip',
+  ];
+  const defaultPath = [
+    `${PATH_ROOT}${itemIdStr.slice(0, 5)}/${itemIdStr.slice(5, 7)}/`,
+    '_1.jpg',
+  ];
+  const mainCoverPath = [
+    `${defaultPath[0]}${COVER}/${isbn}${defaultPath[1]}`,
+    `${defaultPath[0]}${SPIN}/${isbn}_d.jpg`,
+  ];
+  return mainCoverPath;
+};
+
+export const getViewerImagesByIsbnId = (isbn: string, itemId: number) => {
+  const itemIdStr = String(itemId);
+  const [PATH_ROOT, COVER] = [
+    'https://image.aladin.co.kr/product/',
+    'letslook',
+  ];
+  const REPLACE = 'HWAYEON';
+  const defaultPath = `${PATH_ROOT}${itemIdStr.slice(0, 5)}/${itemIdStr.slice(
+    5,
+    7
+  )}/${COVER}/${isbn}${REPLACE}l.jpg`;
+  const mainCoverPath = [
+    defaultPath.replace(REPLACE, '_f'),
+    defaultPath.replace(REPLACE, '_b'),
+  ];
+  const pagesPath = Array.from(Array(9), (_, i) => {
+    const [idx1, idx2] = [(i + 1) * 2 - 1, (i + 1) * 2];
+    return [
+      defaultPath.replace(REPLACE, `_t${idx1}`),
+      defaultPath.replace(REPLACE, `_t${idx2}`),
+    ];
+  });
+  return [mainCoverPath, ...pagesPath];
+};

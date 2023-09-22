@@ -65,20 +65,12 @@ export const categoryList = [
         name: '액션',
       },
       {
-        id: 50931,
-        name: '공포',
-      },
-      {
         id: 987,
         name: '과학',
       },
       {
         id: 55889,
         name: '에세이',
-      },
-      {
-        id: 1196,
-        name: '여행',
       },
       {
         id: 336,

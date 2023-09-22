@@ -50,6 +50,18 @@ export const SideImgCover = styled.div`
     transition: transform 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
     transform: perspective(500px) rotateY(-89deg) translateX(-50%);
   }
+  .SideCover {
+    height: 60vw;
+    max-height: 85vh;
+    border-radius: 3px;
+    transition: transform 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    @media (min-width: 991.5px) {
+      height: 40vw;
+      max-height: 65vh;
+    }
+    border-radius: 3px 1px 1px 3px;
+    transform: perspective(500px) rotateY(-89deg) translateX(-50%);
+  }
 `;
 export const SideCover = styled(motion.img)`
   height: 60vw;
@@ -73,6 +85,16 @@ export const FrontImageCover = styled.div`
     width: 100%;
     height: 100%;
     box-shadow: inset 0px 0px 12px 3px rgba(0, 0, 0, 0.05);
+  }
+  .FrontCover {
+    height: 60vw;
+    max-height: 85vh;
+    border-radius: 3px;
+    transition: transform 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    @media (min-width: 991.5px) {
+      height: 40vw;
+      max-height: 65vh;
+    }
   }
 `;
 export const FrontCover = styled(BookImage)``;
