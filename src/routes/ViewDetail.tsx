@@ -10,7 +10,7 @@ import {
 } from '../apis/aladinApi';
 import { prevPageState } from '../atom';
 // components
-import { Button } from '../components/Button';
+import { Button, HeartBlast } from '../components/Button';
 import ViewerModal from '../components/viewDetail/ViewerModal';
 import CheeseHead from '../components/CheeseHead';
 // styles
@@ -23,13 +23,13 @@ import {
   TitleSection,
   PreviewBtnSection,
   PrevBtnContainer,
-  DetialInfoContainer,
-  DetailInfoTitle,
-  DetailInfoCover,
-  DetialInfoContainer2,
   CardReview,
+  CardBtnCover,
+  LikeBtnSection,
 } from '../styles/screens/viewDetailStyles';
 import DetailImages from '../components/viewDetail/DetailImages';
+import DetailContainer from '../components/viewDetail/DetailContainer';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const getRedesignPrice = (price: number) => {
   const priceStr = String(price);
@@ -62,11 +62,30 @@ const getCardReviews = (reviewList: string[]) => {
     return Array.from(Array(idx), (_, i) => `${ROOT}${i + 1}.jpg`);
   }
 };
+
+const rowVariants = {
+  hidden: (isNext: boolean) => {
+    return {
+      x: isNext ? 605 : -605,
+    };
+  },
+  visible: {
+    x: 0,
+  },
+  exit: (isNext: boolean) => {
+    return {
+      x: isNext ? -605 : 605,
+    };
+  },
+};
+
 function ViewDetail() {
   const prevPage = useRecoilValue(prevPageState);
   const useId = useMatch('/book/:id');
   const itemId = Number(useId?.params.id);
   const [openPreview, setOpenPreview] = useState(false);
+  const [cardIdx, setCardIdx] = useState(0);
+  const [isNext, setIsNext] = useState(true);
 
   const { data: book, isLoading } = useQuery<
     IAladinRequestList,
@@ -76,6 +95,25 @@ function ViewDetail() {
     retry: 0,
     select: (bookDetail) => bookDetail.item[0],
   });
+
+  const handleClickCard = (next: boolean, totalIdx?: number) => {
+    if (next) {
+      setIsNext(true);
+    } else {
+      setIsNext(false);
+    }
+    if (!next) {
+      if (cardIdx === 0) {
+        return;
+      }
+      setCardIdx((prev) => prev - 1);
+    } else {
+      if (cardIdx === totalIdx) {
+        return;
+      }
+      setCardIdx((prev) => prev + 1);
+    }
+  };
 
   return (
     <>
@@ -119,72 +157,100 @@ function ViewDetail() {
                       미리보기
                     </Button>
                   </PreviewBtnSection>
+                  <LikeBtnSection>
+                    <HeartBlast book={book as IAladinBookItem} />
+                  </LikeBtnSection>
                 </BookImageSection>
-                <DetialInfoContainer className="row">
-                  <DetailInfoTitle className="col-12 col-lg-3">
-                    책 소개
-                  </DetailInfoTitle>
-                  <DetailInfoCover className="col-12 col-lg-9">
+
+                <DetailContainer title="책 소개">
+                  <div>
+                    <span>{book?.description}</span>
+                  </div>
+                </DetailContainer>
+                <DetailContainer title="기본 정보">
+                  <div>
+                    <span className="label">출판사</span>
+                    <span>{book?.publisher}</span>
+                  </div>
+                  <div>
+                    <span className="label">주제분류</span>
+                    <span>{book?.categoryName.split('>').join(' > ')}</span>
+                  </div>
+                  <div>
+                    <span className="label">출간일</span>
+                    <span>{book?.pubDate}</span>
+                  </div>
+                  <div>
+                    <span className="label">정가</span>
+                    <span>
+                      {getRedesignPrice(book?.priceStandard as number)}원
+                    </span>
+                  </div>
+                  {book?.subInfo && (
                     <div>
-                      <span>{book?.description}</span>
+                      <span className="label">페이지 수</span>
+                      <span>{book?.subInfo?.itemPage}쪽</span>
                     </div>
-                  </DetailInfoCover>
-                </DetialInfoContainer>
-                <DetialInfoContainer2 className="row">
-                  <DetailInfoTitle className="col-12 col-lg-3">
-                    기본 정보
-                  </DetailInfoTitle>
-                  <DetailInfoCover className="col-12 col-lg-9">
+                  )}
+                  {book?.bestDuration && (
                     <div>
-                      <span className="label">출판사</span>
-                      <span>{book?.publisher}</span>
-                    </div>
-                    <div>
-                      <span className="label">주제분류</span>
-                      <span>{book?.categoryName.split('>').join(' > ')}</span>
-                    </div>
-                    <div>
-                      <span className="label">출간일</span>
-                      <span>{book?.pubDate}</span>
-                    </div>
-                    <div>
-                      <span className="label">정가</span>
+                      <span className="label">종합주간</span>
                       <span>
-                        {getRedesignPrice(book?.priceStandard as number)}원
+                        {book.bestRank} {book.bestDuration}
                       </span>
                     </div>
-                    {book?.subInfo && (
-                      <div>
-                        <span className="label">페이지 수</span>
-                        <span>{book?.subInfo?.itemPage}쪽</span>
-                      </div>
-                    )}
-                    {book?.bestDuration && (
-                      <div>
-                        <span className="label">종합주간</span>
-                        <span>
-                          {book.bestRank} {book.bestDuration}
-                        </span>
-                      </div>
-                    )}
-                  </DetailInfoCover>
-                </DetialInfoContainer2>
+                  )}
+                </DetailContainer>
 
                 {book?.subInfo?.cardReviewImgList && (
-                  <DetialInfoContainer className="row">
-                    <DetailInfoTitle className="col-12 col-lg-3">
-                      카드 리뷰
-                    </DetailInfoTitle>
-                    <DetailInfoCover className="col-12 col-lg-9">
+                  <DetailContainer title="카드 리뷰">
+                    <AnimatePresence initial={false} custom={isNext}>
                       <CardReview>
-                        {getCardReviews(book?.subInfo?.cardReviewImgList).map(
-                          (review, i) => (
-                            <img key={i} src={review} alt={book?.title} />
-                          )
-                        )}
+                        <motion.img
+                          key={cardIdx}
+                          variants={rowVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          transition={{ type: 'tween', duration: 0.5 }}
+                          custom={isNext}
+                          src={
+                            getCardReviews(book?.subInfo?.cardReviewImgList)[
+                              cardIdx
+                            ]
+                          }
+                          alt={book?.title}
+                        />
                       </CardReview>
-                    </DetailInfoCover>
-                  </DetialInfoContainer>
+                    </AnimatePresence>
+
+                    <CardBtnCover>
+                      <button
+                        onClick={() => handleClickCard(false)}
+                        className={`${cardIdx === 0 && 'disabled'}`}
+                      >
+                        <i className="fa-solid fa-angle-left" />
+                      </button>
+                      <button
+                        onClick={() =>
+                          handleClickCard(
+                            true,
+                            getCardReviews(
+                              book?.subInfo?.cardReviewImgList as string[]
+                            ).length - 1
+                          )
+                        }
+                        className={`${
+                          cardIdx ===
+                            getCardReviews(book?.subInfo?.cardReviewImgList)
+                              .length -
+                              1 && 'disabled'
+                        }`}
+                      >
+                        <i className="fa-solid fa-angle-right" />
+                      </button>
+                    </CardBtnCover>
+                  </DetailContainer>
                 )}
               </BookContentSection>
             </BookContentContainer>

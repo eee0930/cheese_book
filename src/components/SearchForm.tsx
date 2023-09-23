@@ -1,4 +1,7 @@
+import { useEffect, useRef, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
+import { latestSearchListState } from '../atom';
 import { mainColors } from '../data/cheeseMainData';
 import {
   ModalContainer,
@@ -14,7 +17,6 @@ import {
   menuFade,
   menuIn,
 } from '../styles/components/sideMenuStyles';
-import { useEffect, useRef, useState } from 'react';
 
 interface ISearchForm {
   themeIdx?: number;
@@ -41,7 +43,7 @@ function SearchInput({ formSubmit, onChange, value }: ISearchInput) {
       <SearchFormInput
         type="search"
         name="search"
-        placeholder="search"
+        placeholder="Keyword and Enter."
         value={value}
         onChange={onChange}
         autoComplete="off"
@@ -54,6 +56,7 @@ function SearchInput({ formSubmit, onChange, value }: ISearchInput) {
 export function SearchForm({ themeIdx = 0, callback }: ISearchForm) {
   const navigate = useNavigate();
   const [searchField, setSearchField] = useState('');
+  const [searchList, setSearchList] = useRecoilState(latestSearchListState);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate(`/search?q=${searchField}`);
@@ -86,6 +89,7 @@ export function SearchForm({ themeIdx = 0, callback }: ISearchForm) {
 
 export function MobileSearchForm({ themeIdx = 0, callback }: ISearchForm) {
   const [searchField, setSearchField] = useState('');
+  const [searchList, setSearchList] = useRecoilState(latestSearchListState);
   const navigate = useNavigate();
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchField(e.target.value);

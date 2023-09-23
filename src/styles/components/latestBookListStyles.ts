@@ -212,10 +212,20 @@ export const BookList = styled(motion.li)`
   margin-bottom: 10px;
   border-radius: 5px;
   cursor: pointer;
+  position: relative;
   @media (min-width: 991.5px) {
     margin-bottom: 1rem;
     border-radius: 10px;
   }
+`;
+export const DeleteOneBtn = styled.button`
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  width: 50px;
+  height: 50px;
+  font-size: 16px;
+  z-index: 1;
 `;
 export const BookCover = styled.div`
   width: 60px;

@@ -11,6 +11,7 @@ import {
   BookTitle,
   CountLabel,
   DeleteBtn,
+  DeleteOneBtn,
   LatestBookBtnContainer,
   LatestBookBtnCover,
   LatestBookBtnImg,
@@ -43,6 +44,13 @@ function LatestBookList() {
   const handleClickBook = (itemId: number) => {
     setOpenLatestList(false);
     navigate(`/book/${itemId}`);
+  };
+  const handleClickDelete = (e: React.UIEvent, idx: number) => {
+    if (latestBooks.length === 1) {
+      setOpenLatestList(false);
+    }
+    e.stopPropagation();
+    setLatestBooks((prev) => [...prev.slice(0, idx), ...prev.slice(idx + 1)]);
   };
   return (
     <>
@@ -91,7 +99,7 @@ function LatestBookList() {
                 </BookListInfo>
                 <BookListContainer>
                   <BookListUl>
-                    {latestBooks.map((book) => (
+                    {latestBooks.map((book, i) => (
                       <BookList
                         variants={slideLeft}
                         initial="initial"
@@ -103,6 +111,11 @@ function LatestBookList() {
                           style={{ backgroundImage: `url(${book.cover})` }}
                         />
                         <BookTitle>{book.title.split('-')[0]}</BookTitle>
+                        <DeleteOneBtn
+                          onClick={(event) => handleClickDelete(event, i)}
+                        >
+                          <i className="fa-solid fa-times" />
+                        </DeleteOneBtn>
                       </BookList>
                     ))}
                   </BookListUl>

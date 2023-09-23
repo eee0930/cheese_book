@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { styled } from 'styled-components';
 
 export const BookContentResultContainer = styled.div`
@@ -84,6 +85,12 @@ export const PreviewBtnSection = styled.div`
 export const PreviewBtn = styled.button`
   border: none;
 `;
+export const LikeBtnSection = styled.div`
+  position: absolute;
+  height: 50px;
+  left: calc(50% + 100px);
+  bottom: -0.5rem;
+`;
 export const BoxContainer = styled.div`
   display: none;
   position: fixed;
@@ -116,27 +123,31 @@ export const BoxContainer = styled.div`
   }
 `;
 export const DetialInfoContainer = styled.div`
-  margin: 4rem 0;
+  margin: 3rem 0;
   background-color: #fff;
-  padding: 4rem 5rem;
-`;
-export const DetialInfoContainer2 = styled.div`
-  margin: 4rem 0;
-  background-color: transparent;
-  padding: 0rem 5rem;
+  padding: 3rem 1rem;
+  &.trans {
+    background-color: transparent;
+  }
+  @media (min-width: 991.5px) {
+    margin: 4rem 0;
+    padding: 4rem 5rem;
+  }
 `;
 export const DetailInfoTitle = styled.h3`
   font-size: 1.5rem;
   line-height: 1.5;
   font-family: ${(props) => props.theme.tilte};
   margin-bottom: 2rem;
-  @media (max-width: 991.5px) {
-    magin-bottom: 0;
+  @media (min-width: 991.5px) {
+    margin-bottom: 0;
   }
 `;
 export const DetailInfoCover = styled.h3`
   font-size: 15px;
   line-height: 2;
+
+  position: relative;
   .label {
     font-weight: bold;
     margin-right: 10px;
@@ -145,23 +156,61 @@ export const DetailInfoCover = styled.h3`
     margin-bottom: 1rem;
   }
 `;
-export const CardReview = styled.div`
+export const CardReview = styled(motion.div)`
   text-align: center;
+  overflow: hidden;
+  height: calc(100vw - 4rem);
   img {
     width: 100%;
-    max-width: 300px;
   }
   @media (min-width: 768px) {
-    img {
-      max-width: 400px;
-    }
+    height: 400px;
+    max-width: 400px;
   }
   @media (min-width: 991.5px) {
     text-align: left;
   }
   @media (min-width: 1199.5px) {
-    img {
-      max-width: 600px;
+    height: 600px;
+    max-width: 600px;
+  }
+`;
+export const CardBtnCover = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: between;
+  align-items: center;
+  justify-content: space-between;
+  button {
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.4);
     }
+    &.disabled {
+      opacity: 0;
+      cursor: default;
+    }
+  }
+  @media (min-width: 768px) {
+    width: 400px;
+  }
+  @media (min-width: 991.5px) {
+    button {
+      font-size: 2rem;
+      width: 60px;
+      height: 60px;
+    }
+  }
+  @media (min-width: 1199.5px) {
+    width: 600px;
   }
 `;

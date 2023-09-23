@@ -89,6 +89,8 @@ export const AnimationBoxCover = styled(BoxStyle)`
   top: -0.8rem;
   right: -0.8rem;
   width: 100%;
+  @media (min-width: 991.5px) {
+  }
 `;
 export const AnimationBox = styled.span`
   position: absolute;
@@ -311,10 +313,10 @@ export const MobileMenuCover = styled(motion.div)`
   justify-content: center;
   align-items: center;
   @media (min-width: 991.5px) {
-    top: calc(50% - 25vh + 1rem);
-    left: calc(50% - 25vw + 1rem);
-    width: calc(50vw - 2rem);
-    height: calc(50vh - 2rem);
+    top: calc(50% - 25vh - 1rem);
+    left: calc(50% - 25vw - 1rem);
+    width: 50vw;
+    height: 50vh;
   }
 `;
 export const FormCharacter = styled.img`
@@ -378,6 +380,12 @@ export const MobileAnimationBoxCover = styled.div`
   right: 0rem;
   width: 100%;
   height: 100%;
+  @media (min-width: 991.5px) {
+    border: ${(props) => props.theme.boxLine.md};
+  }
+  @media (min-width: 1199.5px) {
+    border: ${(props) => props.theme.boxLine.lg};
+  }
 `;
 export const MobileAnimationBox = styled.div`
   position: absolute;
@@ -404,13 +412,14 @@ export const SearchFormInput = styled.input`
   background-color: transparent;
   margin-bottom: 10rem;
   &::placeholder {
-    color: #777;
+    color: #444;
   }
   @media (min-width: 991.5px) {
     margin-bottom: 0;
     border: solid 2px #000;
     background-color: #fff;
     padding: 0.5rem 1rem;
+    width: 400px;
   }
 `;
 

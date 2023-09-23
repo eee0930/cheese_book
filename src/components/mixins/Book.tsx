@@ -77,7 +77,6 @@ export function Book({ book, rankInfo }: IBook) {
         onClick={handleClickBook}
         title={`${oneAuthor} · ${publisher}`}
       >{`${oneAuthor} · ${publisher}`}</BookInfo>
-      <HeartBlast book={book} />
     </BookContentContainer>
   );
 }

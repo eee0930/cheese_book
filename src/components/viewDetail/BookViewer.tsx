@@ -71,13 +71,13 @@ function BookViewer({ itemId, isbn, title, cover }: IIsbn) {
       return;
     }
     if (isRight) {
-      if (index === 0 && mobileIdx === 1) {
+      if (index === 0 && mobileIdx <= 1) {
         return;
       }
       setIndex((prev) => prev - 1);
       setMobileIdx((prev) => prev - 2);
     } else {
-      if (index === totalIdx && mobileIdx === totalIdx * 2 + 1) {
+      if (index === totalIdx && mobileIdx === 1) {
         return;
       }
       setIndex((prev) => prev + 1);
