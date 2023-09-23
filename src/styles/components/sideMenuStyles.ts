@@ -422,7 +422,31 @@ export const SearchFormInput = styled.input`
     width: 400px;
   }
 `;
-
+export const SearchListCover = styled.div`
+  margin-top: 1rem;
+  text-align: center;
+  width: 320px;
+  position: absolute;
+  bottom: calc(50% - 40px);
+  left: calc(50% - 160px);
+  @media (min-width: 991.5px) {
+    width: 400px;
+    bottom: calc(50% - 80px);
+    left: calc(50% - 200px);
+  }
+`;
+export const SearchEle = styled.button`
+  margin: 0 5px;
+  font-size: 16px;
+  height: 30px;
+  padding: 2px 8px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  margin-bottom: 0.5rem;
+  @media (min-width: 991.5px) {
+    font-size: 14px;
+  }
+`;
 export const menuFade = {
   initial: {
     opacity: 0,

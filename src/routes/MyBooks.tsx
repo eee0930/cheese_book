@@ -61,7 +61,9 @@ function MyBooks() {
                   <MyBook key={`${i}-${j}`}>
                     <Link to={`/book/${book.itemId}`}>
                       <MyBookCover
-                        style={{ backgroundImage: `url(${book.cover})` }}
+                        // style={{ backgroundImage: `url(${book.cover})` }}
+                        src={book.cover}
+                        alt={book.title}
                       />
                     </Link>
                   </MyBook>

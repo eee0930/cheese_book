@@ -4,9 +4,11 @@ import {
   Answer,
   AnswerCover,
   AnswersCover,
+  ProgressBarContainer,
   QuestionContainer,
   QuestionCover,
 } from '../../styles/components/mbtiStyles';
+import ProgressBar from '../ProgressBar';
 
 interface IMbtiTest {
   callback: (result: string) => void;
@@ -67,6 +69,9 @@ function MbtiTest({ callback }: IMbtiTest) {
         (question, i) =>
           qIdx === i && (
             <QuestionContainer key={i}>
+              <ProgressBarContainer>
+                <ProgressBar totalIdx={tasteQuestions.length} idx={qIdx} />
+              </ProgressBarContainer>
               <img
                 src={`${process.env.PUBLIC_URL}/img/cheese3.png`}
                 alt="cheese book"

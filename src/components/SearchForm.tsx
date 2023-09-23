@@ -13,7 +13,9 @@ import {
   MobileAnimationBoxCover,
   MobileMenuContainer,
   MobileMenuCover,
+  SearchEle,
   SearchFormInput,
+  SearchListCover,
   menuFade,
   menuIn,
 } from '../styles/components/sideMenuStyles';
@@ -43,7 +45,7 @@ function SearchInput({ formSubmit, onChange, value }: ISearchInput) {
       <SearchFormInput
         type="search"
         name="search"
-        placeholder="Keyword and Enter."
+        placeholder="Input Keyword and Enter."
         value={value}
         onChange={onChange}
         autoComplete="off"
@@ -56,23 +58,51 @@ function SearchInput({ formSubmit, onChange, value }: ISearchInput) {
 export function SearchForm({ themeIdx = 0, callback }: ISearchForm) {
   const navigate = useNavigate();
   const [searchField, setSearchField] = useState('');
-  const [searchList, setSearchList] = useRecoilState(latestSearchListState);
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const [searchList, setSearchList] = useRecoilState<string[]>(
+    latestSearchListState
+  );
+  const handleSearchList = (keyword: string) => {
+    setSearchList((prev) => {
+      if (prev.includes(keyword)) {
+        const idx = prev.indexOf(keyword);
+        return [...prev.slice(0, idx), ...prev.slice(idx + 1), keyword];
+      } else {
+        if (prev.length < 5) {
+          return [...prev, keyword];
+        } else {
+          return [...prev.slice(1), keyword];
+        }
+      }
+    });
+  };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!searchField.length) {
+      return;
+    }
     navigate(`/search?q=${searchField}`);
+    handleSearchList(searchField);
     setSearchField('');
     callback();
   };
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchField(e.target.value);
+  const handleClickKeyword = (search: string) => {
+    setSearchField(search);
+    handleSearchList(search);
+    navigate(`/search?q=${search}`);
+    setSearchField('');
+    callback();
+  };
+  const backgroundColor = {
+    backgroundColor: mainColors[themeIdx][0],
+  };
   return (
     <ModalContainer>
       <OverlayContainer onClick={callback} />
-      <MobileMenuContainer style={{ backgroundColor: mainColors[themeIdx][0] }}>
+      <MobileMenuContainer style={backgroundColor}>
         <MobileAnimationBoxCover>
-          <MobileAnimationBox
-            style={{ backgroundColor: mainColors[themeIdx][0] }}
-          />
+          <MobileAnimationBox style={backgroundColor} />
         </MobileAnimationBoxCover>
         <MobileMenuCover variants={menuIn}>
           <FormCharacter src={`${process.env.PUBLIC_URL}/img/cheese4.png`} />
@@ -81,6 +111,13 @@ export function SearchForm({ themeIdx = 0, callback }: ISearchForm) {
             value={searchField}
             onChange={handleSearchInput}
           />
+          <SearchListCover>
+            {searchList?.map((search, i) => (
+              <SearchEle onClick={() => handleClickKeyword(search)} key={i}>
+                {search}
+              </SearchEle>
+            ))}
+          </SearchListCover>
         </MobileMenuCover>
       </MobileMenuContainer>
     </ModalContainer>
@@ -89,15 +126,45 @@ export function SearchForm({ themeIdx = 0, callback }: ISearchForm) {
 
 export function MobileSearchForm({ themeIdx = 0, callback }: ISearchForm) {
   const [searchField, setSearchField] = useState('');
-  const [searchList, setSearchList] = useRecoilState(latestSearchListState);
+  const [searchList, setSearchList] = useRecoilState<string[]>(
+    latestSearchListState
+  );
   const navigate = useNavigate();
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchField(e.target.value);
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSearchList = (keyword: string) => {
+    setSearchList((prev) => {
+      if (prev.includes(keyword)) {
+        const idx = prev.indexOf(keyword);
+        return [...prev.slice(0, idx), ...prev.slice(idx + 1), keyword];
+      } else {
+        if (prev.length < 5) {
+          return [...prev, keyword];
+        } else {
+          return [...prev.slice(1), keyword];
+        }
+      }
+    });
+  };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!searchField.length) {
+      return;
+    }
     navigate(`/search?q=${searchField}`);
+    handleSearchList(searchField);
     setSearchField('');
     callback();
+  };
+  const handleClickKeyword = (search: string) => {
+    setSearchField(search);
+    handleSearchList(search);
+    navigate(`/search?q=${search}`);
+    setSearchField('');
+    callback();
+  };
+  const backgroundColor = {
+    backgroundColor: mainColors[themeIdx][0],
   };
   return (
     <MobileMenuContainer
@@ -105,12 +172,10 @@ export function MobileSearchForm({ themeIdx = 0, callback }: ISearchForm) {
       initial="initial"
       animate="animate"
       exit="end"
-      style={{ backgroundColor: mainColors[themeIdx][0] }}
+      style={backgroundColor}
     >
       <MobileAnimationBoxCover>
-        <MobileAnimationBox
-          style={{ backgroundColor: mainColors[themeIdx][0] }}
-        />
+        <MobileAnimationBox style={backgroundColor} />
       </MobileAnimationBoxCover>
       <MobileMenuCover variants={menuIn}>
         <SearchInput
@@ -118,6 +183,13 @@ export function MobileSearchForm({ themeIdx = 0, callback }: ISearchForm) {
           value={searchField}
           onChange={handleSearchInput}
         />
+        <SearchListCover>
+          {searchList?.map((search, i) => (
+            <SearchEle onClick={() => handleClickKeyword(search)} key={i}>
+              {search}
+            </SearchEle>
+          ))}
+        </SearchListCover>
       </MobileMenuCover>
     </MobileMenuContainer>
   );

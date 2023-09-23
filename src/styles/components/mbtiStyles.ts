@@ -6,8 +6,12 @@ export const QuestionContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
   img {
     width: 120px;
+    margin-top: 60px;
   }
   @media (min-width: 768px) {
     img {
@@ -15,9 +19,20 @@ export const QuestionContainer = styled.div`
     }
   }
 `;
+export const ProgressBarContainer = styled.div`
+  position: absolute;
+  top: 2rem;
+  left: 0.5rem;
+  width: calc(100% - 1rem);
+  @media (min-width: 768px) {
+    top: 1rem;
+    left: 2rem;
+    width: calc(100% - 4rem);
+  }
+`;
 export const QuestionCover = styled.div`
   width: 100%;
-  max-width: 600px;
+  max-width: 550px;
   margin: 1rem auto 2rem;
   font-size: 1.6rem;
   font-weight: 400;

@@ -46,7 +46,7 @@ export const MyBooksSetCover = styled.div`
     right: 0;
     margin: 0 auto;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
   }
 `;
 
@@ -58,6 +58,7 @@ export const MyBook = styled.div`
   -ms-flex: 0 0 50%;
   flex: 0 0 50%;
   max-width: 50%;
+  align-items: center;
   margin-bottom: 10px;
   padding: 5px;
   @media (min-width: 767.5px) {
@@ -77,7 +78,7 @@ export const MyBook = styled.div`
     z-index: 0;
     padding: 0;
     transition: transform 0.4s, filter 0.4s, z-index 0.2s;
-    box-shadow: -2px 3px 5px 1px rgba(0, 0, 0, 0.15);
+    // box-shadow: -2px 3px 5px 1px rgba(0, 0, 0, 0.15);
     & > div {
       filter: brightness(50%);
     }
@@ -98,11 +99,15 @@ export const MyBook = styled.div`
     width: 190px;
   }
 `;
-export const MyBookCover = styled.div`
+export const MyBookCover = styled.img`
   width: 100%;
   height: 100%;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
+  // background-size: 100% 100%;
+  // background-repeat: no-repeat;
+  // background-position: center;
   border-radius: 2px;
+  box-shadow: -2px 3px 5px 1px rgba(0, 0, 0, 0.15);
+  @media (min-width: 991.5px) {
+    height: auto;
+  }
 `;
