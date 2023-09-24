@@ -22,7 +22,7 @@ function CheeseHead({
           content={`${title ? title + ' | ' : ''}Cheese Book`}
         />
         <meta property="og:image" content={image} />
-        <meta property="og:site_name" content="" />
+        <meta property="og:site_name" content="Cheese Book" />
         <meta property="og:description" content={description} />
 
         <meta

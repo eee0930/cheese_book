@@ -60,11 +60,7 @@ function MyBooks() {
                 {bookSet.map((book, j) => (
                   <MyBook key={`${i}-${j}`}>
                     <Link to={`/book/${book.itemId}`}>
-                      <MyBookCover
-                        // style={{ backgroundImage: `url(${book.cover})` }}
-                        src={book.cover}
-                        alt={book.title}
-                      />
+                      <MyBookCover src={book.cover} alt={book.title} />
                     </Link>
                   </MyBook>
                 ))}

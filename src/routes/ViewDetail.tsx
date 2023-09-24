@@ -63,20 +63,45 @@ const getCardReviews = (reviewList: string[]) => {
   }
 };
 
+// const rowVariants = {
+//   hidden: (isNext: boolean) => {
+//     return {
+//       x: isNext ? 605 : -605,
+//     };
+//   },
+//   visible: {
+//     x: 0,
+//   },
+//   exit: (isNext: boolean) => {
+//     return {
+//       x: isNext ? -605 : 605,
+//     };
+//   },
+// };
+
 const rowVariants = {
-  hidden: (isNext: boolean) => {
+  enter: (isNext: number) => {
     return {
-      x: isNext ? 605 : -605,
+      x: isNext > 0 ? 1000 : -1000,
+      opacity: 0,
     };
   },
-  visible: {
+  center: {
+    zIndex: 1,
     x: 0,
+    opacity: 1,
   },
-  exit: (isNext: boolean) => {
+  exit: (isNext: number) => {
     return {
-      x: isNext ? -605 : 605,
+      zIndex: 0,
+      x: isNext < 0 ? 1000 : -1000,
+      opacity: 0,
     };
   },
+};
+const swipeConfidenceThreshold = 10000;
+const swipePower = (offset: number, velocity: number) => {
+  return Math.abs(offset) * velocity;
 };
 
 function ViewDetail() {
@@ -209,10 +234,10 @@ function ViewDetail() {
                         <motion.img
                           key={cardIdx}
                           variants={rowVariants}
-                          initial="hidden"
-                          animate="visible"
-                          exit="exit"
-                          transition={{ type: 'tween', duration: 0.5 }}
+                          // initial="hidden"
+                          // animate="visible"
+                          // exit="exit"
+                          // transition={{ type: 'tween', duration: 0.5 }}
                           custom={isNext}
                           src={
                             getCardReviews(book?.subInfo?.cardReviewImgList)[
@@ -220,6 +245,30 @@ function ViewDetail() {
                             ]
                           }
                           alt={book?.title}
+                          initial="enter"
+                          animate="center"
+                          exit="exit"
+                          transition={{
+                            x: { type: 'spring', stiffness: 300, damping: 30 },
+                            opacity: { duration: 0.2 },
+                          }}
+                          drag="x"
+                          dragConstraints={{ left: 0, right: 0 }}
+                          dragElastic={1}
+                          onDragEnd={(e, { offset, velocity }) => {
+                            const swipe = swipePower(offset.x, velocity.x);
+
+                            if (swipe < -swipeConfidenceThreshold) {
+                              handleClickCard(
+                                true,
+                                getCardReviews(
+                                  book?.subInfo?.cardReviewImgList as string[]
+                                ).length - 1
+                              );
+                            } else if (swipe > swipeConfidenceThreshold) {
+                              handleClickCard(false);
+                            }
+                          }}
                         />
                       </CardReview>
                     </AnimatePresence>
