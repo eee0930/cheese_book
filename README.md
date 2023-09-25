@@ -89,10 +89,17 @@ $ npm run deploy
 
 
 ## Screens and Introduction 🎬
-### 1. list contents
+### 1. Home
 <div>
+  
+https://github.com/eee0930/cheese_book/assets/37135523/81c210b2-0a6a-4884-914c-166e1456a947
 <img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/914f9562-b038-4b06-a5ad-4596fc825a2e.gif"/>
-
+<ol>
+  <li>베스트 셀러 6개를 배너로 소개</li>
+  <li></li>
+</ol>  
+<br>
+  
 #### skills & issues
 <ol>
   <li>movies, tv show, weekly trends 화면에서 재사용할 수 있도록 slider를 compoenent로 나눔</li>
@@ -110,7 +117,7 @@ $ npm run deploy
 
 <br>
 
-### 3. view details
+### 2. Best Sellers & New Books
 <div>
 <img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/0b5e0e36-6a0a-4cd9-9981-4f830ed6ce92.gif"/>
 <p></p>
@@ -123,7 +130,7 @@ $ npm run deploy
 
 <br>
 
-### 4. trailer video
+### 3. Your Taste
 <div>
 <img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/28e99ab8-0ed1-4573-8844-3441f565f9b4.gif"/>
 <p></p>
@@ -138,7 +145,34 @@ $ npm run deploy
 
 <br>
 
-### 5. search results
+### 4. My Books
+<div>
+<img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/060ddc04-c14a-4b83-9d04-80fb0d986330.gif"/>
+<p></p>
+
+#### skills & issues
+<ol>
+  <li>Router의 useNavigate를 이용하여 검색을 하면 /search로 리다이렉트 되도록 함.</li>
+  <li>useLocation으로 검색어인 param 값을 가져와 해당 검색어에 해당되는 api data를 가져옴.</li>
+</ol>
+</div>
+
+<br>
+
+### 5. Search Results
+<div>
+<img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/060ddc04-c14a-4b83-9d04-80fb0d986330.gif"/>
+<p></p>
+
+#### skills & issues
+<ol>
+  <li>Router의 useNavigate를 이용하여 검색을 하면 /search로 리다이렉트 되도록 함.</li>
+  <li>useLocation으로 검색어인 param 값을 가져와 해당 검색어에 해당되는 api data를 가져옴.</li>
+</ol>
+</div>
+<br>
+
+### 6. Latest Books
 <div>
 <img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/060ddc04-c14a-4b83-9d04-80fb0d986330.gif"/>
 <p></p>
