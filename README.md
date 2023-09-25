@@ -12,8 +12,9 @@
 ## Project Info
 ### Goal
 <ol>
-  <li>netflix 웹사이트와 비슷하게 연출하여 최신 영화와 tv 프로그램 정보들을 보여줌</li>
-  <li>react의 다양한 hook들을 사용하며 state의 효율적인 사용에 대한 고찰 및 연습하기</li>
+  <li></li>
+  <li>React Query cashing 기능을 </li>
+  <li>필요한 기능을 담은 Custom Hook 만들기 </li>
   <li>react router, styled components, query, hook form, 등 다양한 리액트 라이브러리 공부</li>
   <li>api에서 제공하는 데이터를 이용하여 user interface를 고려한 화면에 다양한 정보들을 연출하기</li>
 </ol>
@@ -86,6 +87,8 @@ $ npm run deploy
 ### 1. Home
 <div>
 <img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/ab40bfda-fcf5-4dfe-9920-7e1f0e144fea.gif"/>
+  <br>
+<img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/e97bb335-d77a-409d-aa72-35955cfc37b9.gif" />
 <p></p>
 
 #### skills & issues
@@ -107,7 +110,7 @@ $ npm run deploy
 
 ### 2. Best Sellers, New books
 <div>
-<img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/0b5e0e36-6a0a-4cd9-9981-4f830ed6ce92.gif"/>
+<img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/50ef5119-b5bf-4530-9173-50ec1b097872.gif"/>
 <p></p>
 
 #### skills & issues
@@ -118,7 +121,7 @@ $ npm run deploy
 
 <br>
 
-### 3. Your Taste
+### 3. Detail Book
 <div>
 <img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/0b5e0e36-6a0a-4cd9-9981-4f830ed6ce92.gif"/>
 <p></p>
@@ -131,7 +134,33 @@ $ npm run deploy
 
 <br>
 
-### 4. My Books
+### 4. Book Viewer
+<div>
+<img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/0b5e0e36-6a0a-4cd9-9981-4f830ed6ce92.gif"/>
+<p></p>
+
+#### skills & issues
+<ol>
+  <li>Box를 클릭했을 때 URL을 변경시키고, 변화된 URL에 기반해서 상세보기 Modal을 띄우는 애니메이션을 실행시킴.</li>
+</ol>
+</div>
+
+<br>
+
+### 5. Your Taste
+<div>
+<img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/0b5e0e36-6a0a-4cd9-9981-4f830ed6ce92.gif"/>
+<p></p>
+
+#### skills & issues
+<ol>
+  <li>Box를 클릭했을 때 URL을 변경시키고, 변화된 URL에 기반해서 상세보기 Modal을 띄우는 애니메이션을 실행시킴.</li>
+</ol>
+</div>
+
+<br>
+
+### 6. My Books
 <div>
 <img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/28e99ab8-0ed1-4573-8844-3441f565f9b4.gif"/>
 <p></p>
@@ -146,7 +175,7 @@ $ npm run deploy
 
 <br>
 
-### 5. Search Results
+### 7. Search Results
 <div>
 <img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/060ddc04-c14a-4b83-9d04-80fb0d986330.gif"/>
 <p></p>
@@ -161,7 +190,7 @@ $ npm run deploy
 
 <br>
 
-### 5. Latest Books
+### 8. Latest Books
 <div>
 <img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/060ddc04-c14a-4b83-9d04-80fb0d986330.gif"/>
 <p></p>
