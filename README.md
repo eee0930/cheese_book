@@ -1,4 +1,5 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=f9cc73&height=200&section=header&text=Cheese+Book&fontSize=80" />
+![cheesebook_title](https://github.com/eee0930/cheese_book/assets/37135523/a8153880-9cad-417b-9086-3bafa3f3131b)
+
 
 ## Deployment
 **github pages:** [https://eee0930.github.io/cheese_book](https://eee0930.github.io/cheese_book)
