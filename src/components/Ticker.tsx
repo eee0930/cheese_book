@@ -29,23 +29,3 @@ export const Ticker = ({ children, width }: TickerProps) => {
     </TickerWrap>
   );
 };
-
-export const OneTicker = ({ children, width }: TickerProps) => {
-  const imgWidth = width;
-  const len = children.length;
-  return (
-    <TickerWrap>
-      <AnimatePresence custom={{ imgWidth, len }}>
-        <TickerCollection
-          variants={tickerVariants}
-          initial="initial"
-          animate="animate"
-          custom={{ imgWidth, len }}
-        >
-          {children}
-          {children}
-        </TickerCollection>
-      </AnimatePresence>
-    </TickerWrap>
-  );
-};

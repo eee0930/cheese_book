@@ -72,7 +72,6 @@ function Banner() {
     setBookStyleIdx(Math.floor(index / 3) + 1);
     const bannerTimeout = setTimeout(handleNextIdx, 5000);
     setBannerTimer(bannerTimeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
 
   return (
