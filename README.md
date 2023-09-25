@@ -86,7 +86,7 @@ $ npm run deploy
 ### 1. Home
 <div>
 <img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/ab40bfda-fcf5-4dfe-9920-7e1f0e144fea.gif"/>
-
+<p></p>
 
 #### skills & issues
 <ol>
