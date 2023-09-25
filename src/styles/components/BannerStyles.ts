@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 export const BannerContainer = styled.div`
   margin-left: -1rem;
   margin-right: -1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   margin-top: -${(props) => props.theme.sideMenu.xs};
   position: relative;
   overflow: hidden;

@@ -136,7 +136,7 @@ export const NavTapsContainer = styled.div`
 `;
 export const HomeTapsContainer = styled.div`
   display: none;
-  margin: 0 0 3rem;
+  margin: 5rem 0;
   padding: 0 0.5rem;
   @media (min-width: 768px) {
     display: flex;

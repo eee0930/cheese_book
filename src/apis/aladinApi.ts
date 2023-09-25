@@ -89,6 +89,24 @@ export const fetchBestSellerBookList = async (
     }&MaxResults=${maxResult}`
   );
 
+/**
+ * 블로그 베스트 셀러 (국내/ 해외)
+ * @param isKorea
+ * @param categoryId
+ * @param maxResult
+ * @returns
+ */
+export const fetchBlogBestBookList = async (
+  isKorea: boolean,
+  categoryId: number,
+  maxResult: number
+) =>
+  await request(
+    `${ROOT}ItemList.aspx?QueryType=BlogBest&Cover=Big&categoryId=${categoryId}&SearchTarget=${
+      isKorea ? 'Book' : 'Foreign'
+    }&MaxResults=${maxResult}`
+  );
+
 const searchRequest = async (url: string) => {
   const options = `&TTBKey=${KEY}&Output=js&Version=${VERSION}`;
   try {

@@ -4,7 +4,6 @@ import { useSetRecoilState } from 'recoil';
 import { prevPageState } from '../atom';
 // components
 import Banner from '../components/home/Banner';
-import BestSellers from '../components/list/BestSellers';
 import HomeMenu from '../components/home/HomeMenu';
 import CheeseHead from '../components/CheeseHead';
 import NewBooks from '../components/list/NewBooks';
@@ -15,6 +14,10 @@ import {
   ContentTitle,
   TitleBtnSection,
 } from '../styles/commonStyles';
+import BestSellerTicker from '../components/home/BestSellerTicker';
+import { ContentWrap } from '../styles/screens/homeStyles';
+import NewBooksTicker from '../components/home/NewBooksTicker';
+import CheeseRecommend from '../components/home/CheeseRecomend';
 
 function Home() {
   const setPrevPage = useSetRecoilState(prevPageState);
@@ -25,34 +28,15 @@ function Home() {
       <CheeseHead />
       <Banner />
       <HomeMenu />
-      <ContentContainer>
-        <ContentTitleSection className="row">
-          <ContentTitle className="col-12 col-lg-auto">
-            <i className="fa-solid fa-trophy" />
-            급상승 ! 많이 보고 있는 책
-          </ContentTitle>
-          <TitleBtnSection className="d-none d-lg-inline-block col-lg">
-            <Link to="/best">
-              더보기 <i className="fa-solid fa-plus" />
-            </Link>
-          </TitleBtnSection>
-        </ContentTitleSection>
-        <BestSellers maxSize={12} />
-      </ContentContainer>
-      <ContentContainer>
-        <ContentTitleSection className="row">
-          <ContentTitle className="col-12 col-lg-auto">
-            <i className="fa-solid fa-rocket" />
-            어서와 ! 따끈따끈 산상 책
-          </ContentTitle>
-          <TitleBtnSection className="d-none d-lg-inline-block col-lg">
-            <Link to="/new">
-              더보기 <i className="fa-solid fa-plus" />
-            </Link>
-          </TitleBtnSection>
-        </ContentTitleSection>
-        <NewBooks maxSize={12} />
-      </ContentContainer>
+      <BestSellerTicker />
+      <ContentWrap className="row">
+        <div className="col-12 col-lg-6">
+          <CheeseRecommend />
+        </div>
+        <div className="col-12 col-lg-6">
+          <NewBooksTicker />
+        </div>
+      </ContentWrap>
     </>
   );
 }
