@@ -85,7 +85,7 @@ $ npm run deploy
 ## Screens and Introduction 🎬
 ### 1. Home
 <div>
-![ezgif-2-680a8ae64e](https://github.com/eee0930/cheese_book/assets/37135523/ab40bfda-fcf5-4dfe-9920-7e1f0e144fea)
+<img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/ab40bfda-fcf5-4dfe-9920-7e1f0e144fea.gif"/>
 
 
 #### skills & issues
