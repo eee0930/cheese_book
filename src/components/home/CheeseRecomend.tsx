@@ -81,7 +81,7 @@ function CheeseRecommend({
                     <div
                       style={{
                         color: `${
-                          data?.find((color) => color < 120) ? '#fff' : '#000'
+                          data?.find((color) => color < 90) ? '#fff' : '#000'
                         }`,
                         transition: 'color 0.3s ease',
                       }}
