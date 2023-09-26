@@ -411,6 +411,7 @@ export const SearchFormInput = styled.input`
   font-size: 1.5rem;
   background-color: transparent;
   margin-bottom: 10rem;
+  border-radius: 0;
   &::placeholder {
     color: #444;
   }

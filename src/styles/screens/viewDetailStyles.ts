@@ -192,9 +192,7 @@ export const CardBtnCover = styled.div`
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.2);
     color: #fff;
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.4);
-    }
+
     &.disabled {
       opacity: 0;
       cursor: default;
@@ -208,6 +206,9 @@ export const CardBtnCover = styled.div`
       font-size: 2rem;
       width: 60px;
       height: 60px;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.4);
+      }
     }
   }
   @media (min-width: 1199.5px) {
