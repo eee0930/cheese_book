@@ -1,5 +1,6 @@
+<br>
 <div align="center">
-  <img width="60%" src="https://github.com/eee0930/cheese_book/assets/37135523/a8153880-9cad-417b-9086-3bafa3f3131b.png" />
+  <img width="50%" src="https://github.com/eee0930/cheese_book/assets/37135523/a8153880-9cad-417b-9086-3bafa3f3131b.png" />
 </div>
 
 <br><br>
@@ -12,13 +13,23 @@
 
 
 ## Project Info
+### Main Function
+<ol>
+  <li>나의 성격이나 취향에 맞는 책 추천 기능 (MBTI 테스트)</li>
+  <li>베스트 셀러, 신작 리스트 제공</li>
+  <li>책 미리보기 기능</li>
+  <li>도서, 작가 검색 기능</li>
+  <li>책 좋아요 및 좋아요한 책 리스트 보여주기</li>
+</ol>
+
 ### Goal
 <ol>
-  <li></li>
-  <li>React Query cashing 기능을 </li>
-  <li>필요한 기능을 담은 Custom Hook 만들기 </li>
-  <li>react router, styled components, query, hook form, 등 다양한 리액트 라이브러리 공부</li>
-  <li>api에서 제공하는 데이터를 이용하여 user interface를 고려한 화면에 다양한 정보들을 연출하기</li>
+  <li>책을 읽기 귀찮아하는 게으름쟁이들을 위해 오로지 '책' 정보만 보여주는 SPA 사이트 만들기</li>
+  <li>책 이미지를 3d로 표현하여 관심 유도</li>
+  <li>Framer Motion을 이용하여 사용자 인터렉션 유도</li>
+  <li>React Query의 cashing 특징을 이용해 대량의 데이터 가져오기</li>
+  <li>반복 사용 가능한 Custom Hook 만들기 </li>
+  <li>crawring으로 필요한 정보만 가져오기</li>
 </ol>
 
 ### Period
@@ -34,7 +45,7 @@
 ### Installation
 ``` bash
 $ git clone https://github.com/eee0930/cheese_book.git
-$ cd netflix_clone
+$ cd cheese_book
 $ code .
 ```
 
