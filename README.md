@@ -11,9 +11,13 @@
 <br><br>
 
 [1. Project Info](#project-info)
+
 [2. Getting Started](#getting-started-🏃‍♀️)
+
 [3. Stacks](#stacks-📚)
+
 [4. Screens and Introduction](#screens-and-introduction-🎬)
+
 [5. Architecture](#architecture)
 
 
