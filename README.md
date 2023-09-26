@@ -24,6 +24,9 @@
 <br><br>
 
 ## 1. Project Info
+### [Cheese book 개발 기획안](https://placid-tortoise-06c.notion.site/Cheese-Book-c4090905b0644ace9b12a2334e98673f?pvs=4)
+
+
 ### Main Function
 <ol>
   <li>나의 성격이나 취향에 맞는 책 추천 기능 (MBTI 테스트)</li>
@@ -41,7 +44,7 @@
   <li>Framer Motion을 이용하여 사용자 인터렉션 유도</li>
   <li>React Query의 cashing 특징을 이용해 대량의 데이터 가져오기</li>
   <li>반복 사용 가능한 Custom Hook 만들기 </li>
-  <li>crawring으로 필요한 정보만 가져오기</li>
+  <li>Scraping으로 필요한 정보만 가져오기</li>
 </ol>
 
 ### Period
@@ -206,13 +209,13 @@ $ npm run deploy
 
 ### 7. Search Results
 <div>
-<img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/060ddc04-c14a-4b83-9d04-80fb0d986330.gif"/>
+<img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/0991a044-a6e7-469f-bc0c-ddb15fcb3c13.gif"/>
 <p></p>
 
 #### skills & issues
 <ol>
-  <li>책 또는 지은이 검색을 할 수 있음</li>
-  <li>최근 검색어 5개 목록을 보여줌, 클릭시 해당 검색 결과를 보여줌</li>
+  <li>도서 제목 또는 작가명으로 검색을 할 수 있음</li>
+  <li>최근 검색어 5개 목록을 보여줌, 클릭 시 해당 검색 결과를 보여줌</li>
   <li>검색한 keyword로 재 검색시 새로 데이터를 불러오는 문제 -> cashing 기능이 있는 react query 사용</li>
   <li>검색 결과 화면에서 다른 keyword로 검색시 데이어를 불러오지 못하는 버그 발생 -> react query 고유키 설정 오류로, 검색어마다 고유기를 ['search', 검색어]로 지정하여 해결</li>
 </ol>
