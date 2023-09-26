@@ -151,7 +151,7 @@ $ npm run deploy
 
 ### 4. Book Viewer
 <div>
-<img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/0b5e0e36-6a0a-4cd9-9981-4f830ed6ce92.gif"/>
+<img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/eff8b490-605a-4608-903b-c9639d97c756.gif"/>
 <p></p>
 
 #### skills & issues
@@ -218,6 +218,7 @@ $ npm run deploy
 #### skills & issues
 <ol>
   <li>최근 본 책 목록을 보여줌</li>
+  <li>각각의 책 목록을 클릭시 해당 책의 상세페이지로 이동</li>
   <li>책 각각을 목록에서 삭제시키거나 전체 삭제를 할 수 있음</li>
 </ol>
 </div>
