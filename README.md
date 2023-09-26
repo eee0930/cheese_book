@@ -10,9 +10,17 @@
 
 <br><br>
 
+<ul>
+  <li>[1. Project Info](#project-info)</li>
+  <li>[2. Getting Started](#getting-started-🏃‍♀️)</li>
+  <li>[3. Stacks](#stacks-📚)</li>
+  <li>[4. Screens and Introduction](#screens-and-introduction-🎬)</li>
+  <li>[5. Architecture](#architecture)</li>
+</ul>
 
+<br><br>
 
-## Project Info
+## 1. Project Info
 ### Main Function
 <ol>
   <li>나의 성격이나 취향에 맞는 책 추천 기능 (MBTI 테스트)</li>
@@ -41,7 +49,7 @@
 
 
 
-## Getting Started 🏃‍♀️
+## 2. Getting Started 🏃‍♀️
 
 ### Installation
 ``` bash
@@ -70,7 +78,7 @@ $ npm run deploy
 
 
 
-## Stacks 📚
+## 3. Stacks 📚
 ### Libraries & Languages
 <div>
 <img src="https://img.shields.io/badge/TypeScript-444444?style=for-the-badge&logo=typescript&logoColor=61DAFB"/>
@@ -97,7 +105,7 @@ $ npm run deploy
 
 
 
-## Screens and Introduction 🎬
+## 4. Screens and Introduction 🎬
 ### 1. Home
 <div>
 <img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/ab40bfda-fcf5-4dfe-9920-7e1f0e144fea.gif"/>
@@ -227,7 +235,7 @@ $ npm run deploy
 
 
 
-## Architecture
+## 5. Architecture
 
 ### Directory structure
 ```bash
