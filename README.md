@@ -10,15 +10,15 @@
 
 <br><br>
 
-[1. Project Info](#project-info)
+[1. Project Info](#1-project-info)
 
-[2. Getting Started](#getting-started-🏃‍♀️)
+[2. Getting Started](#2-getting-started-%EF%B8%8F)
 
-[3. Stacks](#stacks-📚)
+[3. Stacks](#3-stacks-)
 
-[4. Screens and Introduction](#screens-and-introduction-🎬)
+[4. Screens and Introduction](#4-screens-and-introduction-)
 
-[5. Architecture](#architecture)
+[5. Architecture](#5-architecture)
 
 
 <br><br>
@@ -147,7 +147,7 @@ $ npm run deploy
 
 ### 3. Detail Book
 <div>
-<img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/0b5e0e36-6a0a-4cd9-9981-4f830ed6ce92.gif"/>
+<img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/0f60a28a-06d2-496c-9b9f-d9b71a877624.gif"/>
 <p></p>
 
 #### skills & issues
