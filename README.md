@@ -180,7 +180,7 @@ $ npm run deploy
 
 ### 6. My Books
 <div>
-<img width="80%" src="https://blog.kakaocdn.net/dn/bClbuh/btsvqx1YFm3/kR0O3T0pzBOBP8nDvi6Xk1/img.gif"/>
+<img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/3857757e-1ea9-4ae5-92c1-18fd903e3692.gif"/>
 <p></p>
 
 #### skills & issues
@@ -212,7 +212,7 @@ $ npm run deploy
 
 ### 8. Latest Books
 <div>
-<img width="80%" src="https://blog.kakaocdn.net/dn/bnVyy0/btsvVJ68V5k/rRO8SEizCsi96l3VRgnGtK/img.gif"/>
+<img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/e9b73505-9e56-4b43-a854-d301b34841ec.gif"/>
 <p></p>
 
 #### skills & issues
