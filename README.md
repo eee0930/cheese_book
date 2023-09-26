@@ -1,4 +1,6 @@
-![cheesebook_title](https://github.com/eee0930/cheese_book/assets/37135523/a8153880-9cad-417b-9086-3bafa3f3131b)
+<div align="center">
+  <img width="60%" src="https://github.com/eee0930/cheese_book/assets/37135523/a8153880-9cad-417b-9086-3bafa3f3131b.png" />
+</div>
 
 <br><br>
 
