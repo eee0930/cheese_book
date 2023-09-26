@@ -10,13 +10,12 @@
 
 <br><br>
 
-<ul>
-  <li>[1. Project Info](#project-info)</li>
-  <li>[2. Getting Started](#getting-started-🏃‍♀️)</li>
-  <li>[3. Stacks](#stacks-📚)</li>
-  <li>[4. Screens and Introduction](#screens-and-introduction-🎬)</li>
-  <li>[5. Architecture](#architecture)</li>
-</ul>
+[1. Project Info](#project-info)
+[2. Getting Started](#getting-started-🏃‍♀️)
+[3. Stacks](#stacks-📚)
+[4. Screens and Introduction](#screens-and-introduction-🎬)
+[5. Architecture](#architecture)
+
 
 <br><br>
 
