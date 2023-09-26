@@ -20,6 +20,7 @@
   <li>책 미리보기 기능</li>
   <li>도서, 작가 검색 기능</li>
   <li>책 좋아요 및 좋아요한 책 리스트 보여주기</li>
+  <li>Mobile과 PC 유저 모두를 위한 반응형 디자인</li>
 </ol>
 
 ### Goal
@@ -100,22 +101,19 @@ $ npm run deploy
 ### 1. Home
 <div>
 <img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/ab40bfda-fcf5-4dfe-9920-7e1f0e144fea.gif"/>
-  <br>
-<img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/e97bb335-d77a-409d-aa72-35955cfc37b9.gif" />
-<p></p>
 
 #### skills & issues
 <ol>
-  <li>movies, tv show, weekly trends 화면에서 재사용할 수 있도록 slider를 compoenent로 나눔</li>
-  <li>component가 destroy되거나 render 될 떄 효과를 줄 수 있는 AnimationPresence를 이용하여 slider가 넘어가는 효과를 줌. 
-  slider의 key를 index라는 number type으로 주고 slider를 넘기는 버튼을 클릭하면 index가 변화되도록 함. 
-  index가 바뀌면 reactjs는 새로운 slider가 생성되었다고 생각하여 slider 애니메이션 효과를 줄 수 있음.</li>
-  <li>slider 버튼을 빠르게 두번 클릭하면 slider가 destroy 되기 전에 새로운 slider가 render 되어 버려서 component contents가 꼬여버리는 버그가 생김.
-  slider가 움직이고 있다는 의미를 가진 leaving이라는 state를 정의하고, AnimatePresence의 onExitComplete prop을 사용하여 leaving이 true인 동안은 버튼이 동작하지 않게 구현
-  </li>
-  <li>화면을 리렌더링했을 때 components가 render 되어서 버튼을 클릭하지 않았는데도 slider 애니메이션 효과가 나타나는 버그가 생김.
-  AnimatePresence에 initial prop을 이용하여 initail 값을 false로 설정하여 해결함.
-  </li>
+  <li>베스트셀러 List Data를 불러와 framer motion을 이용하여 active한 배너를 보여줌</li>
+  <li>5초마다 한번씩 배너를 변경하기 위헤 setTimeout 기능을 썼지만 timeout이 한번 발생될 때마다 state들이 모두 업데이트되는 버그 발생 -> setTimeout을 정의한 변수를 담을 state를 정의한 후 useEffect 안에서 배너 변경 감지시 timeout 변수를 삭제한 후 다시 정의하여 해결</li>
+</ol>
+<br>
+<img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/e97bb335-d77a-409d-aa72-35955cfc37b9.gif" />
+
+#### skills & issues
+<ol>
+  <li>베스트셀러, 신작 도서, 치즈북 추천 도서들을 framer motion을 이용하여 ticker 형태로 active하게 보여줌</li>
+  <li>각각의 도서 클릭 시 해당 도서 상세페이지로 이동</li>
 </ol>
 </div>
 
@@ -128,7 +126,9 @@ $ npm run deploy
 
 #### skills & issues
 <ol>
-  <li>Box를 클릭했을 때 URL을 변경시키고, 변화된 URL에 기반해서 상세보기 Modal을 띄우는 애니메이션을 실행시킴.</li>
+  <li>카테고리별로 베스트셀러와 신작 도서들을 보여줌</li>
+  <li>Skelepton UI를 이용하여 한꺼번에 많은 데이터를 불러오기전 로딩 화면을 보여줌</li>
+  <li>layout component를 따로 만들어 그 안에서 scroll이 움직이도록 구현하였기 때문에 useScroll hook이 적용되지 않는 문제가 생김 -> useRef에 이동할 target div를 배열로 담아 scrollIntoView를 이용하여 스크롤 이동을 구현하여 해결함</li>
 </ol>
 </div>
 
@@ -141,7 +141,9 @@ $ npm run deploy
 
 #### skills & issues
 <ol>
-  <li>Box를 클릭했을 때 URL을 변경시키고, 변화된 URL에 기반해서 상세보기 Modal을 띄우는 애니메이션을 실행시킴.</li>
+  <li>책 커버에 마우스를 올릴 시 책 이미지가 3d로 움직임</li>
+  <li>책 기본 정보들을 보여줌</li>
+  <li>이미지로 된 카드 리뷰를 button click 또는 mouse drag event를 일으켜 slide로 보여줌</li>
 </ol>
 </div>
 
@@ -154,7 +156,10 @@ $ npm run deploy
 
 #### skills & issues
 <ol>
-  <li>Box를 클릭했을 때 URL을 변경시키고, 변화된 URL에 기반해서 상세보기 Modal을 띄우는 애니메이션을 실행시킴.</li>
+  <li>책 미리보기 버튼 클릭 시 미리보기 모달을 띄움</li>
+  <li>오른쪽을 클릭시 다음 페이지로 이동, 왼쪽을 클릭시 이전 페이지로 이동</li>
+  <li>객 책들의 미리보기 이미지 정보를 미리 알 수 없음 (이미지의 404 에러를 통해 미리보기 이미지 유무를 알 수 있음) -> 이미지 url을 string으로 미리 만든 후 onError를 이용하여 cover 이미지로 교체함</li>
+  <li>404에러가 난 이미지를 클릭시 index에 관한 정보기 없어 빈 화면이 나옴 -> 이미지 태그에 onError가 실행될 경우 index가 0일때만 prevent라는 state를 true로 변경, prevent가 true일 경우 이미지 클릭 이벤트를 preventDefault, return 시켜 해결</li>
 </ol>
 </div>
 
@@ -162,12 +167,12 @@ $ npm run deploy
 
 ### 5. Your Taste
 <div>
-<img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/0b5e0e36-6a0a-4cd9-9981-4f830ed6ce92.gif"/>
+<img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/176b6e47-b4ce-408c-91fd-563b6d8960f1.gif"/>
 <p></p>
 
 #### skills & issues
 <ol>
-  <li>Box를 클릭했을 때 URL을 변경시키고, 변화된 URL에 기반해서 상세보기 Modal을 띄우는 애니메이션을 실행시킴.</li>
+  <li>12개 문항의 mbti 테스트를 통해 각 성격유형별로 책을 추천해줌</li>
 </ol>
 </div>
 
@@ -175,12 +180,12 @@ $ npm run deploy
 
 ### 6. My Books
 <div>
-<img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/28e99ab8-0ed1-4573-8844-3441f565f9b4.gif"/>
+<img width="80%" src="https://blog.kakaocdn.net/dn/bClbuh/btsvqx1YFm3/kR0O3T0pzBOBP8nDvi6Xk1/img.gif"/>
 <p></p>
 
 #### skills & issues
 <ol>
-  <li>framer motion의 whileHover prop을 이용하여 사진에 마우스를 올릴 시 사진이 해당 영화의 트레일러 영상 component로 변경되도록 구현</li>
+  <li>상세보기 페이지에서 하트모양 좋아요 버튼을 클릭시 My Books 페이지에서 좋아요를 누른 책 목록을 볼 수있음</li>
 </ol>
 </div>
 
@@ -195,8 +200,10 @@ $ npm run deploy
 
 #### skills & issues
 <ol>
-  <li>Router의 useNavigate를 이용하여 검색을 하면 /search로 리다이렉트 되도록 함.</li>
-  <li>useLocation으로 검색어인 param 값을 가져와 해당 검색어에 해당되는 api data를 가져옴.</li>
+  <li>책 또는 지은이 검색을 할 수 있음</li>
+  <li>최근 검색어 5개 목록을 보여줌, 클릭시 해당 검색 결과를 보여줌</li>
+  <li>검색한 keyword로 재 검색시 새로 데이터를 불러오는 문제 -> cashing 기능이 있는 react query 사용</li>
+  <li>검색 결과 화면에서 다른 keyword로 검색시 데이어를 불러오지 못하는 버그 발생 -> react query 고유키 설정 오류로, 검색어마다 고유기를 ['search', 검색어]로 지정하여 해결</li>
 </ol>
 </div>
 
@@ -205,13 +212,13 @@ $ npm run deploy
 
 ### 8. Latest Books
 <div>
-<img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/060ddc04-c14a-4b83-9d04-80fb0d986330.gif"/>
+<img width="80%" src="https://blog.kakaocdn.net/dn/bnVyy0/btsvVJ68V5k/rRO8SEizCsi96l3VRgnGtK/img.gif"/>
 <p></p>
 
 #### skills & issues
 <ol>
-  <li>Router의 useNavigate를 이용하여 검색을 하면 /search로 리다이렉트 되도록 함.</li>
-  <li>useLocation으로 검색어인 param 값을 가져와 해당 검색어에 해당되는 api data를 가져옴.</li>
+  <li>최근 본 책 목록을 보여줌</li>
+  <li>책 각각을 목록에서 삭제시키거나 전체 삭제를 할 수 있음</li>
 </ol>
 </div>
 
