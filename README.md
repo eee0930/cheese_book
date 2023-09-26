@@ -167,7 +167,7 @@ $ npm run deploy
 
 ### 5. Your Taste
 <div>
-<img width="80%" src="https://github.com/eee0930/netflix_clone/assets/37135523/0b5e0e36-6a0a-4cd9-9981-4f830ed6ce92.gif"/>
+<img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/f1897617-845d-4354-95ef-d835e48de07f.gif"/>
 <p></p>
 
 #### skills & issues
