@@ -1,11 +1,16 @@
+import { useEffect, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import Color from 'color-thief-react';
+import { useRecoilState } from 'recoil';
 import { useQuery } from 'react-query';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { latestBookListState } from '../../atom';
 import {
   IAladinBookItem,
   IAladinRequestList,
   fetchBlogBestBookList,
 } from '../../apis/aladinApi';
-// components
+// styles
 import {
   ItemTitle,
   MiddleItem,
@@ -22,14 +27,12 @@ import {
   middleItem,
   tickerOneVariants,
 } from '../../styles/components/tickerStyles';
-import { useEffect, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import Color from 'color-thief-react';
 interface IRecomend {
   isKorea?: boolean;
   cateNum?: number;
   maxSize?: number;
 }
+
 function CheeseRecommend({
   isKorea = true,
   cateNum = 0,
@@ -40,6 +43,7 @@ function CheeseRecommend({
     () => fetchBlogBestBookList(isKorea, cateNum, maxSize),
     { retry: 0 }
   );
+  const [latestBooks, setLatestBooks] = useRecoilState(latestBookListState);
   let bookDatas: IAladinBookItem[] | undefined;
   if (!isLoading) {
     bookDatas = data?.item as IAladinBookItem[];
@@ -62,7 +66,30 @@ function CheeseRecommend({
       return newIdx;
     });
   };
+  const navigate = useNavigate();
 
+  const handleClickBook = ({ itemId, title, cover }: IAladinBookItem) => {
+    saveLastestBook(itemId, title, cover);
+    navigate(`/book/${itemId}`);
+  };
+  const saveLastestBook = (itemId: number, title: string, cover: string) => {
+    const len = latestBooks.length;
+    const nowBook = { itemId, title, cover };
+    const idx = latestBooks.findIndex(
+      (latestBook) => latestBook.itemId === itemId
+    );
+    if (idx > -1) {
+      setLatestBooks((prevArr) => {
+        return [...prevArr.slice(0, idx), ...prevArr.slice(idx + 1), nowBook];
+      });
+    } else {
+      setLatestBooks((prevArr) => {
+        return len >= 10
+          ? [...prevArr.slice(1), nowBook]
+          : [...prevArr, nowBook];
+      });
+    }
+  };
   return (
     <>
       {bookDatas && (
@@ -148,6 +175,11 @@ function CheeseRecommend({
                             to={`/book/${bookDatas?.at(bookIdx[1])?.itemId}`}
                           >
                             <TickerOneItemCover
+                              onClick={() =>
+                                handleClickBook(
+                                  bookDatas?.at(bookIdx[1]) as IAladinBookItem
+                                )
+                              }
                               style={{
                                 backgroundImage: `url(${
                                   bookDatas?.at(bookIdx[1])?.cover

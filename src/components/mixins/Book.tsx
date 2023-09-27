@@ -12,7 +12,6 @@ import {
   BookTitle,
   Rank,
 } from '../../styles/components/bookStyles';
-import { HeartBlast } from '../Button';
 
 const GRID_SIZE = 'col-6 col-md-3 col-xl-2';
 

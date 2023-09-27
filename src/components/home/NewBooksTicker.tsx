@@ -1,5 +1,7 @@
 import { useQuery } from 'react-query';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { latestBookListState } from '../../atom';
 import {
   IAladinBookItem,
   IAladinRequestList,
@@ -23,6 +25,12 @@ interface IBestSellers {
   maxSize?: number;
 }
 
+interface IClickBook {
+  itemId: number;
+  title: string;
+  cover: string;
+}
+
 function BestSellerTicker({
   isKorea = true,
   cateNum = 0,
@@ -33,12 +41,36 @@ function BestSellerTicker({
     () => fetchNewestBookList(isKorea, cateNum, maxSize),
     { retry: 0 }
   );
+  const [latestBooks, setLatestBooks] = useRecoilState(latestBookListState);
   const imgWidth = 10;
   let bookDatas;
   if (!isLoading) {
     bookDatas = data?.item as IAladinBookItem[];
   }
+  const navigate = useNavigate();
 
+  const handleClickBook = ({ itemId, title, cover }: IClickBook) => {
+    saveLastestBook(itemId, title, cover);
+    navigate(`/book/${itemId}`);
+  };
+  const saveLastestBook = (itemId: number, title: string, cover: string) => {
+    const len = latestBooks.length;
+    const nowBook = { itemId, title, cover };
+    const idx = latestBooks.findIndex(
+      (latestBook) => latestBook.itemId === itemId
+    );
+    if (idx > -1) {
+      setLatestBooks((prevArr) => {
+        return [...prevArr.slice(0, idx), ...prevArr.slice(idx + 1), nowBook];
+      });
+    } else {
+      setLatestBooks((prevArr) => {
+        return len >= 10
+          ? [...prevArr.slice(1), nowBook]
+          : [...prevArr, nowBook];
+      });
+    }
+  };
   return (
     <TickerContainer>
       <TickerJumboTitle>New Books</TickerJumboTitle>
@@ -55,16 +87,15 @@ function BestSellerTicker({
           {bookDatas?.map((book, i) => (
             <TickerItemCover
               key={book.isbn}
+              onClick={() => handleClickBook(book)}
               style={{
                 width: `${imgWidth}rem`,
                 backgroundImage: `url(${book.cover})`,
               }}
             >
-              <Link to={`/book/${book.itemId}`}>
-                <TickerItem>
-                  <ItemTitle>{book.title.split('-')[0]}</ItemTitle>
-                </TickerItem>
-              </Link>
+              <TickerItem>
+                <ItemTitle>{book.title.split('-')[0]}</ItemTitle>
+              </TickerItem>
             </TickerItemCover>
           ))}
         </Ticker>
