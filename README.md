@@ -16,7 +16,7 @@
 
 [3. Stacks](#3-stacks-)
 
-[4. Screens and Introduction](#4-screens-and-introduction-)
+[4. Screens and Key Features](#4-screens-and-key-features-)
 
 [5. Architecture](#5-architecture)
 
@@ -111,8 +111,8 @@ $ npm run deploy
 
 
 
-## 4. Screens and Introduction 🎬
-### 1. Home
+## 4. Screens and Key Features 🎬
+### 1. Home 화면에서부터 눈에 띄는 배너! 베스트 셀러가 보고싶은 기분!
 <div>
 <img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/ab40bfda-fcf5-4dfe-9920-7e1f0e144fea.gif"/>
 
@@ -133,14 +133,13 @@ $ npm run deploy
 
 <br>
 
-### 2. Best Sellers, New books
+### 2. 카테고리별로 베스트셀러와 신작들을 볼 수 있음
 <div>
 <img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/50ef5119-b5bf-4530-9173-50ec1b097872.gif"/>
 <p></p>
 
 #### skills & issues
 <ol>
-  <li>카테고리별로 베스트셀러와 신작 도서들을 보여줌</li>
   <li>Skelepton UI를 이용하여 한꺼번에 많은 데이터를 불러오기전 로딩 화면을 보여줌</li>
   <li>layout component를 따로 만들어 그 안에서 scroll이 움직이도록 구현하였기 때문에 useScroll hook이 적용되지 않는 문제가 생김 -> useRef에 이동할 target div를 배열로 담아 scrollIntoView를 이용하여 스크롤 이동을 구현하여 해결함</li>
 </ol>
@@ -148,29 +147,26 @@ $ npm run deploy
 
 <br>
 
-### 3. Detail Book
+### 3. 3D로 보는 책 커버부터 궁금했던 기본 정보들, 빠져든다 빠져든다
 <div>
 <img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/0f60a28a-06d2-496c-9b9f-d9b71a877624.gif"/>
 <p></p>
 
 #### skills & issues
 <ol>
-  <li>책 커버에 마우스를 올릴 시 책 이미지가 3d로 움직임</li>
-  <li>책 기본 정보들을 보여줌</li>
   <li>이미지로 된 카드 리뷰를 button click 또는 mouse drag event를 일으켜 slide로 보여줌</li>
 </ol>
 </div>
 
 <br>
 
-### 4. Book Viewer
+### 4. 미리보기 기능까지! 있을 건 다 있는 치즈 북
 <div>
 <img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/eff8b490-605a-4608-903b-c9639d97c756.gif"/>
 <p></p>
 
 #### skills & issues
 <ol>
-  <li>책 미리보기 버튼 클릭 시 미리보기 모달을 띄움</li>
   <li>오른쪽을 클릭시 다음 페이지로 이동, 왼쪽을 클릭시 이전 페이지로 이동</li>
   <li>객 책들의 미리보기 이미지 정보를 미리 알 수 없음 (이미지의 404 에러를 통해 미리보기 이미지 유무를 알 수 있음) -> 이미지 url을 string으로 미리 만든 후 onError를 이용하여 cover 이미지로 교체함</li>
   <li>404에러가 난 이미지를 클릭시 index에 관한 정보기 없어 빈 화면이 나옴 -> 이미지 태그에 onError가 실행될 경우 index가 0일때만 prevent라는 state를 true로 변경, prevent가 true일 경우 이미지 클릭 이벤트를 preventDefault, return 시켜 해결</li>
@@ -179,20 +175,20 @@ $ npm run deploy
 
 <br>
 
-### 5. Your Taste
+### 5. 테스트를 진행하면 내 성격 유형에 맞는 책을 추천해줌!
 <div>
 <img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/f1897617-845d-4354-95ef-d835e48de07f.gif"/>
 <p></p>
 
 #### skills & issues
 <ol>
-  <li>12개 문항의 mbti 테스트를 통해 각 성격유형별로 책을 추천해줌</li>
+  <li>12개 문항의 mbti 테스트를 통해 각 성격유형별로 책을 추천</li>
 </ol>
 </div>
 
 <br>
 
-### 6. My Books
+### 6. 좋아요 기능과 좋아하는 책을 한 번에 볼 수 있는 목록까지!
 <div>
 <img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/3857757e-1ea9-4ae5-92c1-18fd903e3692.gif"/>
 <p></p>
@@ -207,14 +203,13 @@ $ npm run deploy
 
 <br>
 
-### 7. Search Results
+### 7. 도서, 작가 검색을 통해 원하는 책을 찾을 수 있음
 <div>
 <img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/0991a044-a6e7-469f-bc0c-ddb15fcb3c13.gif"/>
 <p></p>
 
 #### skills & issues
 <ol>
-  <li>도서 제목 또는 작가명으로 검색을 할 수 있음</li>
   <li>최근 검색어 5개 목록을 보여줌, 클릭 시 해당 검색 결과를 보여줌</li>
   <li>검색한 keyword로 재 검색시 새로 데이터를 불러오는 문제 -> cashing 기능이 있는 react query 사용</li>
   <li>검색 결과 화면에서 다른 keyword로 검색시 데이어를 불러오지 못하는 버그 발생 -> react query 고유키 설정 오류로, 검색어마다 고유기를 ['search', 검색어]로 지정하여 해결</li>
@@ -224,7 +219,7 @@ $ npm run deploy
 
 <br>
 
-### 8. Latest Books
+### 8. 최근 본 책들과 기록 삭제 기능까지!
 <div>
 <img width="80%" src="https://github.com/eee0930/cheese_book/assets/37135523/e9b73505-9e56-4b43-a854-d301b34841ec.gif"/>
 <p></p>
