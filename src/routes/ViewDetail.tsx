@@ -253,7 +253,7 @@ function ViewDetail() {
                             opacity: { duration: 0.2 },
                           }}
                           drag="x"
-                          dragConstraints={{ left: 0, right: 0 }}
+                          dragConstraints={{ left: 1, right: 1 }}
                           dragElastic={1}
                           onDragEnd={(e, { offset, velocity }) => {
                             const swipe = swipePower(offset.x, velocity.x);
