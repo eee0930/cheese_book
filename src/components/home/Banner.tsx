@@ -70,7 +70,7 @@ function Banner() {
   useEffect(() => {
     clearTimeout(bannerTimer);
     setBookStyleIdx(Math.floor(index / 3) + 1);
-    const bannerTimeout = setTimeout(handleNextIdx, 5000);
+    const bannerTimeout = setTimeout(handleNextIdx, 3500);
     setBannerTimer(bannerTimeout);
   }, [index]);
 
