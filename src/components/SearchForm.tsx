@@ -98,7 +98,7 @@ export function SearchForm({ themeIdx = 0, callback }: ISearchForm) {
     backgroundColor: mainColors[themeIdx][0],
   };
   return (
-    <ModalContainer>
+    <ModalContainer className="search">
       <OverlayContainer onClick={callback} />
       <MobileMenuContainer style={backgroundColor}>
         <MobileAnimationBoxCover>

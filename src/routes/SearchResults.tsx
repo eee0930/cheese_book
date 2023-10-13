@@ -15,6 +15,7 @@ import CheeseHead from '../components/CheeseHead';
 import EmptyData from '../components/EmptyData';
 //styles
 import { ContentTitle, ContentTitleSection } from '../styles/commonStyles';
+import { useAppendScript } from '../hooks/useAppendScript';
 
 const CATE_NAME = 'Search Results';
 function SearchResults() {
@@ -39,7 +40,7 @@ function SearchResults() {
     }
     setPrevPage(`${location.pathname}${location.search}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
+  }, [query, isLoading]);
 
   const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const sort = e.target.value;
@@ -89,7 +90,7 @@ function SearchResults() {
             <>
               {books ? (
                 <div className="row">
-                  {books.item?.map((book, i) => (
+                  {books.item?.map((book: any, i: number) => (
                     <Book book={book} key={i} />
                   ))}
                 </div>
