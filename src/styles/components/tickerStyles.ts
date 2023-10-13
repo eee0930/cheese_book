@@ -60,6 +60,7 @@ export const TickerItemCover = styled.div`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   transition: background-size 0.3s ease;
+  cursor: pointer;
   &:hover {
     background-size: 110% 110%;
   }

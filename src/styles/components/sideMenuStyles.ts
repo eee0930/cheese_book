@@ -290,6 +290,12 @@ export const MobileMenuContainer = styled(motion.div)`
   height: 100vh;
   z-index: 60;
   transition: background-color 0.5s ease;
+  @media (min-width: 756.5px) {
+    top: calc(50% - 25vh);
+    left: calc(50% - 35vw);
+    width: 70vw;
+    height: 50vh;
+  }
   @media (min-width: 991.5px) {
     top: calc(50% - 25vh);
     left: calc(50% - 25vw);
@@ -312,6 +318,12 @@ export const MobileMenuCover = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (min-width: 756.5px) {
+    top: calc(50% - 25vh - 1rem);
+    left: calc(50% - 35vw - 1rem);
+    width: 70vw;
+    height: 50vh;
+  }
   @media (min-width: 991.5px) {
     top: calc(50% - 25vh - 1rem);
     left: calc(50% - 25vw - 1rem);
@@ -380,7 +392,7 @@ export const MobileAnimationBoxCover = styled.div`
   right: 0rem;
   width: 100%;
   height: 100%;
-  @media (min-width: 991.5px) {
+  @media (min-width: 756.5px) {
     border: ${(props) => props.theme.boxLine.md};
   }
   @media (min-width: 1199.5px) {
@@ -415,7 +427,7 @@ export const SearchFormInput = styled.input`
   &::placeholder {
     color: #444;
   }
-  @media (min-width: 991.5px) {
+  @media (min-width: 756.5px) {
     margin-bottom: 0;
     border: solid 2px #000;
     background-color: #fff;
@@ -430,7 +442,7 @@ export const SearchListCover = styled.div`
   position: absolute;
   bottom: calc(50% - 40px);
   left: calc(50% - 160px);
-  @media (min-width: 991.5px) {
+  @media (min-width: 756.5px) {
     width: 400px;
     bottom: calc(50% - 80px);
     left: calc(50% - 200px);

@@ -42,8 +42,17 @@ export const Modal = styled.div`
     right: 20px;
     bottom: 20px;
     border-radius: 15px;
+    &.search {
+      width: 80vw;
+      height: 90vh;
+      top: 5vh;
+      left: 10vw;
+      right: 10vw;
+      bottom: 5vh;
+      border-radius: 1rem;
+    }
   }
-  @media (min-width: 1199.5px) {
+  @media (min-width: 991.5px) {
     width: 80vw;
     height: 90vh;
     top: 5vh;
