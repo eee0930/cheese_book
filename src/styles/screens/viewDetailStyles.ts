@@ -169,6 +169,7 @@ export const CardReview = styled(motion.div)`
   }
   @media (min-width: 991.5px) {
     text-align: left;
+    cursor: grab;
   }
   @media (min-width: 1199.5px) {
     height: 600px;

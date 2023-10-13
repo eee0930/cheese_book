@@ -234,10 +234,6 @@ function ViewDetail() {
                         <motion.img
                           key={cardIdx}
                           variants={rowVariants}
-                          // initial="hidden"
-                          // animate="visible"
-                          // exit="exit"
-                          // transition={{ type: 'tween', duration: 0.5 }}
                           custom={isNext}
                           src={
                             getCardReviews(book?.subInfo?.cardReviewImgList)[
