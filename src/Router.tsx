@@ -5,7 +5,7 @@ import BasicLayout from './routes/layouts/BasicLayout';
 import AuthLayout from './routes/layouts/AuthLayout';
 import Home from './routes/Home';
 import ListBestSeller from './routes/ListBestSeller';
-import Login from './routes/Login';
+//import Login from './routes/Login';
 import ListNewBooks from './routes/ListNewBooks';
 import Taste from './routes/Taste';
 import ViewDetail from './routes/ViewDetail';
@@ -23,12 +23,12 @@ const router = createHashRouter([
       {
         path: 'auth',
         element: <AuthLayout />,
-        children: [
-          {
-            path: 'login',
-            element: <Login />,
-          },
-        ],
+        // children: [
+        //   {
+        //     path: 'login',
+        //     element: <Login />,
+        //   },
+        // ],
         errorElement: <ErrorComponent />,
       },
       {

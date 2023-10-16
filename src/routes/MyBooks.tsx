@@ -60,7 +60,11 @@ function MyBooks() {
                 {bookSet.map((book, j) => (
                   <MyBook key={`${i}-${j}`}>
                     <Link to={`/book/${book.itemId}`}>
-                      <MyBookCover src={book.cover} alt={book.title} />
+                      <MyBookCover
+                        src={book.cover}
+                        alt={book.title}
+                        loading="lazy"
+                      />
                     </Link>
                   </MyBook>
                 ))}
