@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 declare global {
   interface Window {
-    data: any;
+    printData: (data: any) => void;
   }
 }
-export const useAppendScript = (src: string) => {
+export const useAppendScript = <T>(src: string) => {
   const [$script, setScript] = useState<HTMLScriptElement>();
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<any>();
+  const [printData, setPrintData] = useState<(data: T) => void>();
 
   useEffect(() => {
     if (!$script) {
@@ -16,19 +16,19 @@ export const useAppendScript = (src: string) => {
   }, []);
 
   useEffect(() => {
-    if (isLoading) {
-      setData(window.data);
+    if (!isLoading) {
+      setPrintData(window.printData);
     }
   }, [isLoading]);
 
   const settingInitial = () => {
     const $script = document.createElement('script');
-    $script.src = `${src}&callback=data`;
+    $script.src = `${src}&callback=printData`;
     $script.type = 'text/javascript';
     document.body.appendChild($script);
     setScript($script);
     $script.addEventListener('load', () => setIsLoading(false));
   };
 
-  return { data, isLoading };
+  return { printData, isLoading };
 };
