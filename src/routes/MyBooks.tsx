@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { ILatestBook, likedBookListState, prevPageState } from '../atom';
 
 import CheeseHead from '../components/CheeseHead';
+import EmptyData from '../components/EmptyData';
 // styles
 import {
   MyBooksSetContainer,
@@ -18,9 +19,9 @@ import {
   PageTitleCover,
   PageTitleImg,
 } from '../styles/commonStyles';
-import EmptyData from '../components/EmptyData';
 
 const CATE_NAME = 'My Books';
+
 function MyBooks() {
   const setPrevPage = useSetRecoilState(prevPageState);
   const likedBookList = useRecoilValue(likedBookListState);
@@ -39,8 +40,8 @@ function MyBooks() {
       newBookSet[idx].push(likedBookList[i]);
     }
     setBookSetList([...newBookSet]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <>
       <CheeseHead title={`${CATE_NAME}`} />

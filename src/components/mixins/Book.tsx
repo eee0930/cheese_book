@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import ContentLoader from 'react-content-loader';
@@ -28,7 +29,10 @@ interface IBook {
 
 export function Book({ book, rankInfo }: IBook) {
   const [latestBooks, setLatestBooks] = useRecoilState(latestBookListState);
-  const { title, author, cover, publisher, itemId } = book;
+  const { title, author, cover, publisher, itemId } = useMemo(
+    () => book,
+    [book]
+  );
   const oneAuthor = useAuthors(author);
   const navigate = useNavigate();
 
@@ -55,6 +59,7 @@ export function Book({ book, rankInfo }: IBook) {
     saveLastestBook();
     navigate(`/book/${itemId}`);
   };
+
   return (
     <BookContentContainer className={GRID_SIZE}>
       {rankInfo && (

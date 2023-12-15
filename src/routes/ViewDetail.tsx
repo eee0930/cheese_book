@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useMatch } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { useQuery } from 'react-query';
+import { AnimatePresence, motion } from 'framer-motion';
 // apis
 import {
   IAladinBookItem,
@@ -10,9 +11,11 @@ import {
 } from '../apis/aladinApi';
 import { prevPageState } from '../atom';
 // components
+import CheeseHead from '../components/CheeseHead';
 import { Button, HeartBlast } from '../components/Button';
 import ViewerModal from '../components/viewDetail/ViewerModal';
-import CheeseHead from '../components/CheeseHead';
+import DetailImages from '../components/viewDetail/DetailImages';
+import DetailContainer from '../components/viewDetail/DetailContainer';
 // styles
 import { Loader } from '../styles/globalStyles';
 import {
@@ -27,9 +30,6 @@ import {
   CardBtnCover,
   LikeBtnSection,
 } from '../styles/screens/viewDetailStyles';
-import DetailImages from '../components/viewDetail/DetailImages';
-import DetailContainer from '../components/viewDetail/DetailContainer';
-import { AnimatePresence, motion } from 'framer-motion';
 
 const getRedesignPrice = (price: number) => {
   const priceStr = String(price);
@@ -62,22 +62,6 @@ const getCardReviews = (reviewList: string[]) => {
     return Array.from(Array(idx), (_, i) => `${ROOT}${i + 1}.jpg`);
   }
 };
-
-// const rowVariants = {
-//   hidden: (isNext: boolean) => {
-//     return {
-//       x: isNext ? 605 : -605,
-//     };
-//   },
-//   visible: {
-//     x: 0,
-//   },
-//   exit: (isNext: boolean) => {
-//     return {
-//       x: isNext ? -605 : 605,
-//     };
-//   },
-// };
 
 const rowVariants = {
   enter: (isNext: number) => {

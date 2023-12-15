@@ -2,19 +2,20 @@ import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { prevPageState } from '../atom';
 // components
+import CheeseHead from '../components/CheeseHead';
 import Banner from '../components/home/Banner';
 import HomeMenu from '../components/home/HomeMenu';
-import CheeseHead from '../components/CheeseHead';
 import BestSellerTicker from '../components/home/BestSellerTicker';
-import NewBooksTicker from '../components/home/NewBooksTicker';
 import CheeseRecommend from '../components/home/CheeseRecomend';
+import NewBooksTicker from '../components/home/NewBooksTicker';
 // styles
 import { ContentWrap } from '../styles/screens/homeStyles';
 
 function Home() {
   const setPrevPage = useSetRecoilState(prevPageState);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   useEffect(() => setPrevPage('/'), []);
+
   return (
     <>
       <CheeseHead />

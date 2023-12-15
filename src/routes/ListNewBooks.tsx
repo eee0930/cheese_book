@@ -4,9 +4,9 @@ import { useSetRecoilState } from 'recoil';
 import { prevPageState } from '../atom';
 import { categoryList } from '../data/cheeseMainData';
 // components
+import CheeseHead from '../components/CheeseHead';
 import NewBooks from '../components/list/NewBooks';
 import NavTaps from '../components/list/NavTaps';
-import CheeseHead from '../components/CheeseHead';
 // styles
 import {
   ContentContainer,

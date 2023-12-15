@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 import Color from 'color-thief-react';
 import { bannerMent } from '../../data/cheeseMainData';
 import {
@@ -67,6 +67,7 @@ function Banner() {
     saveLastestBook(itemId, title, cover);
     navigate(`/book/${itemId}`);
   };
+
   useEffect(() => {
     clearTimeout(bannerTimer);
     setBookStyleIdx(Math.floor(index / 3) + 1);

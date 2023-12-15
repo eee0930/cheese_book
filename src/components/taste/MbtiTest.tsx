@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { tasteQuestions } from '../../data/cheeseMainData';
 import {
   Answer,
@@ -26,6 +26,7 @@ const mbtiSet = [
 function MbtiTest({ callback }: IMbtiTest) {
   const [answers, setAnswers] = useState<string[]>([]);
   const [qIdx, setQIdx] = useState(0);
+
   const handleClickAnswer = (idx: number, answer: string) => {
     setAnswers((prev) => [...prev, answer]);
     if (idx === tasteQuestions.length - 1) {
@@ -34,7 +35,7 @@ function MbtiTest({ callback }: IMbtiTest) {
       setQIdx(idx + 1);
     }
   };
-  const getMbtiResult = (answer: string) => {
+  const getMbtiResult = useCallback((answer: string) => {
     const newAnswers = [...answers];
     if (newAnswers.length < tasteQuestions.length) {
       newAnswers.push(answer);
@@ -62,7 +63,8 @@ function MbtiTest({ callback }: IMbtiTest) {
       }
     }
     callback(mbti);
-  };
+  }, []);
+
   return (
     <>
       {tasteQuestions.map(

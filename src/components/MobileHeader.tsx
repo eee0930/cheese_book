@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MobileMenu } from './SideMenu';
-import { mainColors } from '../data/cheeseMainData';
 import {
   LogoSection,
   LogoText,
@@ -13,6 +12,7 @@ import {
   SearchButton,
 } from '../styles/components/mobileHeaderStyles';
 import { MobileSearchForm } from './SearchForm';
+import { mainColors } from '../data/cheeseMainData';
 
 function MobileHeader() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);

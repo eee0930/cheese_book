@@ -10,14 +10,14 @@ import {
   fetchBookListByQuery,
 } from '../apis/aladinApi';
 // components
-import { Book, BookLoader } from '../components/mixins/Book';
 import CheeseHead from '../components/CheeseHead';
+import { Book, BookLoader } from '../components/mixins/Book';
 import EmptyData from '../components/EmptyData';
 //styles
 import { ContentTitle, ContentTitleSection } from '../styles/commonStyles';
-import { useAppendScript } from '../hooks/useAppendScript';
 
 const CATE_NAME = 'Search Results';
+
 function SearchResults() {
   const location = useLocation();
   const query = new URLSearchParams(location.search).get('q') as string;

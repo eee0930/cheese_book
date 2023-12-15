@@ -71,6 +71,7 @@ function BestSellerTicker({
       });
     }
   };
+
   return (
     <TickerContainer>
       <TickerJumboTitle>Best Sellers</TickerJumboTitle>

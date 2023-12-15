@@ -1,7 +1,7 @@
 import { useRecoilState } from 'recoil';
 import { ButtonCover, HeartButton } from '../styles/components/buttonStyles';
 import { likedBookListState } from '../atom';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const BTN_COLOR = ['btn-primary', 'btn-secondary', 'btn-third'];
 
@@ -42,13 +42,14 @@ interface IHeartBlast {
 export function HeartBlast({ book }: IHeartBlast) {
   const [likedBooks, setLikedBooks] = useRecoilState(likedBookListState);
   const [isActive, setIsActive] = useState(false);
+
   useEffect(() => {
     const isLiked = likedBooks.some((liked) => liked.itemId === book.itemId);
     if (isLiked) {
       setIsActive(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const handleClickBtn = () => {
     if (isActive) {
       const likedIdx = likedBooks.findIndex(
@@ -63,6 +64,7 @@ export function HeartBlast({ book }: IHeartBlast) {
     }
     setIsActive((isLiked) => !isLiked);
   };
+
   return (
     <HeartButton
       className={`${isActive ? 'active' : ''}`}

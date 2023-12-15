@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import {
   ButtonGroupContainer,
   ButtonGroupEle,
@@ -12,10 +13,12 @@ interface IButtonGroup {
 }
 
 function NavTaps({ groupInfo, callBack }: IButtonGroup) {
+  const handleClickBtn = useCallback((i: number) => callBack(i), []);
+
   return (
     <ButtonGroupContainer>
       {groupInfo.map((info, i) => (
-        <ButtonGroupEle key={i} onClick={() => callBack(i)}>
+        <ButtonGroupEle key={i} onClick={() => handleClickBtn(i)}>
           {info.name}
         </ButtonGroupEle>
       ))}

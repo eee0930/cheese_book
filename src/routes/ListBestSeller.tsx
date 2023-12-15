@@ -4,9 +4,9 @@ import { useSetRecoilState } from 'recoil';
 import { categoryList } from '../data/cheeseMainData';
 import { prevPageState } from '../atom';
 // components
+import CheeseHead from '../components/CheeseHead';
 import BestSellers from '../components/list/BestSellers';
 import NavTaps from '../components/list/NavTaps';
-import CheeseHead from '../components/CheeseHead';
 // styles
 import {
   ContentContainer,
@@ -28,7 +28,6 @@ function ListBestSeller() {
   const setPrevPage = useSetRecoilState(prevPageState);
   const location = useLocation();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => setPrevPage(location.pathname), []);
 
   const scrollRef = useRef<HTMLDivElement[]>([]);

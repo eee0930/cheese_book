@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useLocation } from 'react-router-dom';
 import { myTasteResultState, prevPageState } from '../atom';
+// components
+import CheeseHead from '../components/CheeseHead';
+import { Button } from '../components/Button';
+import MbtiTest from '../components/taste/MbtiTest';
+import TasteResults from '../components/taste/TasteResults';
 // styles
 import {
   PageTitle,
@@ -16,19 +21,15 @@ import {
   TasteTestResultContainer,
   testContainerVariants,
 } from '../styles/screens/tasteStyles';
-// components
-import { Button } from '../components/Button';
-import MbtiTest from '../components/taste/MbtiTest';
-import TasteResults from '../components/taste/TasteResults';
-import CheeseHead from '../components/CheeseHead';
 
 const CATE_NAME = 'Your Taste';
+
 function Taste() {
   const setPrevPage = useSetRecoilState(prevPageState);
   const [myTasteResult, setMyTasteResult] = useRecoilState(myTasteResultState);
   const [testStart, setTestStart] = useState(false);
   const location = useLocation();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   useEffect(() => setPrevPage(location.pathname), []);
 
   const getTestResult = (result: string) => setMyTasteResult(result);

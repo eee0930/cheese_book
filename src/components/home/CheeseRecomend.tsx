@@ -27,6 +27,7 @@ import {
   middleItem,
   tickerOneVariants,
 } from '../../styles/components/tickerStyles';
+
 interface IRecomend {
   isKorea?: boolean;
   cateNum?: number;
@@ -52,11 +53,13 @@ function CheeseRecommend({
   const [bookIdx, setBookIdx] = useState([0, 1, 2]);
   const [tickerTimer, setTickerTimer] =
     useState<ReturnType<typeof setTimeout>>();
+
   useEffect(() => {
     clearTimeout(tickerTimer);
     const bannerTimeout = setTimeout(changeIdx, 3000);
     setTickerTimer(bannerTimeout);
   }, [bookIdx]);
+
   const changeIdx = () => {
     setBookIdx((prev) => {
       const len = data?.item?.length as number;
@@ -66,6 +69,7 @@ function CheeseRecommend({
       return newIdx;
     });
   };
+
   const navigate = useNavigate();
 
   const handleClickBook = ({ itemId, title, cover }: IAladinBookItem) => {
@@ -90,6 +94,7 @@ function CheeseRecommend({
       });
     }
   };
+
   return (
     <>
       {bookDatas && (
