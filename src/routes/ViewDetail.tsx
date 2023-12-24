@@ -112,14 +112,10 @@ function ViewDetail() {
       setIsNext(false);
     }
     if (!next) {
-      if (cardIdx === 0) {
-        return;
-      }
+      if (cardIdx === 0) return;
       setCardIdx((prev) => prev - 1);
     } else {
-      if (cardIdx === totalIdx) {
-        return;
-      }
+      if (cardIdx === totalIdx) return;
       setCardIdx((prev) => prev + 1);
     }
   };
@@ -147,8 +143,13 @@ function ViewDetail() {
             <BookContentContainer>
               {/* 2.1 제목 */}
               <TitleSection>
-                <h1>{book?.title.split('-')[0]}</h1>
-                <h1 className="subTitle">{book?.title.split('-').slice(1)}</h1>
+                {/* <h1>{book?.title.split('-')[0]}</h1>
+                <h1 className="subTitle">{book?.title.split('-').slice(1)}</h1> */}
+                {book?.title.split('-').map((t, i) => (
+                  <h1 key={i} className={i === 1 ? 'subTitle' : ''}>
+                    {t}
+                  </h1>
+                ))}
                 <h3>{book?.author}</h3>
               </TitleSection>
               {/* 2.2 책 커버 및 출판 정보 */}
