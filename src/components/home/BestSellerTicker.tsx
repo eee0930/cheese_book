@@ -31,6 +31,8 @@ interface IClickBook {
   cover: string;
 }
 
+const imgWidth = 10;
+
 function BestSellerTicker({
   isKorea = true,
   cateNum = 0,
@@ -42,7 +44,6 @@ function BestSellerTicker({
     { retry: 0 }
   );
   const [latestBooks, setLatestBooks] = useRecoilState(latestBookListState);
-  const imgWidth = 10;
   let bookDatas;
   if (!isLoading) {
     bookDatas = data?.item as IAladinBookItem[];

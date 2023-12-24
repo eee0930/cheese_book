@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import router from './Router';
 import { RecoilRoot } from 'recoil';
@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <div>
+  <StrictMode>
     <RecoilRoot>
       <QueryClientProvider client={client}>
         <HelmetProvider>
@@ -19,5 +19,5 @@ root.render(
         </HelmetProvider>
       </QueryClientProvider>
     </RecoilRoot>
-  </div>
+  </StrictMode>
 );

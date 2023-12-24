@@ -17,7 +17,7 @@ import {
 } from '../../styles/layoutStyles';
 
 function BasicLayout() {
-  const [foldMenu, setFoldMenu] = useState(false);
+  const [isFoldMenu, setIsFoldMenu] = useState(false);
   const location = useLocation();
   const mainContainer = useRef<HTMLDivElement>(null);
   const topBtnAnimate = useAnimation();
@@ -25,7 +25,6 @@ function BasicLayout() {
     if (mainContainer.current) {
       mainContainer.current.scrollTo(0, 0);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   const { scrollY } = useScroll({ container: mainContainer });
@@ -37,7 +36,6 @@ function BasicLayout() {
         topBtnAnimate.start('top');
       }
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollY]);
 
   const topBtnVisible: Variants = {
@@ -62,12 +60,12 @@ function BasicLayout() {
         </MobileSideMenuContainer>
         <BaseLayoutMenu
           className={`${
-            foldMenu && 'fold'
+            isFoldMenu && 'fold'
           } col-md-auto d-none d-md-inline-block`}
         >
           <SideMenu
-            isFolded={foldMenu}
-            handleMenuBtn={() => setFoldMenu((prev) => !prev)}
+            isFolded={isFoldMenu}
+            handleMenuBtn={() => setIsFoldMenu((prev) => !prev)}
           />
         </BaseLayoutMenu>
         <CheeseMainContainer ref={mainContainer} className="col-12 col-md">

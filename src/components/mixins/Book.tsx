@@ -29,10 +29,7 @@ interface IBook {
 
 export function Book({ book, rankInfo }: IBook) {
   const [latestBooks, setLatestBooks] = useRecoilState(latestBookListState);
-  const { title, author, cover, publisher, itemId } = useMemo(
-    () => book,
-    [book]
-  );
+  const { title, author, cover, publisher, itemId } = book;
   const oneAuthor = useAuthors(author);
   const navigate = useNavigate();
 

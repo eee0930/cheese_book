@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { prevPageState } from '../atom';
@@ -21,13 +21,12 @@ interface IGroupInfo {
   id: number;
   name: string;
 }
-const cateList = categoryList?.at(0)?.categories;
 const CATE_NAME = 'New Books';
 function ListNewBooks() {
   const setPrevPage = useSetRecoilState(prevPageState);
   const location = useLocation();
+  const cateList = useMemo(() => categoryList?.at(0)?.categories, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => setPrevPage(location.pathname), []);
 
   const scrollRef = useRef<HTMLDivElement[]>([]);
