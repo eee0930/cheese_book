@@ -131,7 +131,11 @@ function ViewDetail() {
         </Loader>
       ) : (
         <>
-          <CheeseHead title={`${book?.title.split('-')[0]}`} />
+          <CheeseHead
+            title={`${book?.title.split('-')[0]}`}
+            image={book?.cover}
+            description={book?.description}
+          />
           <BookContentResultContainer>
             {/* [1. 카테고리]--------------------------------------------------*/}
             <PrevBtnContainer>
