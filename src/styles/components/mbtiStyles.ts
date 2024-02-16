@@ -89,13 +89,13 @@ export const Answer = styled.div`
 // [test result]----------------------------------------------------------------
 
 export const TestResultContainer = styled.div`
-  height: 80vh;
+  min-height: 80vh;
   display: flex;
   justify-content: start;
   align-items: center;
   flex-direction: column;
   @media (min-width: 1199.5px) {
-    height: 70vh;
+    min-height: 70vh;
   }
 `;
 export const TestResultMent = styled.div`
