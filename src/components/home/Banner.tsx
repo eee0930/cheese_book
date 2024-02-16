@@ -34,8 +34,9 @@ function Banner() {
   const [latestBooks, setLatestBooks] = useRecoilState(latestBookListState);
   const { data, isLoading } = useQuery<IAladinRequestList>(
     'bestSellersBanner',
-    () => fetchBestSellerBookList(true, 0, BANNER_LEN)
+    () => fetchBestSellerBookList(true, 0, BANNER_LEN + 2)
   );
+
   const [index, setIndex] = useState(0);
   const [bookStyleIdx, setBookStyleIdx] = useState(1);
   const [bannerTimer, setBannerTimer] =
@@ -80,7 +81,7 @@ function Banner() {
       {!isLoading && (
         <>
           <Color
-            src={`${data?.item[index].cover}`}
+            src={`${data?.item[index]?.cover}`}
             format={'hex'}
             crossOrigin={'anonymous'}
           >
@@ -127,7 +128,7 @@ function Banner() {
                 <BookCover
                   className={`style${bookStyleIdx}`}
                   style={{
-                    backgroundImage: `url(${data?.item[index].cover})`,
+                    backgroundImage: `url(${data?.item[index]?.cover})`,
                   }}
                 />
               </BookCoverPerspect>
