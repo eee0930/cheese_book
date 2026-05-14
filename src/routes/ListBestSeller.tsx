@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { categoryList } from '../data/cheeseMainData';
@@ -26,7 +26,7 @@ const CATE_NAME = 'Best Sellers';
 function ListBestSeller() {
   const setPrevPage = useSetRecoilState(prevPageState);
   const location = useLocation();
-  const cateList = useMemo(() => categoryList?.at(0)?.categories, []);
+  const cateList = categoryList?.at(0)?.categories;
 
   useEffect(() => setPrevPage(location.pathname), []);
 

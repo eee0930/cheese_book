@@ -1,7 +1,7 @@
 import { useRecoilState } from 'recoil';
 import { ButtonCover, HeartButton } from '../styles/components/buttonStyles';
 import { likedBookListState } from '../atom';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const BTN_COLOR = ['btn-primary', 'btn-secondary', 'btn-third'];
 

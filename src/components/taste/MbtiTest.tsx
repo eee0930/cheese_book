@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { tasteQuestions } from '../../data/cheeseMainData';
 import {
   Answer,
@@ -27,19 +27,7 @@ function MbtiTest({ callback }: IMbtiTest) {
   const [answers, setAnswers] = useState<string[]>([]);
   const [qIdx, setQIdx] = useState(0);
 
-  const handleClickAnswer = (idx: number, answer: string) => {
-    setAnswers((prev) => [...prev, answer]);
-    if (idx === tasteQuestions.length - 1) {
-      getMbtiResult(answer);
-    } else {
-      setQIdx(idx + 1);
-    }
-  };
-  const getMbtiResult = useCallback((answer: string) => {
-    const newAnswers = [...answers];
-    if (newAnswers.length < tasteQuestions.length) {
-      newAnswers.push(answer);
-    }
+  const getMbtiResult = (allAnswers: string[]) => {
     let mbti = '';
     const resultObj: IResultObj = {
       I: 0,
@@ -51,8 +39,8 @@ function MbtiTest({ callback }: IMbtiTest) {
       P: 0,
       J: 0,
     };
-    for (let i = 0; i < newAnswers.length; i++) {
-      resultObj[newAnswers[i]] += 1;
+    for (let i = 0; i < allAnswers.length; i++) {
+      resultObj[allAnswers[i]] += 1;
     }
     for (let i = 0; i < 4; i++) {
       const [a, b] = mbtiSet[i];
@@ -63,7 +51,17 @@ function MbtiTest({ callback }: IMbtiTest) {
       }
     }
     callback(mbti);
-  }, []);
+  };
+
+  const handleClickAnswer = (idx: number, answer: string) => {
+    const newAnswers = [...answers, answer];
+    setAnswers(newAnswers);
+    if (idx === tasteQuestions.length - 1) {
+      getMbtiResult(newAnswers);
+    } else {
+      setQIdx(idx + 1);
+    }
+  };
 
   return (
     <>

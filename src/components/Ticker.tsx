@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import {
   TickerCollection,
@@ -12,8 +11,8 @@ type TickerProps = {
 };
 
 export const Ticker = ({ children, width }: TickerProps) => {
-  const imgWidth = useMemo(() => width, [width]);
-  const len = useMemo(() => children.length, [children]);
+  const imgWidth = width;
+  const len = children.length;
   return (
     <TickerWrap>
       <AnimatePresence custom={{ imgWidth, len }}>
