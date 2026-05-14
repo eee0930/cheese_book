@@ -12,7 +12,9 @@ export const BookImagesCovers = styled(motion.div)`
   display: inline-block;
   position: relative;
   padding: 0;
-  transition: transform 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95),
+  font-size: 0;
+  transition:
+    transform 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95),
     box-shadow 0.5s ease;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
   &:hover {
